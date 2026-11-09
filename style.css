@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.5.2
+Version: 1.5.3
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -163,10 +163,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (max-width:900px){.marquee{padding:16px 0}.marquee__track{font-size:18px;gap:32px}}
 
 /* Clients */
-.clients{padding:48px var(--gutter) 120px;display:flex;align-items:center;gap:48px;flex-wrap:wrap;margin-top:-80px}
-.clients__list{display:flex;gap:48px;flex-wrap:wrap;align-items:center;flex:1;min-width:0;opacity:.55}
-.clients__list span{font-family:var(--en);font-size:24px;text-transform:uppercase;letter-spacing:.02em}
-.clients__list img{height:28px;width:auto;filter:brightness(0) invert(1)}
+.clients{padding:48px var(--gutter) 120px;display:grid;grid-template-columns:160px minmax(0,1fr);align-items:start;gap:40px;margin-top:-80px}
+.clients>.label{padding-top:18px}
+.clients__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px 16px;align-items:center}
+.clients__list li{display:flex;align-items:center;justify-content:center;min-height:64px}
+.clients__list span{font-family:var(--ub);font-weight:700;font-size:15px;letter-spacing:.02em;opacity:.6;text-align:center}
+.clients__list img{display:block;width:100%;max-width:200px;height:auto;aspect-ratio:400/140;object-fit:contain;opacity:.62;transition:opacity .3s}
+.clients__list li:hover img{opacity:1}
+@media (max-width:1100px){.clients__list{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:900px){.clients{grid-template-columns:1fr;gap:16px}.clients>.label{padding-top:0}.clients__list{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 12px}.clients__list li{min-height:52px}}
 @media (max-width:900px){.clients{flex-direction:column;align-items:flex-start;gap:14px;padding:28px var(--gutter)}.clients__list{gap:16px 24px}.clients__list span{font-size:20px}}
 
 /* =========================================================

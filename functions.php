@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.5.2' );
+define( 'FB_THEME_VER', '1.5.3' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -199,7 +199,7 @@ function fb_settings_fields() {
 			'hero_video'   => array( '', 'ヒーロー背景動画のURL（MP4・5MB以下推奨。空欄なら静止画）' ),
 			'partners'     => array( '', 'ライブ配信パートナー（1行1件「名称|URL」。空欄なら既定の7社）' ),
 			'hero_image'   => array( '', 'ヒーロー静止画URL（空欄ならテーマ同梱の写真）' ),
-			'clients'      => array( "Panasonic\nSoftBank\nNTT\nSONY\nLINE\nP&G\n朝日新聞\nABCテレビ\nセレッソ大阪\nFIBA 3x3", '取引先（1行に1社。ロゴを使う場合は「社名|ロゴのファイル名」。ロゴはメディアライブラリにアップロード）' ),
+			'clients'      => array( "Panasonic|client-panasonic.png\nSoftBank|client-softbank.png\nSony Pictures|client-sony-pictures.png\nDaiwa House|client-daiwa-house.png\n三井不動産|client-mitsui-fudosan.png\n資生堂|client-shiseido.png\n朝日新聞|client-asahi-shimbun.png\nABCテレビ|client-abc-tv.png\nMBS|client-mbs.png\nMGスポーツ|client-mg-sports.png\n東映アニメーション|client-toei-animation.png\nCyberAgent|client-cyberagent.png\n大阪エヴェッサ|client-osaka-evessa.png\n京都ハンナリーズ|client-kyoto-hannaryz.png\n日本社会人バスケットボール連盟|client-jsb.png\nセレッソ大阪|client-cerezo-osaka.png\n近畿大学|client-kindai.png\n京都大学|client-kyoto-u.png", '取引先（1行に1社。ロゴを使う場合は「社名|ロゴのファイル名」。ロゴはメディアライブラリにアップロード）' ),
 		),
 		'価格（最低価格の表示）' => array(
 			'price_live'  => array( '80,000', 'ライブ配信 最低価格（円／日）' ),
@@ -332,7 +332,11 @@ function fb_clients() {
 		if ( '' === $line ) { continue; }
 		$parts = array_map( 'trim', explode( '|', $line ) );
 		$img = isset( $parts[1] ) ? $parts[1] : '';
-		if ( $img && false === strpos( $img, '/' ) ) { $img = fb_img( $img ); } /* ファイル名だけならメディアライブラリから */
+		if ( $img && false === strpos( $img, '/' ) ) {
+			/* ファイル名だけ: メディアライブラリ優先 → テーマ同梱 assets/img/clients/ */
+			$media = fb_img( $img );
+			$img   = ( false === strpos( $media, FB_THEME_URI ) || ! file_exists( get_template_directory() . '/assets/img/clients/' . $img ) ) ? $media : esc_url( FB_THEME_URI . '/assets/img/clients/' . $img );
+		}
 		$out[] = array( 'name' => $parts[0], 'img' => $img );
 	}
 	return $out;
