@@ -26,8 +26,11 @@
 
   /* 英字書体（Bebas）の見出しに日本語が入った場合は和文書体に切り替え */
   var jpRe = /[\u3040-\u30ff\u3400-\u9fff\uff01-\uff60]/;
+  var latinRe = /[A-Za-z0-9]/;
   document.querySelectorAll('.display').forEach(function (el) {
-    if (!el.classList.contains('display--jp') && jpRe.test(el.textContent)) { el.classList.add('display--jp'); }
+    if (el.classList.contains('display--jp') || el.closest('.fact, .history, .steps, .work')) { return; }
+    var t = el.textContent;
+    if (jpRe.test(t) && !latinRe.test(t)) { el.classList.add('display--jp'); }
   });
 
   /* ヒーロー動画の停止ボタン */

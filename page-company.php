@@ -50,7 +50,7 @@ $history = array(
 		<p class="body-text">私たちのルーツは、2020年・コロナ禍の真っ只中にあります。「関西の大学バスケットボールを発展させ、事業化する。」その想いひとつで、ゼロから立ち上がりました。失敗を恐れずに挑んだ結果生まれた数字は、大学スポーツ界における「継続可能な成功モデル」の可能性を証明しています。</p>
 		<dl class="spec">
 			<div><dt>代表 / CEO</dt><dd>佐々木 未央（Sasaki Mio）</dd></div>
-			<div><dt>略歴</dt><dd>1996年生、近畿大学卒。学生時代に関西学生バスケットボール連盟で学生委員長を務める。2019年 インフルエンサーマネジメント会社 取締役就任。2020年 FASTBREAKS合同会社 創業。2021年 地域リーグ所属バスケットボールチーム 理事就任。</dd></div>
+			<div><dt>略歴</dt><dd class="bio">1996年生まれ。近畿大学卒業。<br>学生時代、関西学生バスケットボール連盟で学生委員長を務める。<br>2019年　インフルエンサーマネジメント会社 取締役 就任<br>2020年　FASTBREAKS合同会社 創業<br>2021年　地域リーグ所属バスケットボールチーム 理事 就任</dd></div>
 		</dl>
 	</div>
 	<figure class="setup__fig ceo__fig"><img src="<?php echo fb_img( 'ceo.jpg' ); ?>" alt="代表 佐々木 未央" loading="lazy"><span class="about__bar" aria-hidden="true"></span></figure>
