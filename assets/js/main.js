@@ -43,6 +43,16 @@
     });
   }
 
+  /* ヒーロー動画：スマホで自動再生されない場合（省電力モード等）に再生を試みる */
+  if (video) {
+    video.muted = true; video.setAttribute('muted', ''); video.setAttribute('playsinline', '');
+    var tryPlay = function () { if (video.paused) { var p = video.play(); if (p && p.catch) { p.catch(function () {}); } } };
+    tryPlay();
+    video.addEventListener('canplay', tryPlay, { once: true });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { tryPlay(); } });
+    ['touchstart', 'scroll', 'click'].forEach(function (ev) { window.addEventListener(ev, tryPlay, { once: true, passive: true }); });
+  }
+
   /* FACTS カウントアップ */
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counters = document.querySelectorAll('[data-count]');
