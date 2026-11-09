@@ -6,7 +6,6 @@
 			<img src="<?php echo fb_logo( 'white' ); ?>" alt="FASTBREAKS" width="150" height="43">
 			<p class="site-footer__company">
 				<?php echo esc_html( fb_opt( 'company_name' ) ); ?>
-				<?php if ( $note = fb_opt( 'company_note' ) ) : ?><small><?php echo esc_html( $note ); ?></small><?php endif; ?>
 			</p>
 			<p class="site-footer__addr">大阪本社：<?php echo esc_html( fb_opt( 'address_osaka' ) ); ?><br>東京支社：<?php echo esc_html( fb_opt( 'address_tokyo' ) ); ?></p>
 		</div>
@@ -19,7 +18,7 @@
 				'fallback_cb'    => function () {
 					$items = array(
 						'Service' => home_url( '/service/' ), 'Works' => get_post_type_archive_link( 'works' ),
-						'Vision' => home_url( '/vision/' ), 'About' => home_url( '/company/' ), 'Partners' => home_url( '/partner/' ), 'News' => fb_news_url(),
+						'About' => home_url( '/company/' ), 'Vision' => home_url( '/vision/' ), 'News' => fb_news_url(), 'Partners' => home_url( '/partner/' ),
 						'Recruit' => home_url( '/recruit/' ), 'Contact' => home_url( '/contact/' ),
 						'Privacy' => home_url( '/privacy-policy/' ),
 					);

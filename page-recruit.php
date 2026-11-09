@@ -26,9 +26,9 @@ $univs = array( '大阪大学', '神戸大学', '大阪公立大学', '滋賀大
 	<div class="wrap">
 		<div class="section-head"><div><p class="label">Why FASTBREAKS</p><p class="display display--jp section-head__en">ここで働く理由</p></div></div>
 		<div class="cards3">
-			<div class="card"><p class="display card__en c-blue">01</p><p class="card__title">「同世代」ならではの距離感と視点</p><p class="body-text">選手と同じ大学生が制作・発信を担うことで、大人には撮れない「リアルな表情」や「内輪の熱気」を捕捉。ターゲット層の感性にダイレクトに響くコンテンツを生み出しています。</p></div>
-			<div class="card"><p class="display card__en c-indigo">02</p><p class="card__title">プロ水準の機材・実務を通じた育成</p><p class="body-text">配信・撮影・編集・執筆の全工程で、プロフェッショナルな裁量権を付与。現場でのOJTを通じて、即戦力レベルのメディアスキルを持つ人材を多数輩出しています。</p></div>
-			<div class="card"><p class="display card__en c-purple">03</p><p class="card__title">「実践型SNSマーケティング」の最前線</p><p class="body-text">「投稿して終わり」ではなく、リーチ数・維持率・保存数などのインサイトをもとに、自分で次のクリエイティブ改善案を策定。生きたデータで学びます。</p></div>
+			<div class="card"><p class="display card__en c-blue">01</p><p class="card__title">「熱狂の現場」の最前線に立てる</p><p class="body-text">関西学生バスケから FIBA 3x3 の国際大会まで、年間124日程のライブ配信と325本の映像制作。観る人の熱量を肌で感じながら、自分の仕事がその場で世の中に届く手応えがあります。</p></div>
+			<div class="card"><p class="display card__en c-indigo">02</p><p class="card__title">少人数で放送品質を出す、技術の裁量</p><p class="body-text">独自に構築したソフトウェアベースの配信システムで、少人数でも放送クオリティを維持し、最大5現場を同時に運用しています。機材やワークフローの改善提案も歓迎です。</p></div>
+			<div class="card"><p class="display card__en c-purple">03</p><p class="card__title">配信・映像・SNSまで、領域を広げられる</p><p class="body-text">配信オペレーション、撮影、編集、SNS運用までを自社で一気通貫。得意分野を軸にしながら、企画・ディレクションへとキャリアの幅を広げられます。</p></div>
 		</div>
 	</div>
 </section>

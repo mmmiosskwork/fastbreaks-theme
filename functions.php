@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.15' );
+define( 'FB_THEME_VER', '1.7.16' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -171,7 +171,7 @@ function fb_settings_fields() {
 	return array(
 		'会社情報' => array(
 			'company_name' => array( 'FASTBREAKS合同会社', '会社名' ),
-			'company_note' => array( '※株式会社に変更手続中', '会社名の注記（不要なら空欄）' ),
+			'company_note' => array( '', '会社名の注記（不要なら空欄）' ),
 			'address_osaka'=> array( '〒540-0035 大阪市中央区釣鐘町1丁目2-2 BLDG土屋3階', '大阪本社' ),
 			'address_tokyo'=> array( '〒191-0012 東京都日野市日野1034-1', '東京支社' ),
 			'email'        => array( '', 'お問い合わせメール（サイトに表示する場合のみ。空欄＝非表示）' ),
@@ -388,10 +388,10 @@ function fb_nav_fallback() {
 	$items = array(
 		'Service' => home_url( '/service/' ),
 		'Works'   => get_post_type_archive_link( 'works' ),
-		'Vision'  => home_url( '/vision/' ),
 		'About'   => home_url( '/company/' ),
-		'Partners' => home_url( '/partner/' ),
+		'Vision'  => home_url( '/vision/' ),
 		'News'    => fb_news_url(),
+		'Partners' => home_url( '/partner/' ),
 		'Recruit' => home_url( '/recruit/' ),
 	);
 	echo '<ul class="nav__list">';
