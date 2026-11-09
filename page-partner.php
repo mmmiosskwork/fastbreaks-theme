@@ -38,11 +38,7 @@ $partners = fb_partners();
 	<p class="ghost ghost--right" aria-hidden="true">Why partner</p>
 	<div class="wrap">
 		<div class="section-head"><div><p class="label">Why partner with us</p><p class="display display--jp section-head__en">パートナーになると</p></div></div>
-		<div class="cards3">
-			<div class="card"><p class="display card__en c-blue">01</p><p class="card__title">全試合のライブ配信にロゴ・CMを掲出</p><p class="body-text">関西学生バスケ1部リーグ戦をはじめとする年間100試合超のライブ配信で、配信画面・告知投稿・現場看板に露出。Z世代とその保護者層に直接届きます。</p></div>
-			<div class="card"><p class="display card__en c-indigo">02</p><p class="card__title">学生アスリートの4年間を支える</p><p class="body-text">高校時代に注目された選手が大学で見られなくなる現状を変える取り組みです。ご支援は配信機材・人件費・通信費に充てられ、全試合無料配信の継続につながります。</p></div>
-			<div class="card"><p class="display card__en c-purple">03</p><p class="card__title">コンテンツでのタイアップ</p><p class="body-text">配信だけでなく、SNSショート動画・インタビュー・イベント連動企画など、FASTBREAKSの制作体制を活かしたタイアップコンテンツもご提案します。</p></div>
-		</div>
+		<div class="card partner-merit"><p class="card__title">学生アスリートの4年間を支える</p><p class="body-text">高校時代に注目された選手が大学で見られなくなる現状を変える取り組みです。ご支援は配信機材・人件費・通信費に充てられ、全試合無料配信の継続につながります。</p></div>
 	</div>
 </section>
 
