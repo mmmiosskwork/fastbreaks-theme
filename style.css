@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.24
+Version: 1.7.25
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -798,3 +798,36 @@ body{overflow-x:clip}
 .page-generic__body li{margin:.4em 0}
 .page-generic__body li>ol,.page-generic__body li>ul{margin:.4em 0}
 @media (max-width:900px){.page-generic__wrap{padding-bottom:72px}.page-generic__body h2{font-size:18px}}
+
+/* 1.7.25: ライブ配信 LP（/broadcast/） */
+.lp-hero .phero__title{font-size:120px}
+.lp-hero__h1{font-family:var(--jp);font-weight:900;font-size:40px;line-height:1.45;letter-spacing:-.01em;margin:4px 0 0}
+.lp-stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lp-stats__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.lp-stats__grid>div{padding:36px 28px;border-left:1px solid var(--line)}
+.lp-stats__grid>div:first-child{border-left:0;padding-left:0}
+.lp-stats__num{font-size:88px;line-height:.85;margin:0}
+.lp-stats__num span{font-family:var(--jp);font-weight:900;font-size:24px;margin-left:8px}
+.lp-stats__label{margin:12px 0 0;font-size:13px;color:var(--muted);font-weight:700}
+.lp-problems{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.lp-problems li{background:var(--bg);padding:28px 32px 28px 64px;position:relative;font-size:17px;font-weight:900;line-height:1.6}
+.lp-problems li::before{content:"";position:absolute;left:32px;top:38px;width:14px;height:2px;background:var(--c-blue)}
+.lp-plan-cta{margin-top:auto;align-self:flex-start}
+.plan{display:flex;flex-direction:column}
+.lp-mini-plans{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
+.lp-mini-plans li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.lp-mini-plans .display{font-size:30px}
+.lp-mini-plans small{font-family:var(--jp);font-size:12px;color:var(--muted);margin-left:4px}
+@media (max-width:900px){
+  .lp-hero .phero__title{font-size:52px}
+  .lp-hero__h1{font-size:26px}
+  .lp-stats__grid{grid-template-columns:1fr 1fr}
+  .lp-stats__grid>div{padding:24px 16px;border-left:0;border-top:1px solid var(--line)}
+  .lp-stats__grid>div:nth-child(-n+2){border-top:0}
+  .lp-stats__grid>div:nth-child(odd){padding-left:0}
+  .lp-stats__num{font-size:56px}
+  .lp-stats__num span{font-size:18px}
+  .lp-problems{grid-template-columns:1fr}
+  .lp-problems li{font-size:15px;padding:20px 20px 20px 48px}
+  .lp-problems li::before{left:20px;top:31px}
+}

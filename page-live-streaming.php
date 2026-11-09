@@ -40,7 +40,7 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 	<div class="wrap">
 		<div class="section-head">
 			<div><p class="label">Plans</p><p class="display display--jp section-head__en">プラン</p></div>
-			<p class="section-head__lead">規模・体制に合わせて組み合わせます。お見積りはお問い合わせください。</p>
+			<p class="section-head__lead">規模・体制に合わせて組み合わせます。<br><a class="text-link" href="<?php echo esc_url( home_url( '/broadcast/#plans' ) ); ?>">料金の目安はこちら →</a></p>
 		</div>
 		<div class="plans__grid">
 			<div class="plan"><p class="label c-blue">Light</p><?php if ( $show_prices ) : ?><p class="plan__price display">¥80,000<small>〜 / 日</small></p><?php endif; ?><p class="plan__setup">1カメラ・スタッフ1名</p><ul class="checks"><li>固定カメラ配信</li><li>スコアテロップ</li><li>YouTube / 自社PFへの配信設定</li><li>アーカイブURL納品</li></ul><p class="plan__for">学校・部活動・セミナー・小規模大会</p></div>
