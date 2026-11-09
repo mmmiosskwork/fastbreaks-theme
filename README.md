@@ -44,3 +44,11 @@ MP4（H.264、10〜15秒、5MB以下）をメディアにアップロードし�
 
 ## 8. 株式会社化のとき
 サイト設定の「会社名」を変更し、「会社名の注記」を空欄にするだけで全ページに反映されます。
+
+
+## 更新の流れ（GitHub 連携）
+
+- コードは https://github.com/mmmiosskwork/fastbreaks-theme（main ブランチ）で管理
+- style.css の `Version:` が上がると、WordPress の「ダッシュボード → 更新」に FASTBREAKS テーマの更新が表示される（最大10分のキャッシュ。すぐ確認したいときは `/wp-admin/?fb-check-update=1` を開く）
+- 「テーマを更新」を押すと GitHub の zip を取得して差し替わる。zip の手動アップロードは不要
+- 文言・数字・URL・パートナー一覧・ヒーロー動画などは「設定 → FASTBREAKS サイト設定」で変更（コード変更不要）

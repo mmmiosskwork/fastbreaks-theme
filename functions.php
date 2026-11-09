@@ -571,3 +571,51 @@ function fb_partners() {
 	}
 	return $out;
 }
+
+/* -------------------------------------------------------------------------
+ * GitHub からのテーマ更新（mmmiosskwork/fastbreaks-theme の main ブランチ）
+ * style.css の Version が上がると「ダッシュボード → 更新」に表示され、標準の更新機能で反映される
+ * ------------------------------------------------------------------------- */
+define( 'FB_GH_REPO', 'mmmiosskwork/fastbreaks-theme' );
+define( 'FB_GH_BRANCH', 'main' );
+add_filter( 'pre_set_site_transient_update_themes', function ( $t ) {
+	if ( empty( $t->checked ) ) { return $t; }
+	$remote = get_transient( 'fb_gh_remote_version' );
+	if ( false === $remote ) {
+		$remote = '';
+		$r = wp_remote_get( 'https://raw.githubusercontent.com/' . FB_GH_REPO . '/' . FB_GH_BRANCH . '/style.css', array( 'timeout' => 8 ) );
+		if ( ! is_wp_error( $r ) && 200 === wp_remote_retrieve_response_code( $r ) && preg_match( '/^\s*Version:\s*(.+)$/mi', wp_remote_retrieve_body( $r ), $m ) ) {
+			$remote = trim( $m[1] );
+		}
+		set_transient( 'fb_gh_remote_version', $remote, 10 * MINUTE_IN_SECONDS );
+	}
+	$local = wp_get_theme( 'fastbreaks' )->get( 'Version' );
+	if ( $remote && $local && version_compare( $remote, $local, '>' ) ) {
+		$t->response['fastbreaks'] = array(
+			'theme'       => 'fastbreaks',
+			'new_version' => $remote,
+			'url'         => 'https://github.com/' . FB_GH_REPO,
+			'package'     => 'https://codeload.github.com/' . FB_GH_REPO . '/zip/refs/heads/' . FB_GH_BRANCH,
+		);
+	} else {
+		unset( $t->response['fastbreaks'] );
+	}
+	return $t;
+} );
+/* GitHub の zip は「fastbreaks-theme-main/」で展開されるのでフォルダ名を fastbreaks に直す */
+add_filter( 'upgrader_source_selection', function ( $source, $remote_source, $upgrader, $hook_extra ) {
+	if ( empty( $hook_extra['theme'] ) || 'fastbreaks' !== $hook_extra['theme'] ) { return $source; }
+	global $wp_filesystem;
+	$target = trailingslashit( $remote_source ) . 'fastbreaks/';
+	if ( untrailingslashit( $source ) !== untrailingslashit( $target ) && $wp_filesystem->move( $source, $target ) ) { return $target; }
+	return $source;
+}, 10, 4 );
+/* 更新チェックのキャッシュをすぐ消すリンク（ダッシュボード → 更新 → 「再確認」でも可） */
+add_action( 'admin_init', function () {
+	if ( isset( $_GET['fb-check-update'] ) && current_user_can( 'update_themes' ) ) {
+		delete_transient( 'fb_gh_remote_version' );
+		delete_site_transient( 'update_themes' );
+		wp_safe_redirect( admin_url( 'update-core.php' ) );
+		exit;
+	}
+} );
