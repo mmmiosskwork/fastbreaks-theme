@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.25
+Version: 1.7.26
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -830,4 +830,23 @@ body{overflow-x:clip}
   .lp-problems{grid-template-columns:1fr}
   .lp-problems li{font-size:15px;padding:20px 20px 20px 48px}
   .lp-problems li::before{left:20px;top:31px}
+}
+
+/* 1.7.26: LP 専用ヘッダー・フッター */
+.lp-header .site-header__inner{display:flex;align-items:center;gap:40px}
+.lp-header__nav{display:flex;gap:32px;margin-left:auto}
+.lp-header__nav a{font-size:13px;font-weight:700;color:rgba(255,255,255,.85)}
+.lp-header__nav a:hover{color:var(--c-blue)}
+.lp-header__cta{height:44px;padding:0 24px;font-size:13px;letter-spacing:.04em}
+.is-lp [id]{scroll-margin-top:calc(var(--header-h) + 16px)}
+.lp-footer__inner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;margin-bottom:40px}
+.lp-footer__links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.lp-footer__links a{font-size:13px;font-weight:700;color:rgba(255,255,255,.7)}
+.lp-footer__links a:hover{color:#fff}
+@media (max-width:900px){
+  .lp-header .site-header__inner{gap:12px}
+  .lp-header__nav{display:none}
+  .lp-header__cta{margin-left:auto;height:40px;padding:0 16px;font-size:12px}
+  .lp-footer__inner{flex-direction:column;gap:28px}
+  .lp-footer__links a{display:inline-block;padding:6px 0}
 }

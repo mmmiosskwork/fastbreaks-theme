@@ -4,7 +4,7 @@
  * 固定ページ「ライブ配信の料金・プラン」（スラッグ broadcast）に自動適用。
  * コーポレートサイト本体には価格を出さない方針のため、料金はこのページだけに載せる。
  */
-get_header();
+get_header( 'lp' );
 
 $fb_plans = array(
 	array( 'id' => 'light',    'label' => 'Light',    'cls' => 'c-blue',     'price' => 150000, 'unit' => '日',   'setup' => '1カメラ・スタッフ1名', 'items' => array( '固定カメラ配信', 'スコアテロップ', 'YouTube / 自社PFへの配信設定', 'アーカイブURL納品' ), 'for' => '学校・部活動・セミナー・小規模大会', 'hot' => false ),
@@ -22,9 +22,8 @@ $fb_faq = array(
 );
 ?>
 
-<section class="phero phero--plain lp-hero">
+<section class="phero phero--plain lp-hero" id="top">
 	<div class="wrap phero__inner">
-		<nav class="crumbs" aria-label="パンくず"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>／</span><a href="<?php echo esc_url( home_url( '/service/live-streaming/' ) ); ?>">ライブ配信</a><span>／</span><span>料金・プラン</span></nav>
 		<p class="label">Live Streaming — Plans &amp; Price</p>
 		<p class="display phero__title" aria-hidden="true">Broadcast grade.<br><span class="gradtext">SNS speed.</span></p>
 		<h1 class="lp-hero__h1">スポーツ・イベント・セミナーの<br>ライブ配信代行</h1>
@@ -118,7 +117,7 @@ $lp_works = new WP_Query( array(
 	'no_found_rows'  => true,
 ) );
 if ( $lp_works->have_posts() ) : ?>
-<section class="works-home">
+<section class="works-home" id="works">
 	<div class="wrap">
 		<div class="section-head"><div><p class="label">Works — Live Streaming</p><h2 class="display display--jp section-head__en">配信実績</h2></div><a class="pill pill--line" href="<?php echo esc_url( home_url( '/works/type/live/' ) ); ?>">配信実績をすべて見る</a></div>
 		<div class="works-grid works-grid--3">
@@ -139,7 +138,7 @@ if ( $lp_works->have_posts() ) : ?>
 	</ol>
 </section>
 
-<section class="faq wrap">
+<section class="faq wrap" id="faq">
 	<div class="faq__head"><p class="label">FAQ</p><h2 class="display display--jp section-head__en">よくある<br>ご質問</h2></div>
 	<dl class="faq__list">
 		<?php foreach ( $fb_faq as $q ) : ?><div><dt><?php echo esc_html( $q[0] ); ?></dt><dd><?php echo esc_html( $q[1] ); ?></dd></div><?php endforeach; ?>
@@ -194,4 +193,4 @@ $ld = array(
 echo '<script type="application/ld+json">' . wp_json_encode( $ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
 ?>
 
-<?php get_footer(); ?>
+<?php get_footer( 'lp' ); ?>
