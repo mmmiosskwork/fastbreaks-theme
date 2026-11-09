@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.6.3' );
+define( 'FB_THEME_VER', '1.7.0' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -210,7 +210,7 @@ function fb_settings_fields() {
 		'お問い合わせ' => array(
 			'contact_shortcode' => array( '', 'お問い合わせフォームのショートコード（例：[contact-form-7 id="123" title="お問い合わせ"]）' ),
 			'recruit_shortcode' => array( '', '採用応募フォームのショートコード' ),
-			'intern_form_url' => array( 'https://docs.google.com/forms/d/e/1FAIpQLSeAHs0J0aqq8X226lnlXQkjCoGtSsI1G_9t-8cmuU_kRlSVwQ/viewform', '学生インターン応募フォームのURL（Googleフォーム等。別タブで開く）' ),
+			'intern_shortcode' => array( '', '学生インターン応募フォームのショートコード' ),
 			'gtm_id'            => array( '', 'Google タグマネージャー ID（GTM-XXXXXXX）' ),
 		),
 	);

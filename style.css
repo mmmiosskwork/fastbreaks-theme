@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.6.3
+Version: 1.7.0
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -685,3 +685,18 @@ h1,h2,h3,.display--jp,.phero__jp,.about__title,.vision-statement__jp,.manifesto_
 .plan__for{margin-bottom:24px}
 .text-link{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .text-link:hover{color:var(--label)}
+
+/* ===== 学生インターン ===== */
+.roles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-left:1px solid var(--line)}
+.role{display:flex;flex-direction:column;gap:12px;padding:32px 24px 40px;border-right:1px solid var(--line)}
+.role__num{font-family:var(--ub);font-size:11px;letter-spacing:.3em;color:var(--label)}
+.role__en{font-size:clamp(40px,4.2vw,64px);line-height:.9}
+.role__jp{font-size:17px;font-weight:900;margin-top:4px}
+.role .body-text{font-size:13px}
+.intern-info{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:80px;align-items:start}
+@media (max-width:1100px){.roles{grid-template-columns:repeat(3,minmax(0,1fr))}.role{border-bottom:1px solid var(--line)}}
+@media (max-width:900px){.roles{grid-template-columns:1fr;border-left:0;border-top:1px solid var(--line)}.role{border-right:0;padding:28px 0}.intern-info{grid-template-columns:1fr;gap:48px}}
+/* フォームの補助：設問ラベル・セレクトの矢印・チェック群 */
+.wpcf7 .fb-q{font-size:14px;font-weight:700;letter-spacing:.02em;color:#fff;margin:0 0 -10px}
+.wpcf7 select{padding-right:44px;background-image:linear-gradient(45deg,transparent 50%,rgba(255,255,255,.7) 50%),linear-gradient(135deg,rgba(255,255,255,.7) 50%,transparent 50%);background-position:calc(100% - 22px) 50%,calc(100% - 16px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;cursor:pointer}
+.wpcf7 select option{background:#0F1430;color:#fff}
