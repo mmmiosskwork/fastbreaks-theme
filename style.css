@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.5.4
+Version: 1.6.0
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -605,3 +605,19 @@ a:hover .ncover img{transform:scale(1.04)}
 .pill--accent::before{content:"";position:absolute;inset:0;background:#fff;transform:translateX(-101%);transition:transform .4s cubic-bezier(.2,.7,.2,1);z-index:-1}
 .pill--accent:hover::before{transform:none}
 .pill--accent:hover{color:var(--bg);background:var(--accent)}
+
+/* ===== note 最新記事 ===== */
+.note-feed{padding-top:140px;padding-bottom:40px}
+.note-feed__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}
+.note-feed__list a{display:flex;flex-direction:column;gap:12px;height:100%}
+.note-feed__thumb{display:block;aspect-ratio:1280/670;overflow:hidden;background:var(--surface)}
+.note-feed__thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.note-feed__list a:hover .note-feed__thumb img{transform:scale(1.04)}
+.note-feed__meta{display:flex;align-items:center;gap:12px;font-family:var(--ub);font-size:12px;letter-spacing:.08em;color:var(--muted-2)}
+.note-feed__src{display:inline-flex;align-items:center;height:20px;padding:0 8px;border:1px solid var(--line-2);border-radius:999px;font-size:10px;letter-spacing:.1em;color:#fff}
+.note-feed__title{font-size:15px;font-weight:700;line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.note-feed__go{margin-top:auto;font-family:var(--ub);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--label)}
+.note-feed__list a:hover .note-feed__title{color:var(--label)}
+.note-feed__more{margin-top:48px;display:flex;justify-content:center}
+@media (max-width:1100px){.note-feed__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.note-feed{padding-top:80px}.note-feed__list{grid-template-columns:1fr;gap:28px}}

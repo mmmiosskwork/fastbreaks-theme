@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.5.4' );
+define( 'FB_THEME_VER', '1.6.0' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -184,7 +184,7 @@ function fb_settings_fields() {
 			'sns_instagram' => array( 'https://www.instagram.com/fastbreaks_jp/', 'Instagram URL' ),
 			'sns_tiktok'    => array( 'https://www.tiktok.com/', 'TikTok URL' ),
 			'sns_x'         => array( 'https://x.com/', 'X URL' ),
-			'sns_note'      => array( 'https://note.com/', 'note URL' ),
+			'sns_note'      => array( 'https://note.com/fastbreaks', 'note URL（トップに最新記事を自動表示）' ),
 			'sns_handle'    => array( '@fastbreaks_jp', 'SNSアカウント名（表示用）' ),
 			'sns_followers' => array( 'フォロワー総数 39,436 ／ 年間3,352万回再生（2025）', 'SNS実績の一行' ),
 			'instagram_shortcode' => array( '', 'Instagram表示プラグインのショートコード（例：[instagram-feed]）' ),
@@ -589,7 +589,7 @@ add_filter( 'pre_set_site_transient_update_themes', function ( $t ) {
 	$remote = get_transient( 'fb_gh_remote_version' );
 	if ( false === $remote ) {
 		$remote = '';
-		$r = wp_remote_get( 'https://raw.githubusercontent.com/' . FB_GH_REPO . '/' . FB_GH_BRANCH . '/style.css', array( 'timeout' => 8 ) );
+		$r = wp_remote_get( 'https://raw.githubusercontent.com/' . FB_GH_REPO . '/' . FB_GH_BRANCH . '/style.css?t=' . time(), array( 'timeout' => 8, 'headers' => array( 'Cache-Control' => 'no-cache' ) ) );
 		if ( ! is_wp_error( $r ) && 200 === wp_remote_retrieve_response_code( $r ) && preg_match( '/^\s*Version:\s*(.+)$/mi', wp_remote_retrieve_body( $r ), $m ) ) {
 			$remote = trim( $m[1] );
 		}
@@ -625,3 +625,36 @@ add_action( 'admin_init', function () {
 		exit;
 	}
 } );
+
+/* -------------------------------------------------------------------------
+ * note の最新記事（設定「note URL」の /rss を1時間キャッシュ）
+ * ------------------------------------------------------------------------- */
+function fb_note_items( $limit = 4 ) {
+	$base = untrailingslashit( (string) fb_opt( 'sns_note' ) );
+	if ( ! preg_match( '#^https://note\.com/[A-Za-z0-9_]+$#', $base ) ) { return array(); }
+	$key   = 'fb_note_' . md5( $base );
+	$items = get_transient( $key );
+	if ( false === $items ) {
+		$items = array();
+		$r = wp_remote_get( $base . '/rss', array( 'timeout' => 8 ) );
+		if ( ! is_wp_error( $r ) && 200 === wp_remote_retrieve_response_code( $r ) ) {
+			$prev = libxml_use_internal_errors( true );
+			$xml  = simplexml_load_string( wp_remote_retrieve_body( $r ) );
+			libxml_use_internal_errors( $prev );
+			if ( $xml && isset( $xml->channel->item ) ) {
+				foreach ( $xml->channel->item as $it ) {
+					$media = $it->children( 'http://search.yahoo.com/mrss/' );
+					$items[] = array(
+						'title' => wp_strip_all_tags( (string) $it->title ),
+						'link'  => esc_url_raw( (string) $it->link ),
+						'date'  => strtotime( (string) $it->pubDate ),
+						'thumb' => esc_url_raw( (string) $media->thumbnail ),
+					);
+					if ( count( $items ) >= 12 ) { break; }
+				}
+			}
+		}
+		set_transient( $key, $items, $items ? HOUR_IN_SECONDS : 10 * MINUTE_IN_SECONDS );
+	}
+	return array_slice( $items, 0, $limit );
+}

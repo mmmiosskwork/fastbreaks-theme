@@ -188,6 +188,30 @@ if ( $featured->have_posts() ) : ?>
 	</div>
 </section>
 
+<!-- NOTE -->
+<?php $notes = fb_note_items( 4 ); if ( $notes ) : ?>
+<section class="note-feed wrap" id="note">
+	<div class="section-head">
+		<div>
+			<p class="label">Stories on note</p>
+			<p class="display section-head__en">FASTBREAKS <span class="gradtext">note</span></p>
+		</div>
+		<p class="section-head__lead">関西学生バスケットボールの公式note。コートの外にある選手とチームのストーリーを届けています。</p>
+	</div>
+	<ul class="note-feed__list">
+		<?php foreach ( $notes as $n ) : ?>
+		<li><a href="<?php echo esc_url( $n['link'] ); ?>" target="_blank" rel="noopener">
+			<span class="note-feed__thumb"><?php if ( $n['thumb'] ) : ?><img src="<?php echo esc_url( $n['thumb'] ); ?>" alt="" loading="lazy"><?php endif; ?></span>
+			<span class="note-feed__meta"><span class="note-feed__src">note</span><time datetime="<?php echo esc_attr( gmdate( 'c', $n['date'] ) ); ?>"><?php echo esc_html( wp_date( 'Y.m.d', $n['date'] ) ); ?></time></span>
+			<span class="note-feed__title"><?php echo esc_html( $n['title'] ); ?></span>
+			<span class="note-feed__go">note で読む <span aria-hidden="true">↗</span></span>
+		</a></li>
+		<?php endforeach; ?>
+	</ul>
+	<div class="note-feed__more"><a class="pill pill--line" href="<?php echo esc_url( fb_opt( 'sns_note' ) ); ?>" target="_blank" rel="noopener">note をもっと見る ↗</a></div>
+</section>
+<?php endif; ?>
+
 <!-- MEDIA + NEWS -->
 <section class="media-news wrap" id="news">
 	<div class="media">
