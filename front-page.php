@@ -28,7 +28,7 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 	</div>
 	<div class="hero__slash" aria-hidden="true"></div>
 	<div class="wrap hero__inner">
-		<p class="label hero__in">Sports × Digital Contents Production — Osaka / Tokyo</p>
+		<p class="label hero__in">Sports × Digital Contents Production</p>
 		<h1 class="display hero__title"><span class="line"><span>One instance</span></span><span class="line"><span>shows <span class="gradtext">all the rest.</span></span></span></h1>
 		<p class="hero__jp hero__in">確かな熱源が、そこにはある。</p>
 		<p class="hero__lead hero__in">大学スポーツの最前線から、スポーツの映像・ライブ配信・SNSをつくる。<br>関西発「映像制作×ライブ配信×SNS運用」のコンテンツプロダクション。</p>
