@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.23' );
+define( 'FB_THEME_VER', '1.7.24' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -56,23 +56,7 @@ add_action( 'wp_head', function () {
  * 3. カスタム投稿タイプ「実績（works）」とタクソノミー
  * ---------------------------------------------------------------------- */
 add_action( 'init', function () {
-	register_post_type( 'works', array(
-		'labels' => array(
-			'name'          => '実績',
-			'singular_name' => '実績',
-			'add_new_item'  => '実績を追加',
-			'edit_item'     => '実績を編集',
-			'all_items'     => '実績一覧',
-		),
-		'public'       => true,
-		'has_archive'  => true,
-		'rewrite'      => array( 'slug' => 'works', 'with_front' => false ),
-		'menu_icon'    => 'dashicons-format-video',
-		'menu_position'=> 5,
-		'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
-		'show_in_rest' => true,
-	) );
-
+	/* タクソノミーを先に登録（/works/type/〇〇/ が実績の個別ページと誤認されて 404 になるのを防ぐ） */
 	register_taxonomy( 'work_type', 'works', array(
 		'labels'            => array( 'name' => '種別', 'singular_name' => '種別' ),
 		'hierarchical'      => true,
@@ -90,7 +74,32 @@ add_action( 'init', function () {
 		'show_in_rest'      => true,
 		'show_admin_column' => true,
 	) );
+
+	register_post_type( 'works', array(
+		'labels' => array(
+			'name'          => '実績',
+			'singular_name' => '実績',
+			'add_new_item'  => '実績を追加',
+			'edit_item'     => '実績を編集',
+			'all_items'     => '実績一覧',
+		),
+		'public'       => true,
+		'has_archive'  => true,
+		'rewrite'      => array( 'slug' => 'works', 'with_front' => false ),
+		'menu_icon'    => 'dashicons-format-video',
+		'menu_position'=> 5,
+		'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
+		'show_in_rest' => true,
+	) );
 } );
+
+/* テーマ更新時に一度だけパーマリンクを更新（URL ルールの変更を反映） */
+add_action( 'init', function () {
+	if ( get_option( 'fb_rewrite_ver' ) !== FB_THEME_VER ) {
+		flush_rewrite_rules( false );
+		update_option( 'fb_rewrite_ver', FB_THEME_VER );
+	}
+}, 99 );
 
 /* テーマ有効化時に初期タームを登録し、パーマリンクを更新 */
 add_action( 'after_switch_theme', function () {
@@ -704,7 +713,59 @@ add_action( 'login_head', 'fb_favicon_links' );
  * wp_head の出力から og:・twitter:・description をいったん取り除き、テーマで一本化して出し直す。
  * ------------------------------------------------------------------------- */
 function fb_front_title() { return 'FASTBREAKS｜大学スポーツの映像制作・ライブ配信・SNS運用'; }
-add_filter( 'aioseo_title', function ( $t ) { return is_front_page() ? fb_front_title() : $t; } );
+add_filter( 'aioseo_title', function ( $t ) {
+	if ( is_front_page() ) { return fb_front_title(); }
+	$o = fb_seo_override();
+	return ( $o && ! empty( $o['title'] ) ) ? $o['title'] : $t;
+}, 20 );
+add_filter( 'pre_get_document_title', function ( $t ) {
+	if ( is_front_page() ) { return fb_front_title(); }
+	$o = fb_seo_override();
+	return ( $o && ! empty( $o['title'] ) ) ? $o['title'] : $t;
+}, 20 );
+
+/* ページごとのタイトル・説明文（検索結果とシェアで使う）。本文が空のテンプレートページや自動生成の一覧ページ向け */
+function fb_seo_override() {
+	$s = ' | FASTBREAKS';
+	$pages = array(
+		'service'        => array( 'サービス｜ライブ配信・映像制作・SNS運用' . $s, 'スポーツ・セミナーのライブ配信、映像制作、SNS運用・マーケティング、自社メディアでのスポンサードコンテンツまで。大学スポーツの現場で鍛えたチームが一気通貫で手がけます。' ),
+		'live-streaming' => array( 'ライブ配信｜スポーツ・セミナー・イベントの配信代行' . $s, 'スポーツ大会・セミナー・企業イベントのライブ配信を、撮影から配信・アーカイブまで。関西学生バスケの全試合配信で磨いた少人数オペレーションで、最大8カメラ・5会場の同時配信に対応します。' ),
+		'video'          => array( '映像制作｜スポーツのハイライト・PR・SNS動画' . $s, 'ライブ配信の素材を起点に、ハイライト、YouTube の長尺動画、SNS ショート、PR 映像まで。競技を理解したチームが、現場の熱が伝わる映像をつくります。' ),
+		'sns'            => array( 'SNS運用・マーケティング｜スポーツチーム・大会のSNS' . $s, '撮影から編集・投稿・分析まで、スポーツチームや大会の SNS 運用を一気通貫で支援。自社メディアで培った「ファンを熱狂させるメディア運営」のノウハウを提供します。' ),
+		'media'          => array( '自社メディア・スポンサードコンテンツ' . $s, '関西最大級の学生バスケメディア「FASTBREAKS」。Z世代・学生層に届く自社メディアで、企業のスポンサードコンテンツやタイアップ企画を展開します。' ),
+		'vision'         => array( 'Vision｜確かな熱源が、そこにはある。' . $s, '挑んで、倒れて、また挑む。FASTBREAKS が大切にしている考え方と、大学スポーツの熱を世界へ届けるためのビジョン。' ),
+		'company'        => array( '会社概要｜FASTBREAKS合同会社', 'FASTBREAKS合同会社の会社概要。ビジョン、代表プロフィール、沿革、大阪本社・東京支社の所在地。' ),
+		'partner'        => array( 'ライブ配信パートナー｜関西学生バスケットボール' . $s, '' ),
+		'recruit'        => array( '採用情報｜クリエイター・学生インターン募集' . $s, '配信オペレーター・カメラマン・エディターなどのクリエイターと、学生インターンを募集しています。大学スポーツの最前線で、熱狂を届ける側へ。' ),
+		'internship'     => array( '学生インターン募集｜関西学生バスケの現場で学ぶ' . $s, '配信・撮影・編集・SNS運用・記事執筆を、関西学生バスケの現場で実践。未経験から始められる長期の学生インターンです。' ),
+		'contact'        => array( 'お問い合わせ｜ライブ配信・映像制作のご相談' . $s, 'ライブ配信・撮影・映像制作・SNS運用のご相談、協賛・タイアップ、取材のご依頼はこちらのフォームから。' ),
+		'faq'            => array( 'よくある質問' . $s, 'ライブ配信・映像制作のご依頼について、依頼の時期、対応エリア、配信先などのよくある質問をまとめました。' ),
+	);
+	if ( is_page() ) {
+		$slug = get_post_field( 'post_name', get_queried_object_id() );
+		if ( isset( $pages[ $slug ] ) ) { return array( 'title' => $pages[ $slug ][0], 'desc' => $pages[ $slug ][1] ); }
+		return null;
+	}
+	if ( is_home() ) {
+		return array( 'title' => 'お知らせ' . $s, 'desc' => 'FASTBREAKS のお知らせ一覧。ライブ配信の実施情報、イベント、採用情報などをお届けします。' );
+	}
+	if ( is_post_type_archive( 'works' ) ) {
+		return array( 'title' => '実績｜ライブ配信・映像制作の制作事例' . $s, 'desc' => 'FIBA 3x3 の国際大会から関西学生バスケのリーグ戦まで、FASTBREAKS のライブ配信・映像制作・イベントの実績一覧です。' );
+	}
+	if ( is_tax( array( 'work_type', 'sport' ) ) ) {
+		$n = single_term_title( '', false );
+		return array( 'title' => $n . 'の実績' . $s, 'desc' => 'FASTBREAKS の「' . $n . '」の実績一覧です。' );
+	}
+	if ( is_category() ) {
+		$n = single_cat_title( '', false );
+		return array( 'title' => $n . 'のお知らせ' . $s, 'desc' => 'FASTBREAKS の「' . $n . '」に関するお知らせ一覧です。' );
+	}
+	if ( is_tag() ) {
+		$n = single_tag_title( '', false );
+		return array( 'title' => '「' . $n . '」の記事' . $s, 'desc' => 'FASTBREAKS の「' . $n . '」に関する記事一覧です。' );
+	}
+	return null;
+}
 add_action( 'wp_head', function () { if ( ! is_admin() ) { ob_start(); } }, 0 );
 add_action( 'wp_head', function () {
 	if ( is_admin() ) { return; }
@@ -733,12 +794,15 @@ function fb_meta_tags( $desc = '' ) {
 		$desc  = $front;
 		$url   = home_url( '/' );
 	} else {
+		$ov    = fb_seo_override();
 		$title = wp_get_document_title();
+		if ( $ov && ! empty( $ov['desc'] ) ) { $desc = $ov['desc']; }
 		$req   = isset( $GLOBALS['wp']->request ) ? (string) $GLOBALS['wp']->request : '';
 		$url   = is_singular() ? get_permalink() : home_url( $req ? user_trailingslashit( $req ) : '/' );
+		if ( $cs = fb_works_canonical_source() ) { $url = $cs; }
 		if ( is_singular() ) {
 			$p = get_queried_object();
-			if ( ! $desc || is_singular( array( 'post', 'works' ) ) ) {
+			if ( ( ! $desc && ! ( $ov && ! empty( $ov['desc'] ) ) ) || is_singular( array( 'post', 'works' ) ) ) {
 				$src  = has_excerpt( $p ) ? $p->post_excerpt : wp_strip_all_tags( strip_shortcodes( $p->post_content ) );
 				$text = trim( preg_replace( '/\s+/u', ' ', $src ) );
 				if ( $text ) { $desc = mb_strimwidth( $text, 0, 220, '…', 'UTF-8' ); }
@@ -752,6 +816,7 @@ function fb_meta_tags( $desc = '' ) {
 		if ( ! $desc ) { $desc = $front; }
 	}
 	$desc = strtr( $desc, $fix );
+	if ( false !== strpos( $desc, '掲載内容 / 掲載料' ) || false !== strpos( $desc, '新テーマのテンプレート' ) ) { $desc = $front; }
 	$t = array(
 		array( 'name', 'description', $desc ),
 		array( 'property', 'og:locale', 'ja_JP' ),
@@ -817,3 +882,21 @@ function fb_sns_list( $class = '' ) {
 	return $h . '</ul>';
 }
 
+
+/* 実績にコピーした記事のうち、お知らせとしても公開中のもの（9件）は重複コンテンツになるため、
+   実績側の正規URL（canonical）を元のお知らせ記事に向ける */
+function fb_works_canonical_source() {
+	if ( ! is_singular( 'works' ) ) { return ''; }
+	$src = (int) get_post_meta( get_queried_object_id(), 'fb_source_post_id', true );
+	return ( $src && 'publish' === get_post_status( $src ) ) ? get_permalink( $src ) : '';
+}
+add_filter( 'aioseo_canonical_url', function ( $url ) {
+	$c = fb_works_canonical_source();
+	return $c ? $c : $url;
+} );
+
+/* ExUnit が本文の後ろに足す関連記事（h1 を含む）を取り除く。関連記事は single.php で出している */
+add_filter( 'the_content', function ( $c ) {
+	if ( false === strpos( $c, 'veu_relatedPosts' ) ) { return $c; }
+	return preg_replace( '#<aside[^>]*class="[^"]*veu_relatedPosts[^"]*"[^>]*>.*?</aside>#s', '', $c );
+}, 9999 );
