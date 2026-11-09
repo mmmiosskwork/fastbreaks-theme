@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.12' );
+define( 'FB_THEME_VER', '1.7.13' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -390,6 +390,7 @@ function fb_nav_fallback() {
 		'Works'   => get_post_type_archive_link( 'works' ),
 		'Vision'  => home_url( '/vision/' ),
 		'About'   => home_url( '/company/' ),
+		'Partners' => home_url( '/partner/' ),
 		'News'    => fb_news_url(),
 		'Recruit' => home_url( '/recruit/' ),
 	);
