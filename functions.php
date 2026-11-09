@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.9' );
+define( 'FB_THEME_VER', '1.7.10' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -599,14 +599,23 @@ add_filter( 'pre_set_site_transient_update_themes', function ( $t ) {
 			$remote = trim( $m[1] );
 		}
 		set_transient( 'fb_gh_remote_version', $remote, 10 * MINUTE_IN_SECONDS );
+		/* zip のキャッシュで古い版が入るのを防ぐため、最新コミットの SHA を取得して固定 */
+		$sha = '';
+		$c = wp_remote_get( 'https://api.github.com/repos/' . FB_GH_REPO . '/commits/' . FB_GH_BRANCH, array( 'timeout' => 8, 'headers' => array( 'Accept' => 'application/vnd.github.sha', 'User-Agent' => 'fastbreaks-theme-updater' ) ) );
+		if ( ! is_wp_error( $c ) && 200 === wp_remote_retrieve_response_code( $c ) ) {
+			$body = trim( wp_remote_retrieve_body( $c ) );
+			if ( preg_match( '/^[0-9a-f]{40}$/', $body ) ) { $sha = $body; }
+		}
+		set_transient( 'fb_gh_remote_sha', $sha, 10 * MINUTE_IN_SECONDS );
 	}
+	$sha = (string) get_transient( 'fb_gh_remote_sha' );
 	$local = wp_get_theme( 'fastbreaks' )->get( 'Version' );
 	if ( $remote && $local && version_compare( $remote, $local, '>' ) ) {
 		$t->response['fastbreaks'] = array(
 			'theme'       => 'fastbreaks',
 			'new_version' => $remote,
 			'url'         => 'https://github.com/' . FB_GH_REPO,
-			'package'     => 'https://codeload.github.com/' . FB_GH_REPO . '/zip/refs/heads/' . FB_GH_BRANCH,
+			'package'     => 'https://codeload.github.com/' . FB_GH_REPO . '/zip/' . ( $sha ? $sha : 'refs/heads/' . FB_GH_BRANCH ),
 		);
 	} else {
 		unset( $t->response['fastbreaks'] );
