@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.5' );
+define( 'FB_THEME_VER', '1.7.6' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -41,7 +41,7 @@ remove_action( 'wp_head', 'rsd_link' );
  * ---------------------------------------------------------------------- */
 add_action( 'wp_enqueue_scripts', function () {
 	// フォント：公開後に woff2 を assets/fonts に置いて自サーバー配信へ切り替え可
-	wp_enqueue_style( 'fb-fonts', 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@700&family=Noto+Sans+JP:wght@400;500;700;800&display=swap', array(), null );
+	wp_enqueue_style( 'fb-fonts', 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap', array(), null );
 	wp_enqueue_style( 'fb-style', get_stylesheet_uri(), array( 'fb-fonts' ), FB_THEME_VER );
 	wp_enqueue_script( 'fb-main', FB_THEME_URI . '/assets/js/main.js', array(), FB_THEME_VER, true );
 } );
