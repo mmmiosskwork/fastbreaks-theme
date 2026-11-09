@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.6.1
+Version: 1.6.2
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -678,3 +678,10 @@ h1,h2,h3,.display--jp,.phero__jp,.about__title,.vision-statement__jp,.manifesto_
 .wpcf7 form.sent .wpcf7-response-output{border-color:var(--c-indigo)!important}
 .wpcf7 form.invalid .wpcf7-response-output,.wpcf7 form.failed .wpcf7-response-output{border-color:#DB2777!important}
 @media (max-width:900px){.wpcf7 input[type="submit"]{width:100%;min-width:0}}
+
+/* 採用：職種カードごとの応募ボタン */
+.plan .recruit-cta{margin-top:auto;align-self:flex-start}
+.plans__grid .plan{display:flex;flex-direction:column}
+.plan__for{margin-bottom:24px}
+.text-link{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.text-link:hover{color:var(--label)}
