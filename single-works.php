@@ -15,16 +15,15 @@ $results = fb_work_results( get_the_ID() );
 $yt      = fb_youtube_id( $video );
 ?>
 <article class="work-single">
-	<section class="phero phero--work">
-		<?php if ( has_post_thumbnail() ) : ?><img class="phero__img" src="<?php echo esc_url( get_the_post_thumbnail_url( null, 'fb-wide' ) ); ?>" alt="" fetchpriority="high"><?php else : ?><img class="phero__img" src="<?php echo fb_img( 'arena_wide.jpg' ); ?>" alt=""><?php endif; ?>
-		<div class="phero__fade" aria-hidden="true"></div>
+	<section class="phero phero--plain phero--work">
 		<div class="wrap phero__inner">
 			<nav class="crumbs" aria-label="パンくず"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>／</span><a href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>">Works</a><span>／</span><span><?php the_title(); ?></span></nav>
 			<?php if ( $types && ! is_wp_error( $types ) ) : ?><div class="tags"><?php foreach ( $types as $t ) : ?><a class="tag <?php echo esc_attr( fb_type_class( $t ) ); ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a><?php endforeach; ?></div><?php endif; ?>
-			<h1 class="display phero__title phero__title--md"><?php the_title(); ?></h1>
+			<h1 class="work-single__title"><?php the_title(); ?></h1>
 			<?php if ( $client ) : ?><p class="phero__jp"><?php echo esc_html( $client ); ?></p><?php endif; ?>
 		</div>
 	</section>
+	<?php if ( has_post_thumbnail() ) : ?><figure class="wrap work-single__fig"><?php the_post_thumbnail( 'fb-wide' ); ?></figure><?php endif; ?>
 
 	<section class="wrap work-single__grid">
 		<aside class="work-single__meta">
