@@ -55,7 +55,7 @@ $history = array(
 </section>
 
 <section class="wrap" style="padding:120px var(--gutter);border-top:1px solid var(--line);display:grid;grid-template-columns:320px minmax(0,1fr);gap:80px;align-items:start">
-	<div><p class="label">Company profile</p><p class="display section-head__en" style="margin-top:16px">会社概要</p></div>
+	<div><p class="label">Company profile</p><p class="display display--jp section-head__en" style="margin-top:16px">会社概要</p></div>
 	<dl class="spec spec--table">
 		<div><dt>会社名</dt><dd><?php echo esc_html( fb_opt( 'company_name' ) ); ?><?php if ( $n = fb_opt( 'company_note' ) ) : ?> <small><?php echo esc_html( $n ); ?></small><?php endif; ?></dd></div>
 		<div><dt>設立</dt><dd><?php echo esc_html( fb_opt( 'founded' ) ); ?></dd></div>
@@ -70,14 +70,14 @@ $history = array(
 </section>
 
 <section class="process wrap" style="border-top:1px solid var(--line)">
-	<div class="section-head"><div><p class="label">History</p><p class="display section-head__en">沿革</p></div></div>
+	<div class="section-head"><div><p class="label">History</p><p class="display display--jp section-head__en">沿革</p></div></div>
 	<ol class="history">
 		<?php foreach ( $history as $h ) : ?><li><span class="display history__year"><?php echo esc_html( $h[0] ); ?></span><span class="history__text"><?php echo esc_html( $h[1] ); ?></span></li><?php endforeach; ?>
 	</ol>
 </section>
 
 <section class="wrap" style="padding:120px var(--gutter);border-top:1px solid var(--line)">
-	<div class="section-head"><div><p class="label">Access</p><p class="display section-head__en">アクセス</p></div></div>
+	<div class="section-head"><div><p class="label">Access</p><p class="display display--jp section-head__en">アクセス</p></div></div>
 	<div class="access">
 		<div class="access__item">
 			<p class="display access__en">Osaka HQ</p>

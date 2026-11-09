@@ -24,6 +24,12 @@
     });
   }
 
+  /* 英字書体（Bebas）の見出しに日本語が入った場合は和文書体に切り替え */
+  var jpRe = /[\u3040-\u30ff\u3400-\u9fff\uff01-\uff60]/;
+  document.querySelectorAll('.display').forEach(function (el) {
+    if (!el.classList.contains('display--jp') && jpRe.test(el.textContent)) { el.classList.add('display--jp'); }
+  });
+
   /* ヒーロー動画の停止ボタン */
   var vt = document.querySelector('[data-video-toggle]');
   var video = document.querySelector('.hero__video');
