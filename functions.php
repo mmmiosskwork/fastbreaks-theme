@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.16' );
+define( 'FB_THEME_VER', '1.7.17' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -476,13 +476,14 @@ add_action( 'admin_menu', function () {
 			} elseif ( 'unpublish_sources' === $action ) {
 				foreach ( fb_copied_works() as $w ) {
 					$src = (int) get_post_meta( $w->ID, 'fb_source_post_id', true );
-					if ( $src && 'publish' === get_post_status( $src ) ) {
+					/* お知らせ等にも属する記事はニュースに残す（レポートのみの記事だけ下書きに） */
+					if ( $src && 'publish' === get_post_status( $src ) && 1 === count( wp_get_post_categories( $src ) ) ) {
 						wp_update_post( array( 'ID' => $src, 'post_status' => 'draft' ) );
 						update_post_meta( $src, 'fb_unpublished_by_migration', '1' );
 						$n++;
 					}
 				}
-				$msg = sprintf( 'コピー元のレポート記事 %d 件を下書きに戻しました（旧URLは /works/ に301リダイレクトされます）。', $n );
+				$msg = sprintf( 'コピー元のレポート記事（レポートのみの記事）%d 件を下書きに戻しました（旧URLは /works/ に301リダイレクトされます）。', $n );
 			} elseif ( 'republish_sources' === $action ) {
 				$drafts = get_posts( array( 'post_type' => 'post', 'posts_per_page' => -1, 'post_status' => 'draft', 'meta_key' => 'fb_unpublished_by_migration', 'meta_value' => '1' ) );
 				foreach ( $drafts as $d ) { wp_update_post( array( 'ID' => $d->ID, 'post_status' => 'publish' ) ); delete_post_meta( $d->ID, 'fb_unpublished_by_migration' ); $n++; }
