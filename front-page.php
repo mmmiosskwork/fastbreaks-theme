@@ -4,6 +4,10 @@
  */
 get_header();
 $hero_video = fb_opt( 'hero_video' );
+/* テーマ同梱の軽量版（PC 1280px／スマホ 960px）があればそちらを使う */
+$hero_lg = file_exists( get_template_directory() . '/assets/video/hero-720.mp4' ) ? FB_THEME_URI . '/assets/video/hero-720.mp4?v=' . FB_THEME_VER : '';
+$hero_sm = file_exists( get_template_directory() . '/assets/video/hero-540.mp4' ) ? FB_THEME_URI . '/assets/video/hero-540.mp4?v=' . FB_THEME_VER : '';
+if ( $hero_lg ) { $hero_video = $hero_lg; }
 $hero_image = fb_opt( 'hero_image' ) ? fb_opt( 'hero_image' ) : fb_img( 'hero_celebrate.jpg' );
 $show_prices = '1' === (string) fb_opt( 'show_prices' );
 ?>
@@ -12,9 +16,8 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 <section class="hero" id="top">
 	<div class="hero__media" aria-hidden="true">
 		<?php if ( $hero_video ) : ?>
-			<video class="hero__video" autoplay muted loop playsinline poster="<?php echo esc_url( $hero_image ); ?>">
-				<source src="<?php echo esc_url( $hero_video ); ?>" type="video/mp4">
-			</video>
+			<video class="hero__video" autoplay muted loop playsinline preload="auto" poster="<?php echo esc_url( $hero_image ); ?>" data-src-lg="<?php echo esc_url( $hero_video ); ?>" data-src-sm="<?php echo esc_url( $hero_sm ? $hero_sm : $hero_video ); ?>"></video>
+			<script>(function(v){if(!v)return;var sm=window.matchMedia('(max-width:900px)').matches;v.src=sm?v.getAttribute('data-src-sm'):v.getAttribute('data-src-lg');})(document.currentScript.previousElementSibling);</script>
 		<?php endif; ?>
 		<img class="hero__img" src="<?php echo esc_url( $hero_image ); ?>" alt="" fetchpriority="high">
 		<div class="hero__tint hero__tint--shadow"></div>

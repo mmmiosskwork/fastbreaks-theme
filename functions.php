@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.19' );
+define( 'FB_THEME_VER', '1.7.20' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -680,3 +680,20 @@ function fb_news_url() {
 	$id = (int) get_option( 'page_for_posts' );
 	return $id ? get_permalink( $id ) : home_url( '/news/' );
 }
+
+/* ファビコン（テーマ同梱）。WordPress の「サイトアイコン」設定より優先 */
+remove_action( 'wp_head', 'wp_site_icon', 99 );
+remove_action( 'admin_head', 'wp_site_icon' );
+remove_action( 'login_head', 'wp_site_icon', 99 );
+function fb_favicon_links() {
+	$u = FB_THEME_URI . '/assets/img/icon/';
+	$v = '?v=' . FB_THEME_VER;
+	echo '<link rel="icon" href="' . esc_url( $u . 'favicon.ico' . $v ) . '" sizes="any">' . "\n";
+	echo '<link rel="icon" type="image/png" sizes="32x32" href="' . esc_url( $u . 'favicon-32.png' . $v ) . '">' . "\n";
+	echo '<link rel="icon" type="image/png" sizes="192x192" href="' . esc_url( $u . 'icon-192.png' . $v ) . '">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url( $u . 'apple-touch-icon.png' . $v ) . '">' . "\n";
+	echo '<meta name="msapplication-TileImage" content="' . esc_url( $u . 'icon-512.png' . $v ) . '">' . "\n";
+}
+add_action( 'wp_head', 'fb_favicon_links', 99 );
+add_action( 'admin_head', 'fb_favicon_links' );
+add_action( 'login_head', 'fb_favicon_links' );
