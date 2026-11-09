@@ -24,7 +24,6 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 		<div class="hero__fade"></div>
 	</div>
 	<div class="hero__slash" aria-hidden="true"></div>
-	<p class="ghost ghost--hero" aria-hidden="true">FASTBREAKS</p>
 	<div class="wrap hero__inner">
 		<p class="label hero__in">Sports × Digital Contents Production — Osaka / Tokyo</p>
 		<h1 class="display hero__title"><span class="line"><span>One instance</span></span><span class="line"><span>shows <span class="gradtext">all the rest.</span></span></span></h1>
@@ -176,7 +175,7 @@ if ( $featured->have_posts() ) : ?>
 				<p class="str__num display">02</p>
 				<p class="str__en display">Broadcast × Speed</p>
 				<p class="str__title">「放送グレード×SNSスピード」の制作体制</p>
-				<p class="body-text">ソフトウェアベースの基幹システムで放送クオリティを保ちながらコストダウン。撮影から公開までを会場で即日完結します。</p>
+				<p class="body-text">ソフトウェアベースの基幹システムで放送クオリティを保ちながらコストダウン。SNSコンテンツは撮影から公開までを会場で即日完結します。</p>
 			</div>
 			<div class="str">
 				<p class="str__num display">03</p>

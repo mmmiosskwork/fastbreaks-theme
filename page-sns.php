@@ -6,7 +6,7 @@
 get_header();
 $show_prices = '1' === (string) fb_opt( 'show_prices' );
 ?>
-<section class="phero">
+<section class="phero phero--plain">
 	<img class="phero__img" src="<?php echo has_post_thumbnail() ? esc_url( get_the_post_thumbnail_url( null, 'fb-wide' ) ) : fb_img( 'switcher_laptop.jpg' ); ?>" alt="" fetchpriority="high">
 	<div class="phero__fade" aria-hidden="true"></div><div class="phero__slash" aria-hidden="true"></div>
 	<div class="wrap phero__inner">

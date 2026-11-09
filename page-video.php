@@ -13,7 +13,7 @@ $menu = array(
 	array( '大会・イベントの記録撮影', 'スチル＋動画、1日', '¥100,000〜', '日' ),
 );
 ?>
-<section class="phero">
+<section class="phero phero--plain">
 	<img class="phero__img" src="<?php echo has_post_thumbnail() ? esc_url( get_the_post_thumbnail_url( null, 'fb-wide' ) ) : fb_img( 'team_huddle.jpg' ); ?>" alt="" fetchpriority="high">
 	<div class="phero__fade" aria-hidden="true"></div><div class="phero__slash" aria-hidden="true"></div>
 	<div class="wrap phero__inner">

@@ -6,13 +6,13 @@
 get_header();
 $words = array(
 	array( 'Try',    '挑む。',   '勝算より先に、まず現場に立つ。関西学生バスケの全試合配信も、FIBAの国際大会も、最初は「やってみる」から始まった。' ),
-	array( 'Fail',   '倒れる。', '失敗は隠さない。配信が止まった夜も、数字が伸びなかった企画も、全部が次のクリエイティブの材料になる。' ),
-	array( 'Fast',   '速く。',   '試合が終わった瞬間に、ハイライトは世界へ。放送グレードのクオリティを、SNSのスピードで届ける。' ),
+	array( 'Fail',   '倒れる。', '失敗を恐れて立ち止まるより、挑んで倒れることを選ぶ。うまくいかなかった経験こそが、次の一手を確かなものにする。' ),
+	array( 'Fast',   '速く。',   '迷う時間を、つくる時間に変える。速い意思決定が、速い制作と発信を生む。熱が冷めないうちに、世界へ届ける。' ),
 	array( 'Break',  '壊す。',   '「大学スポーツは誰も見ない」という前提を壊す。現場の熱と世間の認知のあいだにある壁を、映像で破壊する。' ),
-	array( 'Repeat', '繰り返す。', '一度のバズでは文化にならない。124日の配信、325本の映像。積み重ねだけが、人を動かす熱源になる。' ),
+	array( 'Repeat', '繰り返す。', '一度の成功では文化にならない。振り返り、磨き直し、また挑む。改善を積み重ねた先にだけ、人を動かす熱源がある。' ),
 );
 ?>
-<section class="phero">
+<section class="phero phero--plain">
 	<img class="phero__img" src="<?php echo has_post_thumbnail() ? esc_url( get_the_post_thumbnail_url( null, 'fb-wide' ) ) : fb_img( 'team_huddle.jpg' ); ?>" alt="" fetchpriority="high">
 	<div class="phero__fade" aria-hidden="true"></div>
 	<div class="phero__slash" aria-hidden="true"></div>
@@ -31,7 +31,7 @@ $words = array(
 		<p class="label">Our statement</p>
 		<p class="display vision-statement__en" style="margin-top:24px">Try. Fail. Fast.<br>Break. <span class="gradtext">Repeat.</span></p>
 		<h2 class="vision-statement__jp">挑んで、倒れて、また挑む。<br>それを繰り返す姿こそが、人を動かすと信じている。</h2>
-		<p class="body-text vision-statement__lead">高校時代はスーパースターとして注目された選手が、大学進学とともに世間の目から離れてしまう。現場で肌に感じる選手たちの圧倒的な熱量と、世の中の認知とのあいだにある深いギャップ。そのもどかしさが、FASTBREAKSの原点であり、いまも変わらない使命です。</p>
+		<p class="body-text vision-statement__lead">高校時代はスーパースターとして注目された選手が、大学進学とともに世間の目から離れてしまう。<br>現場で肌に感じる選手たちの圧倒的な熱量と、世の中の認知とのあいだにある深いギャップ。<br>そのもどかしさが、FASTBREAKSの原点であり、いまも変わらない使命です。</p>
 	</div>
 </section>
 
@@ -83,11 +83,11 @@ $words = array(
 		<div>
 			<p class="label">Manifesto</p>
 			<div class="manifesto__lines" style="margin-top:32px">
-				<p class="manifesto__line">勝った夜だけを撮らない。</p>
-				<p class="manifesto__line">負けた朝の練習を、撮る。</p>
-				<p class="manifesto__line is-dim">注目されない4年間に、</p>
-				<p class="manifesto__line is-dim">いちばん熱い瞬間がある。</p>
-				<p class="manifesto__line">だから私たちは、そこにいる。</p>
+				<p class="manifesto__line">光が当たる前から、物語は始まっている。</p>
+				<p class="manifesto__line">歓声のない体育館にも、熱は確かにある。</p>
+				<p class="manifesto__line is-dim">まだ誰にも知られていない一瞬が、</p>
+				<p class="manifesto__line is-dim">いつか誰かの心を動かす。</p>
+				<p class="manifesto__line">その熱源を見つけ、世界へ届ける。</p>
 			</div>
 			<div class="btn-row" style="margin-top:48px"><a class="pill pill--accent" href="<?php echo esc_url( home_url( '/company/' ) ); ?>">会社概要</a><a class="pill pill--line" href="<?php echo esc_url( home_url( '/recruit/' ) ); ?>">採用情報</a></div>
 		</div>

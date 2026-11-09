@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.6.0
+Version: 1.6.1
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -97,7 +97,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .site-header.is-scrolled{background:rgba(6,7,15,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:rgba(255,255,255,.08)}
 .admin-bar .site-header{top:32px}@media (max-width:782px){.admin-bar .site-header{top:46px}}
 .site-header__inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--gutter);max-width:calc(var(--wrap) + var(--gutter)*2);margin:0 auto}
-.brand img{height:26px;width:auto}
+.brand img{height:36px;width:auto}
 .nav{display:flex;align-items:center;gap:40px}
 .nav__list{display:flex;align-items:center;gap:40px}
 .nav__list a{font-family:var(--ub);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
@@ -434,14 +434,6 @@ a:hover .ncover img{transform:scale(1.04)}
 @media (max-width:900px){.contact-grid{grid-template-columns:1fr;gap:48px;padding-bottom:80px}}
 
 /* Contact Form 7 の見た目 */
-.wpcf7 label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
-.wpcf7 p{margin-bottom:22px}
-.wpcf7 input[type="text"],.wpcf7 input[type="email"],.wpcf7 input[type="tel"],.wpcf7 input[type="url"],.wpcf7 input[type="date"],.wpcf7 select,.wpcf7 textarea{width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.15);color:#fff;padding:14px 16px;font:inherit;font-size:15px;border-radius:4px}
-.wpcf7 input:focus,.wpcf7 textarea:focus,.wpcf7 select:focus{border-color:var(--c-blue);outline:0}
-.wpcf7 input[type="submit"]{font-family:var(--ub);background:var(--accent);color:#fff;border:0;border-radius:999px;height:56px;padding:0 40px;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .25s}
-.wpcf7 input[type="submit"]:hover{background:#fff;color:var(--bg)}
-.wpcf7-not-valid-tip{color:#FCA5A5;font-size:12px}
-.wpcf7 form .wpcf7-response-output{border-color:var(--c-blue);border-radius:4px;padding:14px;margin:16px 0 0}
 
 /* =========================================================
    7. Entry content (本文)
@@ -512,7 +504,7 @@ a:hover .ncover img{transform:scale(1.04)}
 .vision-statement .ghost{top:60px;left:-10px}
 .vision-statement__en{font-size:120px;line-height:.92}
 .vision-statement__jp{font-size:40px;font-weight:900;line-height:1.5;letter-spacing:-.01em;margin-top:40px;max-width:900px}
-.vision-statement__lead{margin-top:32px;max-width:640px}
+.vision-statement__lead{margin-top:32px;max-width:none}
 .words{padding:140px 0;border-bottom:1px solid var(--line)}
 .words__list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-left:1px solid var(--line)}
 .word{padding:40px 24px 48px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:18px;min-height:360px;position:relative;overflow:hidden;transition:background .3s}
@@ -520,7 +512,7 @@ a:hover .ncover img{transform:scale(1.04)}
 .word__num{font-family:var(--ub);font-size:11px;letter-spacing:.3em;color:var(--label)}
 .word__en{font-size:clamp(44px,5.2vw,88px);line-height:.9;letter-spacing:-.01em}
 .word:nth-child(3) .word__en{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
-.word__jp{font-size:18px;font-weight:900;line-height:1.6;margin-top:auto}
+.word__jp{font-size:18px;font-weight:900;line-height:1.6;margin-top:6px}
 .word__text{font-size:13px;line-height:2;color:var(--muted)}
 .mvv{padding:140px 0;border-bottom:1px solid var(--line)}
 .mvv__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
@@ -621,3 +613,68 @@ a:hover .ncover img{transform:scale(1.04)}
 .note-feed__more{margin-top:48px;display:flex;justify-content:center}
 @media (max-width:1100px){.note-feed__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.note-feed{padding-top:80px}.note-feed__list{grid-template-columns:1fr;gap:28px}}
+
+/* ===== 日本語の改行（文節単位） ===== */
+body{word-break:auto-phrase;text-wrap:pretty}
+h1,h2,h3,.display--jp,.phero__jp,.about__title,.vision-statement__jp,.manifesto__line,.cta__title{text-wrap:balance}
+
+/* ===== ページヒーロー：黒背景（会社概要・Vision・サービス） ===== */
+.phero--plain{min-height:640px}
+.phero--plain .phero__img,.phero--plain .phero__fade,.phero--plain .phero__slash{display:none}
+@media (max-width:900px){.phero--plain{min-height:520px}}
+
+/* ===== 記事のシェアボタン（VK ExUnit）をパープルに ===== */
+.veu_socialSet{margin:56px 0 0!important}
+.veu_socialSet ul{display:flex!important;flex-wrap:wrap;gap:10px;margin:0!important;padding:0!important;list-style:none}
+.veu_socialSet li{margin:0!important;float:none!important;width:auto!important}
+.veu_socialSet .sb_icon_inner,.veu_socialSet li a{background:var(--accent)!important;border:1px solid var(--accent)!important;color:#fff!important;border-radius:999px!important;box-shadow:none!important;padding:10px 20px!important;font-family:var(--ub)!important;font-size:12px!important;letter-spacing:.06em;display:inline-flex!important;align-items:center;gap:8px;transition:background .25s,color .25s}
+.veu_socialSet .sb_icon_inner *,.veu_socialSet li a *{color:inherit!important;fill:currentColor!important}
+.veu_socialSet .sb_icon_inner:hover,.veu_socialSet li a:hover{background:#fff!important;color:var(--accent)!important}
+.veu_socialSet .sb_icon_inner .sb_pc_hide,.veu_socialSet .sb_icon_inner .sb_sp_hide{display:inline!important}
+
+/* ===== 取引先ロゴ：各社のロゴは色・形を変えず白いタイルに表示 ===== */
+.clients__list{gap:12px}
+.clients__list li{background:#fff;border-radius:8px;min-height:0;aspect-ratio:400/150;padding:0;overflow:hidden}
+.clients__list img{opacity:1;max-width:none;filter:none;width:100%;height:100%;aspect-ratio:auto;object-fit:contain}
+.clients__list li:hover img{opacity:1}
+
+/* ===== フォーム（Contact Form 7：お問い合わせ・採用応募） ===== */
+.wpcf7{--f-bg:rgba(255,255,255,.04);--f-line:rgba(255,255,255,.16);font-family:var(--jp)}
+.wpcf7 form{display:flex;flex-direction:column;gap:22px}
+.wpcf7 form>p,.wpcf7 p{margin:0}
+.wpcf7 label,.wpcf7 th,.wpcf7 th p{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;font-weight:700;letter-spacing:.02em;color:#fff;margin:0 0 10px}
+.wpcf7 label br{display:none}
+.wpcf7 label>.wpcf7-form-control-wrap{flex:1 0 100%;margin-top:2px}
+.wpcf7 small.text-danger{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;background:var(--accent);color:#fff;font-size:0;line-height:1}
+.wpcf7 small.text-danger::before{content:"必須";font-size:10px;font-weight:700;letter-spacing:.08em}
+.wpcf7 .wpcf7-form-control-wrap{display:block}
+.wpcf7 input[type="text"],.wpcf7 input[type="email"],.wpcf7 input[type="tel"],.wpcf7 input[type="url"],.wpcf7 input[type="date"],.wpcf7 input[type="number"],.wpcf7 select,.wpcf7 textarea{width:100%;box-sizing:border-box;background:var(--f-bg);border:1px solid var(--f-line);border-radius:10px;color:#fff;font-family:var(--jp);font-size:15px;font-weight:500;line-height:1.6;padding:14px 16px;transition:border-color .2s,box-shadow .2s,background .2s;-webkit-appearance:none;appearance:none}
+.wpcf7 input[type="text"],.wpcf7 input[type="email"],.wpcf7 input[type="tel"],.wpcf7 input[type="url"],.wpcf7 input[type="date"],.wpcf7 input[type="number"],.wpcf7 select{height:54px}
+.wpcf7 textarea{min-height:180px;resize:vertical}
+.wpcf7 ::placeholder{color:rgba(255,255,255,.35)}
+.wpcf7 input:focus,.wpcf7 textarea:focus,.wpcf7 select:focus{outline:0;border-color:var(--c-indigo);background:rgba(255,255,255,.06);box-shadow:0 0 0 4px rgba(91,79,224,.25)}
+/* 採用フォーム（表組み）を縦積みに */
+.wpcf7 figure.wp-block-table{margin:0;overflow:visible}
+.wpcf7 table,.wpcf7 tbody,.wpcf7 tr,.wpcf7 th,.wpcf7 td{display:block;width:100%;border:0!important;background:none!important;padding:0!important;text-align:left}
+.wpcf7 table{border-collapse:separate}
+.wpcf7 tr{padding:0 0 22px!important}
+.wpcf7 th p{margin:0 0 10px}
+/* ラジオ・チェック */
+.wpcf7 .wpcf7-radio,.wpcf7 .wpcf7-checkbox{display:flex;flex-wrap:wrap;gap:10px}
+.wpcf7 .wpcf7-list-item{margin:0}
+.wpcf7 .wpcf7-radio .wpcf7-list-item label,.wpcf7 .wpcf7-checkbox .wpcf7-list-item label{display:inline-flex;align-items:center;gap:10px;margin:0;padding:12px 18px;border:1px solid var(--f-line);border-radius:999px;background:var(--f-bg);font-weight:500;font-size:14px;cursor:pointer;transition:border-color .2s,background .2s}
+.wpcf7 .wpcf7-list-item label:has(input:checked){border-color:var(--accent);background:rgba(91,79,224,.18)}
+.wpcf7 input[type="radio"],.wpcf7 input[type="checkbox"]{accent-color:var(--accent);width:18px;height:18px;margin:0}
+.wpcf7 .wpcf7-acceptance .wpcf7-list-item label{border:0;background:none;padding:0;font-size:13px;color:var(--muted)}
+.wpcf7 .wpcf7-acceptance a{color:#fff;text-decoration:underline}
+/* 送信 */
+.wpcf7 p.text-center,.wpcf7 .text-center{text-align:left}
+.wpcf7 input[type="submit"]{font-family:var(--ub);background:var(--accent);color:#fff;border:0;border-radius:999px;height:60px;min-width:280px;padding:0 48px;font-size:14px;font-weight:700;letter-spacing:.14em;cursor:pointer;transition:background .25s,color .25s;-webkit-appearance:none;appearance:none}
+.wpcf7 input[type="submit"]:hover{background:#fff;color:var(--bg)}
+.wpcf7 .wpcf7-spinner{margin-left:12px}
+.wpcf7-not-valid-tip{color:#F9A8D4;font-size:12px;margin-top:6px}
+.wpcf7 .wpcf7-not-valid{border-color:#DB2777!important}
+.wpcf7 form .wpcf7-response-output{margin:8px 0 0!important;padding:16px 18px!important;border:1px solid var(--f-line)!important;border-radius:10px;font-size:14px;background:var(--f-bg)}
+.wpcf7 form.sent .wpcf7-response-output{border-color:var(--c-indigo)!important}
+.wpcf7 form.invalid .wpcf7-response-output,.wpcf7 form.failed .wpcf7-response-output{border-color:#DB2777!important}
+@media (max-width:900px){.wpcf7 input[type="submit"]{width:100%;min-width:0}}
