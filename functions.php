@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.3' );
+define( 'FB_THEME_VER', '1.7.4' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -41,7 +41,7 @@ remove_action( 'wp_head', 'rsd_link' );
  * ---------------------------------------------------------------------- */
 add_action( 'wp_enqueue_scripts', function () {
 	// フォント：公開後に woff2 を assets/fonts に置いて自サーバー配信へ切り替え可
-	wp_enqueue_style( 'fb-fonts', 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@700&family=Noto+Sans+JP:wght@400;500;700&display=swap', array(), null );
+	wp_enqueue_style( 'fb-fonts', 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@700&family=Noto+Sans+JP:wght@400;500;700;800&display=swap', array(), null );
 	wp_enqueue_style( 'fb-style', get_stylesheet_uri(), array( 'fb-fonts' ), FB_THEME_VER );
 	wp_enqueue_script( 'fb-main', FB_THEME_URI . '/assets/js/main.js', array(), FB_THEME_VER, true );
 } );
@@ -590,7 +590,11 @@ add_filter( 'pre_set_site_transient_update_themes', function ( $t ) {
 	$remote = get_transient( 'fb_gh_remote_version' );
 	if ( false === $remote ) {
 		$remote = '';
-		$r = wp_remote_get( 'https://raw.githubusercontent.com/' . FB_GH_REPO . '/' . FB_GH_BRANCH . '/style.css?t=' . time(), array( 'timeout' => 8, 'headers' => array( 'Cache-Control' => 'no-cache' ) ) );
+		/* GitHub API（CDN キャッシュなし）を優先し、失敗したら raw にフォールバック */
+		$r = wp_remote_get( 'https://api.github.com/repos/' . FB_GH_REPO . '/contents/style.css?ref=' . FB_GH_BRANCH, array( 'timeout' => 8, 'headers' => array( 'Accept' => 'application/vnd.github.raw', 'User-Agent' => 'fastbreaks-theme-updater' ) ) );
+		if ( is_wp_error( $r ) || 200 !== wp_remote_retrieve_response_code( $r ) ) {
+			$r = wp_remote_get( 'https://raw.githubusercontent.com/' . FB_GH_REPO . '/' . FB_GH_BRANCH . '/style.css?t=' . time(), array( 'timeout' => 8, 'headers' => array( 'Cache-Control' => 'no-cache' ) ) );
+		}
 		if ( ! is_wp_error( $r ) && 200 === wp_remote_retrieve_response_code( $r ) && preg_match( '/^\s*Version:\s*(.+)$/mi', wp_remote_retrieve_body( $r ), $m ) ) {
 			$remote = trim( $m[1] );
 		}

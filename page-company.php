@@ -12,7 +12,7 @@ $history = array(
 	array( '2023', '3x3国内リーグ「3XS（トライクロス）」公式ライブ配信を年間受託。東京支社を開設' ),
 	array( '2024', 'ソフトウェアベースのライブ配信システムを独自に構築・導入。放送品質を保ちながら、少人数での複数会場同時配信を実現' ),
 	array( '2025', '自社メディアのライブ配信・SNSコンテンツが年間3,000万回再生を突破。年間124日程の配信、325本の動画制作' ),
-	array( '2026', '日本初開催の FIBA 3x3 Challenger（渋谷・上野原・愛知）、高崎ウェイメンズリースのライブ配信を担当' ),
+	array( '2026', '日本初開催の FIBA 3x3 Challenger（渋谷・上野原・愛知）、FIBA 3×3 WOMEN’S SERIES TAKASAKI STOP のライブ配信を担当' ),
 );
 ?>
 <section class="phero phero--plain">
@@ -50,7 +50,7 @@ $history = array(
 		<p class="body-text">私たちのルーツは、2020年・コロナ禍の真っ只中にあります。「関西の大学バスケットボールを発展させ、事業化する。」その想いひとつで、ゼロから立ち上がりました。失敗を恐れずに挑んだ結果生まれた数字は、大学スポーツ界における「継続可能な成功モデル」の可能性を証明しています。</p>
 		<dl class="spec">
 			<div><dt>代表 / CEO</dt><dd>佐々木 未央（Sasaki Mio）</dd></div>
-			<div><dt>略歴</dt><dd class="bio">1996年生まれ。近畿大学卒業。<br>学生時代、関西学生バスケットボール連盟で学生委員長を務める。<br>2019年　インフルエンサーマネジメント会社 取締役 就任<br>2020年　FASTBREAKS合同会社 創業<br>2021年　地域リーグ所属バスケットボールチーム 理事 就任</dd></div>
+			<div><dt>略歴</dt><dd class="bio">1996年生まれ。近畿大学卒業。<br>学生時代、関西学生バスケットボール連盟で学生委員長を務める。<br>2019年　インフルエンサーマネジメント会社 取締役 就任<br>2020年　FASTBREAKS合同会社 創業<br>2021年　SBリーグ所属バスケットボールチーム 理事 就任</dd></div>
 		</dl>
 	</div>
 	<figure class="setup__fig ceo__fig"><img src="<?php echo fb_img( 'ceo.jpg' ); ?>" alt="代表 佐々木 未央" loading="lazy"><span class="about__bar" aria-hidden="true"></span></figure>
