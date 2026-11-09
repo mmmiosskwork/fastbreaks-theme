@@ -30,12 +30,7 @@
 			) );
 			?>
 		</nav>
-		<ul class="site-footer__list site-footer__sns" aria-label="SNS">
-			<?php foreach ( array( 'YouTube' => 'sns_youtube', 'Instagram' => 'sns_instagram', 'TikTok' => 'sns_tiktok', 'X' => 'sns_x', 'note' => 'sns_note' ) as $label => $key ) :
-				if ( $u = fb_opt( $key ) ) : ?>
-				<li><a href="<?php echo esc_url( $u ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $label ); ?></a></li>
-			<?php endif; endforeach; ?>
-		</ul>
+		<?php echo fb_sns_list( 'site-footer__sns' ); // phpcs:ignore ?>
 	</div>
 	<div class="wrap site-footer__bottom">
 		<p>© <?php echo esc_html( gmdate( 'Y' ) ); ?> FASTBREAKS. ALL RIGHTS RESERVED.</p>

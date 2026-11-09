@@ -26,6 +26,27 @@ while ( have_posts() ) : the_post(); $c = get_the_category(); ?>
 		</div>
 	</div>
 </article>
+<?php
+/* 関連記事（同じカテゴリの新しい順に3件。レポートのみの記事は除外）— ExUnit の関連記事は CSS で非表示 */
+$cat_ids = wp_list_pluck( get_the_category(), 'term_id' );
+$rel = new WP_Query( array(
+	'post_type'           => 'post',
+	'posts_per_page'      => 3,
+	'post__not_in'        => array_merge( array( get_the_ID() ), fb_report_only_ids() ),
+	'category__in'        => $cat_ids,
+	'ignore_sticky_posts' => true,
+	'no_found_rows'       => true,
+) );
+if ( $rel->have_posts() ) : ?>
+<section class="wrap related">
+	<div class="section-head section-head--tight"><div><p class="label">Related</p><p class="display section-head__en">More news</p></div><a class="arrow-link" href="<?php echo esc_url( fb_news_url() ); ?>">Index →</a></div>
+	<ul class="news-grid">
+		<?php while ( $rel->have_posts() ) : $rel->the_post(); $rc = get_the_category(); ?>
+		<li><a href="<?php the_permalink(); ?>"><?php get_template_part( 'template-parts/news-cover' ); ?><span class="news__body"><span class="news__meta"><time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></time><?php if ( $rc ) : ?><span class="tag"><?php echo esc_html( $rc[0]->name ); ?></span><?php endif; ?></span><span class="news__title"><?php the_title(); ?></span></span></a></li>
+		<?php endwhile; wp_reset_postdata(); ?>
+	</ul>
+</section>
+<?php endif; ?>
 <?php endwhile; ?>
 <?php get_template_part( 'template-parts/cta' ); ?>
 <?php get_footer(); ?>

@@ -229,11 +229,7 @@ if ( $featured->have_posts() ) : ?>
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
-		<div class="btn-row">
-			<?php foreach ( array( 'YouTube' => 'sns_youtube', 'Instagram' => 'sns_instagram', 'TikTok' => 'sns_tiktok', 'note' => 'sns_note' ) as $label => $key ) : if ( $u = fb_opt( $key ) ) : ?>
-				<a class="pill pill--line pill--sm" href="<?php echo esc_url( $u ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $label ); ?></a>
-			<?php endif; endforeach; ?>
-		</div>
+		<?php echo fb_sns_list( 'sns-icons--lg' ); // phpcs:ignore ?>
 	</div>
 	<div class="news">
 		<div class="section-head section-head--tight">

@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.21
+Version: 1.7.22
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -770,3 +770,31 @@ body{overflow-x:clip}
 .partners__list a{overflow-wrap:anywhere}
 /* ページ上部へ戻るボタンを reCAPTCHA のマークと重ならない位置に */
 #page_top{bottom:96px!important}
+
+/* 1.7.22: SNS アイコン */
+.sns-icons{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0;padding:0}
+.sns-icons a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;border:1px solid var(--line-2);color:rgba(255,255,255,.85);transition:background .25s,color .25s,border-color .25s}
+.sns-icons a:hover{background:#fff;border-color:#fff;color:var(--bg)}
+.sns-icons svg{width:18px;height:18px;display:block}
+.sns-icons a[title="note"] svg{width:26px;height:26px}
+.sns-icons--lg{margin-top:28px}
+.sns-icons--lg a{width:48px;height:48px}
+.sns-icons--lg svg{width:20px;height:20px}
+.site-footer__sns{align-self:start}
+@media (max-width:900px){.site-footer__sns{gap:12px}.site-footer__sns a{width:44px;height:44px}}
+
+/* 1.7.22: お知らせ詳細の関連記事（ExUnit のものは非表示にしてニュース一覧と同じカードで表示） */
+.veu_relatedPosts{display:none!important}
+.related{padding-top:72px;padding-bottom:120px;border-top:1px solid var(--line)}
+.related .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+@media (max-width:900px){.related{padding-top:48px;padding-bottom:72px}}
+
+/* 1.7.22: 汎用固定ページ（プライバシーポリシー等） */
+.page-generic__wrap{padding-bottom:120px}
+.page-generic__body{max-width:860px}
+.page-generic__body h2{font-size:22px;margin-top:2.6em}
+.page-generic__body h2:first-child{margin-top:0}
+.page-generic__body ol,.page-generic__body ul{padding-left:1.4em;margin:1em 0}
+.page-generic__body li{margin:.4em 0}
+.page-generic__body li>ol,.page-generic__body li>ul{margin:.4em 0}
+@media (max-width:900px){.page-generic__wrap{padding-bottom:72px}.page-generic__body h2{font-size:18px}}

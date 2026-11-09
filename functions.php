@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.21' );
+define( 'FB_THEME_VER', '1.7.22' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -180,10 +180,10 @@ function fb_settings_fields() {
 			'staff'        => array( '12名（業務委託含む）', '従業者数' ),
 		),
 		'SNS' => array(
-			'sns_youtube'   => array( 'https://www.youtube.com/', 'YouTube URL' ),
+			'sns_youtube'   => array( '', 'YouTube URL（空欄なら非表示）' ),
 			'sns_instagram' => array( 'https://www.instagram.com/fastbreaks_jp/', 'Instagram URL' ),
-			'sns_tiktok'    => array( 'https://www.tiktok.com/', 'TikTok URL' ),
-			'sns_x'         => array( 'https://x.com/', 'X URL' ),
+			'sns_tiktok'    => array( 'https://www.tiktok.com/@fastbreaks_jp', 'TikTok URL' ),
+			'sns_x'         => array( 'https://x.com/fastbreaks_jp', 'X URL' ),
 			'sns_note'      => array( 'https://note.com/fastbreaks', 'note URL（トップに最新記事を自動表示）' ),
 			'sns_handle'    => array( '@fastbreaks_jp', 'SNSアカウント名（表示用）' ),
 			'sns_followers' => array( 'フォロワー総数 39,436 ／ 年間3,352万回再生（2025）', 'SNS実績の一行' ),
@@ -697,3 +697,123 @@ function fb_favicon_links() {
 add_action( 'wp_head', 'fb_favicon_links', 99 );
 add_action( 'admin_head', 'fb_favicon_links' );
 add_action( 'login_head', 'fb_favicon_links' );
+
+/* -------------------------------------------------------------------------
+ * シェア時の表示（OGP / Twitter カード / description）
+ * AIOSEO と ExUnit の両方が og: を出していて内容が食い違っていたため、
+ * wp_head の出力から og:・twitter:・description をいったん取り除き、テーマで一本化して出し直す。
+ * ------------------------------------------------------------------------- */
+function fb_front_title() { return 'FASTBREAKS｜大学スポーツの映像制作・ライブ配信・SNS運用'; }
+add_filter( 'aioseo_title', function ( $t ) { return is_front_page() ? fb_front_title() : $t; } );
+add_action( 'wp_head', function () { if ( ! is_admin() ) { ob_start(); } }, 0 );
+add_action( 'wp_head', function () {
+	if ( is_admin() ) { return; }
+	$html = ob_get_clean();
+	if ( false === $html ) { return; }
+	/* 既存の description を拾っておく（最初のもの＝AIOSEO の設定値） */
+	$desc = '';
+	if ( preg_match( '/<meta\s+name="description"\s+content="([^"]*)"/i', $html, $m ) ) { $desc = html_entity_decode( $m[1], ENT_QUOTES, 'UTF-8' ); }
+	/* ExUnit の OGP ブロック、og: / twitter: / article: / fb: と description をすべて除去 */
+	$html = preg_replace( '#<!-- \[ VK All in One Expansion Unit (OGP|twitter card) \] -->.*?<!-- \[ / VK All in One Expansion Unit (OGP|twitter card) \] -->#s', '', $html );
+	$html = preg_replace( '#<meta\s+(property|name)="(og:|twitter:|article:|fb:)[^"]*"[^>]*>\s*#i', '', $html );
+	$html = preg_replace( '#<meta\s+name="description"[^>]*>\s*#i', '', $html );
+	echo $html; // phpcs:ignore
+	echo fb_meta_tags( $desc ); // phpcs:ignore
+}, 9999 );
+
+function fb_meta_tags( $desc = '' ) {
+	$site  = 'FASTBREAKS';
+	$fix   = array( '関西大学バスケ' => '関西学生バスケ' );
+	$front = '関西学生バスケをはじめ大学スポーツメディアとして活躍するFASTBREAKS。スポーツ×デジタルコンテンツに特化した映像制作・ライブ配信・SNS運用で、大学スポーツの熱を届けます。';
+	$type  = 'website';
+	$image = FB_THEME_URI . '/assets/img/ogp.jpg?v=' . FB_THEME_VER;
+	$w = 1200; $h = 630;
+	if ( is_front_page() ) {
+		$title = fb_front_title();
+		$desc  = $front;
+		$url   = home_url( '/' );
+	} else {
+		$title = wp_get_document_title();
+		$req   = isset( $GLOBALS['wp']->request ) ? (string) $GLOBALS['wp']->request : '';
+		$url   = is_singular() ? get_permalink() : home_url( $req ? user_trailingslashit( $req ) : '/' );
+		if ( is_singular() ) {
+			$p = get_queried_object();
+			if ( ! $desc || is_singular( array( 'post', 'works' ) ) ) {
+				$src  = has_excerpt( $p ) ? $p->post_excerpt : wp_strip_all_tags( strip_shortcodes( $p->post_content ) );
+				$text = trim( preg_replace( '/\s+/u', ' ', $src ) );
+				if ( $text ) { $desc = mb_strimwidth( $text, 0, 220, '…', 'UTF-8' ); }
+			}
+			if ( is_singular( array( 'post', 'works' ) ) ) { $type = 'article'; }
+			if ( has_post_thumbnail( $p ) ) {
+				$img = wp_get_attachment_image_src( get_post_thumbnail_id( $p ), 'large' );
+				if ( $img ) { $image = $img[0]; $w = (int) $img[1]; $h = (int) $img[2]; }
+			}
+		}
+		if ( ! $desc ) { $desc = $front; }
+	}
+	$desc = strtr( $desc, $fix );
+	$t = array(
+		array( 'name', 'description', $desc ),
+		array( 'property', 'og:locale', 'ja_JP' ),
+		array( 'property', 'og:site_name', $site ),
+		array( 'property', 'og:type', $type ),
+		array( 'property', 'og:title', $title ),
+		array( 'property', 'og:description', $desc ),
+		array( 'property', 'og:url', $url ),
+		array( 'property', 'og:image', $image ),
+		array( 'property', 'og:image:width', (string) $w ),
+		array( 'property', 'og:image:height', (string) $h ),
+		array( 'name', 'twitter:card', 'summary_large_image' ),
+		array( 'name', 'twitter:site', '@fastbreaks_jp' ),
+		array( 'name', 'twitter:title', $title ),
+		array( 'name', 'twitter:description', $desc ),
+		array( 'name', 'twitter:image', $image ),
+	);
+	$out = "<!-- FASTBREAKS meta -->\n";
+	foreach ( $t as $r ) { $out .= '<meta ' . $r[0] . '="' . esc_attr( $r[1] ) . '" content="' . esc_attr( $r[2] ) . '">' . "\n"; }
+	return $out;
+}
+
+/* SNS アイコン（フッター等）。アカウントは「設定 → FASTBREAKS サイト設定」の URL */
+function fb_sns_links() {
+	$items = array(
+		'sns_instagram' => 'Instagram',
+		'sns_x'         => 'X',
+		'sns_tiktok'    => 'TikTok',
+		'sns_youtube'   => 'YouTube',
+		'sns_note'      => 'note',
+	);
+	$out = array();
+	foreach ( $items as $key => $label ) {
+		$u = trim( (string) fb_opt( $key ) );
+		/* ドメインだけの仮URL（https://x.com/ など）は表示しない */
+		if ( ! $u || preg_match( '#^https?://(www\.)?[^/]+/?$#', $u ) ) { continue; }
+		$out[ $key ] = array( 'url' => $u, 'label' => $label );
+	}
+	return $out;
+}
+function fb_sns_icon( $key ) {
+	switch ( $key ) {
+		case 'sns_x':
+			return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
+		case 'sns_tiktok':
+			return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>';
+		case 'sns_instagram':
+			return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.6" cy="6.4" r="1.3" fill="currentColor"/></svg>';
+		case 'sns_youtube':
+			return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="4.5" width="21" height="15" rx="4.5" fill="currentColor"/><path d="M10 8.8v6.4l5.6-3.2z" fill="#06070F"/></svg>';
+		case 'sns_note':
+			return '<svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="16" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="currentColor">note</text></svg>';
+	}
+	return '';
+}
+function fb_sns_list( $class = '' ) {
+	$links = fb_sns_links();
+	if ( ! $links ) { return ''; }
+	$h = '<ul class="sns-icons ' . esc_attr( $class ) . '" aria-label="SNS">';
+	foreach ( $links as $key => $l ) {
+		$h .= '<li><a href="' . esc_url( $l['url'] ) . '" target="_blank" rel="noopener" aria-label="' . esc_attr( 'FASTBREAKS の ' . $l['label'] ) . '" title="' . esc_attr( $l['label'] ) . '">' . fb_sns_icon( $key ) . '</a></li>';
+	}
+	return $h . '</ul>';
+}
+
