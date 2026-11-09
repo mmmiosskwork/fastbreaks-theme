@@ -235,7 +235,7 @@ if ( $featured->have_posts() ) : ?>
 	<div class="news">
 		<div class="section-head section-head--tight">
 			<div><p class="label"><span class="label__idx">07</span>News</p><p class="display section-head__en">Latest</p></div>
-			<a class="arrow-link" href="<?php echo esc_url( home_url( '/news/' ) ); ?>">Index →</a>
+			<a class="arrow-link" href="<?php echo esc_url( fb_news_url() ); ?>">Index →</a>
 		</div>
 		<ul class="news__list">
 			<?php $news = new WP_Query( array( 'post_type' => 'post', 'posts_per_page' => 4, 'post__not_in' => fb_report_only_ids() ) );

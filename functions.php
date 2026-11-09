@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.0' );
+define( 'FB_THEME_VER', '1.7.1' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -390,7 +390,7 @@ function fb_nav_fallback() {
 		'Works'   => get_post_type_archive_link( 'works' ),
 		'Vision'  => home_url( '/vision/' ),
 		'About'   => home_url( '/company/' ),
-		'News'    => home_url( '/news/' ),
+		'News'    => fb_news_url(),
 		'Recruit' => home_url( '/recruit/' ),
 	);
 	echo '<ul class="nav__list">';
@@ -658,4 +658,10 @@ function fb_note_items( $limit = 4 ) {
 		set_transient( $key, $items, $items ? HOUR_IN_SECONDS : 10 * MINUTE_IN_SECONDS );
 	}
 	return array_slice( $items, 0, $limit );
+}
+
+/* お知らせ一覧の URL（「投稿ページ」に設定された固定ページのパーマリンク。スラッグ変更に追従） */
+function fb_news_url() {
+	$id = (int) get_option( 'page_for_posts' );
+	return $id ? get_permalink( $id ) : home_url( '/news/' );
 }

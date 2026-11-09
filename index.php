@@ -9,7 +9,7 @@ get_header(); ?>
 		<nav class="crumbs" aria-label="パンくず"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>／</span><span>News</span></nav>
 		<div class="section-head"><div><p class="label">News</p><h1 class="display ptitle__title"><?php echo is_category() ? esc_html( single_cat_title( '', false ) ) : 'Latest news'; ?></h1></div></div>
 		<?php $cats = get_categories( array( 'hide_empty' => true ) ); if ( $cats ) : ?>
-		<div class="filters"><div class="filters__row"><span class="label label--muted">Category</span><a class="pill pill--sm <?php echo is_category() ? '' : 'is-on'; ?>" href="<?php echo esc_url( home_url( '/news/' ) ); ?>">All</a><?php foreach ( $cats as $c ) : if ( 'report' === $c->slug ) { continue; } ?><a class="pill pill--sm <?php echo is_category( $c->term_id ) ? 'is-on' : ''; ?>" href="<?php echo esc_url( get_category_link( $c ) ); ?>"><?php echo esc_html( $c->name ); ?></a><?php endforeach; ?></div></div>
+		<div class="filters"><div class="filters__row"><span class="label label--muted">Category</span><a class="pill pill--sm <?php echo is_category() ? '' : 'is-on'; ?>" href="<?php echo esc_url( fb_news_url() ); ?>">All</a><?php foreach ( $cats as $c ) : if ( 'report' === $c->slug ) { continue; } ?><a class="pill pill--sm <?php echo is_category( $c->term_id ) ? 'is-on' : ''; ?>" href="<?php echo esc_url( get_category_link( $c ) ); ?>"><?php echo esc_html( $c->name ); ?></a><?php endforeach; ?></div></div>
 		<?php endif; ?>
 	</div>
 </section>

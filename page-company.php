@@ -5,12 +5,14 @@
  */
 get_header();
 $history = array(
-	array( '2020.03', 'FASTBREAKS合同会社 設立（大阪市中央区）' ),
+	array( '2020.03', 'FASTBREAKS合同会社 設立' ),
 	array( '2020', 'コロナ禍の無観客開催を契機に、関西学生バスケットボールリーグ戦の全試合ライブ配信を開始' ),
-	array( '2023', '3x3国内リーグ「3XS」公式ライブ配信を受託。東京支社を開設' ),
-	array( '2024', '朝日新聞社・ABCテレビ「ブカピ」制作パートナーとしてウインターカップ等を取材' ),
-	array( '2025', 'ライブ配信・SNSコンテンツが年間3,000万回再生を突破。年間124日程の配信、325本の動画制作' ),
-	array( '2026', '日本初開催の FIBA 3x3 Challenger（渋谷・上野原）のライブ配信を担当' ),
+	array( '2021', '朝日新聞社・ABCテレビ「ブカピ」制作パートナーとしてウインターカップ等を取材・制作' ),
+	array( '2022', 'Bリーグ・Jリーグクラブの公式コンテンツ制作・SNS運用を開始。プロスポーツ領域へ事業を拡大' ),
+	array( '2023', '3x3国内リーグ「3XS（トライクロス）」公式ライブ配信を年間受託。東京支社を開設' ),
+	array( '2024', 'ソフトウェアベースのライブ配信システムを独自に構築・導入。放送品質を保ちながら、少人数での複数会場同時配信を実現' ),
+	array( '2025', '自社メディアのライブ配信・SNSコンテンツが年間3,000万回再生を突破。年間124日程の配信、325本の動画制作' ),
+	array( '2026', '日本初開催の FIBA 3x3 Challenger（渋谷・上野原・愛知）、高崎ウェイメンズリースのライブ配信を担当' ),
 );
 ?>
 <section class="phero phero--plain">
@@ -51,7 +53,7 @@ $history = array(
 			<div><dt>略歴</dt><dd>1996年生、近畿大学卒。学生時代に関西学生バスケットボール連盟で学生委員長を務める。2019年 インフルエンサーマネジメント会社 取締役就任。2020年 FASTBREAKS合同会社 創業。2021年 地域リーグ所属バスケットボールチーム 理事就任。</dd></div>
 		</dl>
 	</div>
-	<figure class="setup__fig"><div style="width:100%;height:560px;background:linear-gradient(170deg,var(--surface-2),var(--surface));display:flex;align-items:center;justify-content:center;color:var(--muted-2);font-size:12px;letter-spacing:.2em">[代表写真]</div><span class="about__bar" aria-hidden="true"></span></figure>
+	<figure class="setup__fig ceo__fig"><img src="<?php echo fb_img( 'ceo.jpg' ); ?>" alt="代表 佐々木 未央" loading="lazy"><span class="about__bar" aria-hidden="true"></span></figure>
 </section>
 
 <section class="wrap" style="padding:120px var(--gutter);border-top:1px solid var(--line);display:grid;grid-template-columns:320px minmax(0,1fr);gap:80px;align-items:start">
@@ -80,7 +82,7 @@ $history = array(
 	<div class="section-head"><div><p class="label">Access</p><p class="display display--jp section-head__en">アクセス</p></div></div>
 	<div class="access">
 		<div class="access__item">
-			<p class="display access__en">Osaka HQ</p>
+			<p class="display access__en">Osaka</p>
 			<p class="body-text"><?php echo esc_html( fb_opt( 'address_osaka' ) ); ?></p>
 			<div class="map"><iframe loading="lazy" title="大阪本社 地図" src="https://www.google.com/maps?q=<?php echo rawurlencode( fb_opt( 'address_osaka' ) ); ?>&amp;output=embed" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 		</div>

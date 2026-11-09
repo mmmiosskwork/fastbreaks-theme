@@ -19,7 +19,7 @@
 				'fallback_cb'    => function () {
 					$items = array(
 						'Service' => home_url( '/service/' ), 'Works' => get_post_type_archive_link( 'works' ),
-						'Vision' => home_url( '/vision/' ), 'About' => home_url( '/company/' ), 'Partners' => home_url( '/partner/' ), 'News' => home_url( '/news/' ),
+						'Vision' => home_url( '/vision/' ), 'About' => home_url( '/company/' ), 'Partners' => home_url( '/partner/' ), 'News' => fb_news_url(),
 						'Recruit' => home_url( '/recruit/' ), 'Contact' => home_url( '/contact/' ),
 						'Privacy' => home_url( '/privacy-policy/' ),
 					);

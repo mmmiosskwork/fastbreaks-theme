@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.0
+Version: 1.7.1
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -488,10 +488,10 @@ a:hover .ncover img{transform:scale(1.04)}
 .spec--table dd{font-size:15px}
 .spec--table dd small{display:block;font-size:12px;color:var(--muted-2)}
 .history{display:flex;flex-direction:column}
-.history li{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;padding:24px 0;border-top:1px solid var(--line);align-items:baseline}
+.history li{display:grid;grid-template-columns:140px minmax(0,1fr);gap:24px;padding:22px 0;border-top:1px solid var(--line);align-items:center}
 .history li:last-child{border-bottom:1px solid var(--line)}
-.history__year{font-size:40px;color:var(--c-blue)}
-.history__text{font-size:14px;line-height:1.9;color:rgba(255,255,255,.85)}
+.history__year{font-family:var(--ub)!important;font-weight:700;font-size:22px;line-height:1;letter-spacing:.02em;color:var(--c-blue);font-variant-numeric:tabular-nums}
+.history__text{font-size:15px;font-weight:500;line-height:1.8;color:rgba(255,255,255,.88)}
 .access{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}
 .access__item{display:flex;flex-direction:column;gap:12px}
 .access__en{font-size:44px}
@@ -700,3 +700,7 @@ h1,h2,h3,.display--jp,.phero__jp,.about__title,.vision-statement__jp,.manifesto_
 .wpcf7 .fb-q{font-size:14px;font-weight:700;letter-spacing:.02em;color:#fff;margin:0 0 -10px}
 .wpcf7 select{padding-right:44px;background-image:linear-gradient(45deg,transparent 50%,rgba(255,255,255,.7) 50%),linear-gradient(135deg,rgba(255,255,255,.7) 50%,transparent 50%);background-position:calc(100% - 22px) 50%,calc(100% - 16px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;cursor:pointer}
 .wpcf7 select option{background:#0F1430;color:#fff}
+
+/* 代表写真 */
+.ceo__fig img{width:100%;height:560px;object-fit:cover;object-position:center 30%;display:block}
+@media (max-width:900px){.ceo__fig img{height:420px}.history li{grid-template-columns:84px minmax(0,1fr);gap:16px}.history__year{font-size:17px}}
