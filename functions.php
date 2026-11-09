@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.5.0' );
+define( 'FB_THEME_VER', '1.5.1' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -199,7 +199,7 @@ function fb_settings_fields() {
 			'hero_video'   => array( '', 'ヒーロー背景動画のURL（MP4・5MB以下推奨。空欄なら静止画）' ),
 			'partners'     => array( '', 'ライブ配信パートナー（1行1件「名称|URL」。空欄なら既定の7社）' ),
 			'hero_image'   => array( '', 'ヒーロー静止画URL（空欄ならテーマ同梱の写真）' ),
-			'clients'      => array( "Panasonic\nSoftBank\nNTT\nSONY\nLINE\nP&G\n朝日新聞\nABCテレビ\nセレッソ大阪\nFIBA 3x3", '取引先（1行に1社。ロゴ画像を使う場合は「社名|画像URL」）' ),
+			'clients'      => array( "Panasonic\nSoftBank\nNTT\nSONY\nLINE\nP&G\n朝日新聞\nABCテレビ\nセレッソ大阪\nFIBA 3x3", '取引先（1行に1社。ロゴを使う場合は「社名|ロゴのファイル名」。ロゴはメディアライブラリにアップロード）' ),
 		),
 		'価格（最低価格の表示）' => array(
 			'price_live'  => array( '80,000', 'ライブ配信 最低価格（円／日）' ),
@@ -331,7 +331,9 @@ function fb_clients() {
 		$line = trim( $line );
 		if ( '' === $line ) { continue; }
 		$parts = array_map( 'trim', explode( '|', $line ) );
-		$out[] = array( 'name' => $parts[0], 'img' => isset( $parts[1] ) ? $parts[1] : '' );
+		$img = isset( $parts[1] ) ? $parts[1] : '';
+		if ( $img && false === strpos( $img, '/' ) ) { $img = fb_img( $img ); } /* ファイル名だけならメディアライブラリから */
+		$out[] = array( 'name' => $parts[0], 'img' => $img );
 	}
 	return $out;
 }

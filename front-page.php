@@ -217,7 +217,7 @@ if ( $featured->have_posts() ) : ?>
 		<ul class="news__list">
 			<?php $news = new WP_Query( array( 'post_type' => 'post', 'posts_per_page' => 4, 'post__not_in' => fb_report_only_ids() ) );
 			while ( $news->have_posts() ) : $news->the_post(); ?>
-				<li><a href="<?php the_permalink(); ?>"><time class="display" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></time><span><?php the_title(); ?></span></a></li>
+				<li><a href="<?php the_permalink(); ?>"><?php get_template_part( 'template-parts/news-cover' ); ?><span class="news__body"><span class="news__meta"><time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></time><?php $c = get_the_category(); if ( $c ) : ?><span class="tag"><?php echo esc_html( $c[0]->name ); ?></span><?php endif; ?></span><span class="news__title"><?php the_title(); ?></span></span></a></li>
 			<?php endwhile; wp_reset_postdata(); ?>
 		</ul>
 		<div class="recruit-boxes" id="recruit">

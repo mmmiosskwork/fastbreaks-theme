@@ -15,9 +15,9 @@ get_header(); ?>
 </section>
 <section class="wrap news-archive">
 	<?php if ( have_posts() ) : ?>
-	<ul class="news__list news__list--full">
+	<ul class="news-grid">
 		<?php while ( have_posts() ) : the_post(); $c = get_the_category(); ?>
-		<li><a href="<?php the_permalink(); ?>"><time class="display" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></time><?php if ( $c ) : ?><span class="tag"><?php echo esc_html( $c[0]->name ); ?></span><?php endif; ?><span><?php the_title(); ?></span></a></li>
+		<li><a href="<?php the_permalink(); ?>"><?php get_template_part( 'template-parts/news-cover' ); ?><span class="news__body"><span class="news__meta"><time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></time><?php if ( $c ) : ?><span class="tag"><?php echo esc_html( $c[0]->name ); ?></span><?php endif; ?></span><span class="news__title"><?php the_title(); ?></span></span></a></li>
 		<?php endwhile; ?>
 	</ul>
 	<div class="pager"><?php the_posts_pagination( array( 'prev_text' => '← Prev', 'next_text' => 'Next →', 'mid_size' => 1 ) ); ?></div>

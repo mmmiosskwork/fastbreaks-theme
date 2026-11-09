@@ -78,7 +78,7 @@ if ( $live_works->have_posts() ) : ?>
 <section class="process wrap">
 	<div class="section-head"><div><p class="label">Process</p><p class="display display--jp section-head__en">ご相談から配信まで</p></div></div>
 	<ol class="steps">
-		<li><span class="display c-blue">01</span><strong>ご相談</strong><span>日程・会場・やりたいことをフォームで。2営業日以内にご返信。</span></li>
+		<li><span class="display c-blue">01</span><strong>ご相談</strong><span>会場・やりたいことをフォームでお知らせください。</span></li>
 		<li><span class="display c-blue">02</span><strong>お見積り・プラン提案</strong><span>カメラ台数・テロップ・配信先を決めて概算をご提示。</span></li>
 		<li><span class="display c-indigo">03</span><strong>下見・回線確認</strong><span>会場の電源・回線・カメラ位置を確認。遠方はオンラインで。</span></li>
 		<li><span class="display c-purple">04</span><strong>当日配信</strong><span>設営から撤収まで。即日ダイジェストはその日のうちに。</span></li>
@@ -100,6 +100,6 @@ if ( $live_works->have_posts() ) : ?>
 <section class="wrap entry-content page-extra"><?php the_content(); ?></section>
 <?php endif; endwhile; endif; ?>
 
-<?php get_template_part( 'template-parts/cta', null, array( 'en' => '配信の相談をする', 'title' => '試合の日程と、やりたいことを教えてください。', 'lead' => '概算のお見積りは2営業日以内にお返しします。' ) ); ?>
+<?php get_template_part( 'template-parts/cta', null, array( 'en' => '配信の相談をする', 'title' => 'やりたい配信の形を、お聞かせください。', 'lead' => '規模や体制に合わせて、最適な構成をご提案します。' ) ); ?>
 
 <?php get_footer(); ?>

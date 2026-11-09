@@ -45,5 +45,5 @@ $menu = array(
 <section class="works-home"><div class="wrap"><div class="section-head"><div><p class="label">Works — Video</p><p class="display display--jp section-head__en">制作実績</p></div><a class="pill pill--line" href="<?php echo esc_url( get_post_type_archive_link( 'works' ) ); ?>">All works</a></div><div class="works-grid works-grid--3"><?php while ( $q->have_posts() ) : $q->the_post(); get_template_part( 'template-parts/work-card', null, array( 'size' => 'md' ) ); endwhile; wp_reset_postdata(); ?></div></div></section>
 <?php endif; ?>
 <?php while ( have_posts() ) : the_post(); if ( false !== strpos( get_the_content(), 'fb-show-legacy' ) ) : ?><section class="wrap wrap--narrow entry-content page-extra"><?php the_content(); ?></section><?php endif; endwhile; ?>
-<?php get_template_part( 'template-parts/cta', null, array( 'en' => '映像の相談をする', 'title' => '撮りたいもの、届けたい相手を教えてください。', 'lead' => '企画段階からご一緒します。概算は2営業日以内にお返しします。' ) ); ?>
+<?php get_template_part( 'template-parts/cta', null, array( 'en' => '映像の相談をする', 'title' => '撮りたいもの、届けたい相手を教えてください。', 'lead' => '企画段階からご一緒します。' ) ); ?>
 <?php get_footer(); ?>

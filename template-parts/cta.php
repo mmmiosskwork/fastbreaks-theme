@@ -3,8 +3,8 @@
  * 共通CTA（お問い合わせ）
  * $args: title, lead, en
  */
-$title = isset( $args['title'] ) ? $args['title'] : 'まずは、試合の日程とやりたいことを教えてください。';
-$lead  = isset( $args['lead'] ) ? $args['lead'] : '配信・撮影・SNS運用のご相談、協賛・タイアップ、取材のご依頼はこちらから。2営業日以内にご返信します。';
+$title = isset( $args['title'] ) ? $args['title'] : 'まずは、やりたいことをお聞かせください。';
+$lead  = isset( $args['lead'] ) ? $args['lead'] : '配信・撮影・SNS運用のご相談、協賛・タイアップ、取材のご依頼はこちらから。';
 $en    = isset( $args['en'] ) ? $args['en'] : "Let's change<br>the game together.";
 ?>
 <section class="cta" id="contact-cta">
