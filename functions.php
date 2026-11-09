@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.6' );
+define( 'FB_THEME_VER', '1.7.7' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -309,7 +309,7 @@ function fb_img( $file ) {
 		set_transient( 'fb_img_map', $map, DAY_IN_SECONDS );
 	}
 	if ( $map[ $slug ] ) { return esc_url( $map[ $slug ] ); }
-	return esc_url( FB_THEME_URI . '/assets/img/' . $file );
+	return esc_url( FB_THEME_URI . '/assets/img/' . $file . ( 0 === strpos( $file, 'logo_' ) ? '?v=' . FB_THEME_VER : '' ) );
 }
 add_action( 'add_attachment', function () { delete_transient( 'fb_img_map' ); } );
 add_action( 'delete_attachment', function () { delete_transient( 'fb_img_map' ); } );
