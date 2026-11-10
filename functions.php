@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.26' );
+define( 'FB_THEME_VER', '1.7.27' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -901,3 +901,26 @@ add_filter( 'the_content', function ( $c ) {
 	if ( false === strpos( $c, 'veu_relatedPosts' ) ) { return $c; }
 	return preg_replace( '#<aside[^>]*class="[^"]*veu_relatedPosts[^"]*"[^>]*>.*?</aside>#s', '', $c );
 }, 9999 );
+
+/* -------------------------------------------------------------------------
+ * reCAPTCHA の「保護されています」バッジ
+ * Google の規約上、バッジを隠す場合はフォームの近くに reCAPTCHA の利用表記を出す必要があるため、
+ * バッジは非表示にして、フォームの送信ボタンの下に表記を入れる。
+ * また、フォームの無いページでは reCAPTCHA のスクリプト自体を読み込まない（表示速度の改善）。
+ * ------------------------------------------------------------------------- */
+function fb_page_has_form() {
+	if ( is_page( array( 'contact', 'recruit', 'internship', 'broadcast' ) ) ) { return true; }
+	if ( is_singular() ) {
+		$c = (string) get_post_field( 'post_content', get_queried_object_id() );
+		if ( false !== strpos( $c, 'contact-form-7' ) ) { return true; }
+	}
+	return false;
+}
+add_action( 'wp_enqueue_scripts', function () {
+	if ( fb_page_has_form() ) { return; }
+	wp_dequeue_script( 'google-recaptcha' );
+	wp_dequeue_script( 'wpcf7-recaptcha' );
+}, 100 );
+add_filter( 'wpcf7_form_elements', function ( $html ) {
+	return $html . '<p class="recaptcha-note">このフォームは reCAPTCHA で保護されており、Google の<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener">利用規約</a>が適用されます。</p>';
+} );
