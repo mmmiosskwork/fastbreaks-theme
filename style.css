@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.28
+Version: 1.7.29
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -859,3 +859,25 @@ body{overflow-x:clip}
 
 /* 1.7.28: タグ一覧ページで body に付く class="tag" にタグ用の装飾が当たって白背景になっていたのを修正 */
 .archive-title{margin-top:12px}
+
+/* 1.7.29: サイトマップ（テーマで生成） */
+.sitemap-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 40px}
+.sitemap-group ul{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
+.sitemap-group li a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;font-weight:700;color:#fff}
+.sitemap-group li a:hover{color:var(--c-blue)}
+@media (max-width:900px){.sitemap-grid{grid-template-columns:1fr;gap:36px}}
+
+/* 1.7.29: VK Blocks Pro 停止後も、過去の記事の「余白」ブロックの間隔を保つ（プラグインと同じ値） */
+.vk_spacer-type-margin-top .vk_block-margin-xxs--margin-top{margin-top:6px}
+.vk_spacer-type-margin-top .vk_block-margin-xs--margin-top{margin-top:12px}
+.vk_spacer-type-margin-top .vk_block-margin-sm--margin-top{margin-top:48px}
+.vk_spacer-type-margin-top .vk_block-margin-md--margin-top{margin-top:80px}
+.vk_spacer-type-margin-top .vk_block-margin-lg--margin-top{margin-top:120px}
+.vk_spacer-type-margin-top .vk_block-margin-xl--margin-top{margin-top:160px}
+@media (max-width:575px){
+  .vk_spacer-type-margin-top .vk_block-margin-sm--margin-top{margin-top:16px}
+  .vk_spacer-type-margin-top .vk_block-margin-md--margin-top{margin-top:48px}
+}
+.vk_spacer-display-tablet,.vk_spacer-display-mobile{display:none}
+@media (max-width:991px){.vk_spacer-display-pc{display:none}.vk_spacer-display-tablet{display:block}}
+@media (max-width:575px){.vk_spacer-display-tablet{display:none}.vk_spacer-display-mobile{display:block}}
