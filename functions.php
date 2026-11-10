@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('FB_THEME_VER','1.7.33');
+define('FB_THEME_VER','1.7.34');
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -809,7 +809,8 @@ function fb_meta_tags( $desc = '' ) {
 				if ( $text ) { $desc = mb_strimwidth( $text, 0, 220, '…', 'UTF-8' ); }
 			}
 			if ( is_singular( array( 'post', 'works' ) ) ) { $type = 'article'; }
-			if ( has_post_thumbnail( $p ) ) {
+			/* 固定ページは旧サイトのアイキャッチが残っているため使わず、共通のシェア画像に統一 */
+			if ( ! is_page() && has_post_thumbnail( $p ) ) {
 				$img = wp_get_attachment_image_src( get_post_thumbnail_id( $p ), 'large' );
 				if ( $img ) { $image = $img[0]; $w = (int) $img[1]; $h = (int) $img[2]; }
 			}
