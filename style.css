@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.35
+Version: 1.7.36
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -897,3 +897,11 @@ body{overflow-x:clip}
 .entry-content iframe{max-width:100%}
 .entry-content iframe[src*="youtube.com"],.entry-content iframe[src*="youtube-nocookie.com"],.entry-content iframe[src*="vimeo.com"]{width:100%;height:auto;aspect-ratio:16/9}
 .wp-embed-responsive .entry-content .wp-has-aspect-ratio .wp-block-embed__wrapper iframe{height:100%}
+
+/* 1.7.36 ボタンの塗りをメインのグラデーション（見出し文字と同じ --grad-text）に */
+.pill--accent,.pill--accent:hover{background:var(--grad-text)}
+.entry-content .wp-block-button__link:not(.has-background){background:var(--grad-text)}
+.wpcf7 input[type="submit"]{background:var(--grad-text)}
+.wpcf7 input[type="submit"]:hover{background:#fff}
+.veu_socialSet .sb_icon_inner,.veu_socialSet li a{background:var(--grad-text)!important;border-color:transparent!important}
+.veu_socialSet .sb_icon_inner:hover,.veu_socialSet li a:hover{background:#fff!important}
