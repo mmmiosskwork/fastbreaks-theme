@@ -5,7 +5,7 @@
 get_header();
 $hero_video = fb_opt( 'hero_video' );
 /* PC は元の映像（サイト設定 hero_video・無圧縮のまま）、スマホだけテーマ同梱の軽量版（960px） */
-$hero_sm = file_exists( get_template_directory() . '/assets/video/hero-540.mp4' ) ? FB_THEME_URI . '/assets/video/hero-540.mp4?v=' . FB_THEME_VER : '';
+$hero_sm = file_exists( get_template_directory() . '/assets/video/hero-sp.mp4' ) ? FB_THEME_URI . '/assets/video/hero-sp.mp4?v=' . FB_THEME_VER : '';
 if ( ! $hero_video && file_exists( get_template_directory() . '/assets/video/hero-720.mp4' ) ) { $hero_video = FB_THEME_URI . '/assets/video/hero-720.mp4?v=' . FB_THEME_VER; }
 $hero_image = fb_opt( 'hero_image' ) ? fb_opt( 'hero_image' ) : fb_img( 'hero_celebrate.jpg' );
 $show_prices = '1' === (string) fb_opt( 'show_prices' );
