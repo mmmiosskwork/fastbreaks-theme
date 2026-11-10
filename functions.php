@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('FB_THEME_VER','1.7.44');
+define('FB_THEME_VER','1.7.45');
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -788,7 +788,7 @@ add_action( 'wp_head', function () {
 function fb_meta_tags( $desc = '' ) {
 	$site  = 'FASTBREAKS';
 	$fix   = array( '関西大学バスケ' => '関西学生バスケ' );
-	$front = '確かな熱源が、そこにはある。大学スポーツの最前線から、心を動かす瞬間を届ける。熱と物語を形にする、コンテンツプロダクション。';
+	$front = '「確かな熱源が、そこにはある。」大学スポーツの最前線から、熱と物語を形にするコンテンツプロダクション。ライブ配信、SNSコンテンツで、その瞬間を届けます。';
 	$type  = 'website';
 	$image = FB_THEME_URI . '/assets/img/ogp.jpg?v=' . FB_THEME_VER;
 	$w = 1200; $h = 630;
