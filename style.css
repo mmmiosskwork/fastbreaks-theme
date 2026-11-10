@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.27
+Version: 1.7.28
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -79,7 +79,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .arrow-link span{display:inline-flex;width:40px;height:40px;border:1px solid rgba(255,255,255,.5);border-radius:50%;align-items:center;justify-content:center;transition:all .25s}
 .arrow-link:hover span{border-color:var(--c-blue);transform:translateX(6px)}
 .tags{display:flex;gap:6px;flex-wrap:wrap}
-.tag{font-family:var(--ub);font-size:10px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;line-height:1.4}
+:not(body).tag{font-family:var(--ub);font-size:10px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;line-height:1.4}
 .tag.is-live{background:#3F3FBF}.tag.is-video{background:var(--accent)}.tag.is-sns{background:var(--secondary)}.tag.is-event{background:rgba(255,255,255,.2)}
 
 /* Section head */
@@ -856,3 +856,6 @@ body{overflow-x:clip}
 .wpcf7 .recaptcha-note{font-size:11px;line-height:1.8;color:var(--muted-2);margin-top:4px}
 .wpcf7 .recaptcha-note a{color:var(--muted);text-decoration:underline}
 #page_top{bottom:25px!important}
+
+/* 1.7.28: タグ一覧ページで body に付く class="tag" にタグ用の装飾が当たって白背景になっていたのを修正 */
+.archive-title{margin-top:12px}
