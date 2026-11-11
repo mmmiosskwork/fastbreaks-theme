@@ -202,16 +202,20 @@ if ( $featured->have_posts() ) : ?>
 			<div class="mcol mcol--doc" id="documentary">
 				<p class="mcol__label">Original content</p>
 				<p class="display mcol__head"><?php echo esc_html( fb_opt( 'sig_heading' ) ); ?></p>
-				<div class="yt-facade" data-yt="<?php echo esc_attr( $sig_id ); ?>">
+				<div class="mcol__split">
+					<div class="yt-facade" data-yt="<?php echo esc_attr( $sig_id ); ?>">
 					<button type="button" class="yt-facade__btn" aria-label="動画を再生：<?php echo esc_attr( fb_opt( 'sig_title' ) ); ?>">
 						<img src="https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/hqdefault.jpg'" alt="" loading="lazy">
 						<span class="yt-facade__play" aria-hidden="true"></span>
 					</button>
 				</div>
-				<?php if ( fb_opt( 'sig_series' ) ) : ?><p class="signature__series"><?php echo esc_html( fb_opt( 'sig_series' ) ); ?></p><?php endif; ?>
+					<div class="mcol__body">
+						<?php if ( fb_opt( 'sig_series' ) ) : ?><p class="signature__series"><?php echo esc_html( fb_opt( 'sig_series' ) ); ?></p><?php endif; ?>
 				<h2 class="signature__title"><?php echo esc_html( fb_opt( 'sig_title' ) ); ?></h2>
 				<?php if ( fb_opt( 'sig_lead' ) ) : ?><p class="mcol__text"><?php echo esc_html( fb_opt( 'sig_lead' ) ); ?></p><?php endif; ?>
 				<a class="arrow-link" href="<?php echo esc_url( 'https://www.youtube.com/watch?v=' . $sig_id ); ?>" target="_blank" rel="noopener">YouTube で見る <span aria-hidden="true">↗</span></a>
+					</div>
+				</div>
 			</div>
 			<?php endif; ?>
 			<div class="mcol mcol--ig">
