@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('FB_THEME_VER','1.7.48');
+define('FB_THEME_VER','1.7.49');
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -204,6 +204,13 @@ function fb_settings_fields() {
 			'fact3_value' => array( '325', '数字3' ),   'fact3_unit' => array( '本', '単位3' ),  'fact3_label' => array( '年間動画コンテンツ制作（2025）', 'ラベル3' ),
 			'fact4_value' => array( '5', '数字4' ),     'fact4_unit' => array( '現場', '単位4' ), 'fact4_label' => array( '最大同時運用現場数（同日・別会場）', 'ラベル4' ),
 		),
+		'トップページ：シグネチャーコンテンツ' => array(
+			'sig_video'   => array( 'https://www.youtube.com/watch?v=mEiY09HDUsQ', 'YouTube の動画 URL（空欄ならセクションごと非表示）' ),
+			'sig_heading' => array( 'Dog fight.', '大きな英字の見出し' ),
+			'sig_series'  => array( 'DOG FIGHT. 倒すべきは強者。', 'シリーズ名' ),
+			'sig_title'   => array( '【密着】EP.1 竹野明倫監督と唯一の4回生が果たす下剋上。', '動画のタイトル' ),
+			'sig_lead'    => array( '阪南大学バスケットボール部に密着したドキュメンタリー。', '説明文' ),
+		),
 		'トップページ：ヒーロー・取引先' => array(
 			'hero_video'   => array( '', 'ヒーロー背景動画のURL（MP4・5MB以下推奨。空欄なら静止画）' ),
 			'partners'     => array( '', 'ライブ配信パートナー（1行1件「名称|URL」。空欄なら既定の7社）' ),
@@ -284,7 +291,7 @@ add_action( 'admin_init', function () {
 					$out[ $k ] = wp_kses_post( $v );
 				} elseif ( 0 === strpos( $k, 'sns_' ) && 'sns_handle' !== $k && 'sns_followers' !== $k ) {
 					$out[ $k ] = esc_url_raw( $v );
-				} elseif ( in_array( $k, array( 'hero_video', 'hero_image' ), true ) ) {
+				} elseif ( in_array( $k, array( 'hero_video', 'hero_image', 'sig_video' ), true ) ) {
 					$out[ $k ] = esc_url_raw( $v );
 				} else {
 					$out[ $k ] = sanitize_text_field( $v );
@@ -927,3 +934,4 @@ add_action( 'wp_enqueue_scripts', function () {
 add_filter( 'wpcf7_form_elements', function ( $html ) {
 	return $html . '<p class="recaptcha-note">このフォームは reCAPTCHA で保護されており、Google の<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener">利用規約</a>が適用されます。</p>';
 } );
+

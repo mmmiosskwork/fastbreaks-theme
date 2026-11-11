@@ -152,3 +152,17 @@
     });
   }
 })();
+
+/* YouTube：クリックしたときだけプレーヤーを読み込む（ページを軽く保つ） */
+document.addEventListener('click', function (e) {
+	var btn = e.target.closest && e.target.closest('.yt-facade__btn');
+	if (!btn) return;
+	var box = btn.closest('.yt-facade'); var id = box && box.getAttribute('data-yt');
+	if (!id) return;
+	var f = document.createElement('iframe');
+	f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
+	f.title = btn.getAttribute('aria-label') || 'YouTube';
+	f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+	f.allowFullscreen = true;
+	box.innerHTML = ''; box.appendChild(f); box.classList.add('is-playing');
+});

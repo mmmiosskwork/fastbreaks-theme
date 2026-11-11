@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.48
+Version: 1.7.49
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -908,3 +908,62 @@ body{overflow-x:clip}
 /* 1.7.40 数字のラベルを文節で改行（長いラベルが単語の途中で折れないように） */
 .fact__label{word-break:auto-phrase;text-wrap:balance}
 .fact__label--wbr{word-break:keep-all}
+
+/* ===== 1.7.49 シグネチャーコンテンツ（YouTube） ===== */
+.signature{padding:140px 0;border-top:1px solid var(--line)}
+.signature__grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:56px;align-items:center;margin-top:48px}
+.yt-facade{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.yt-facade__btn{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
+.yt-facade__btn img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s;filter:brightness(.82)}
+.yt-facade__btn:hover img{transform:scale(1.03);filter:brightness(.95)}
+.yt-facade__play{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--grad-text);box-shadow:0 10px 40px rgba(91,108,240,.45);transition:transform .3s}
+.yt-facade__play::after{content:"";position:absolute;left:34px;top:27px;border-style:solid;border-width:15px 0 15px 24px;border-color:transparent transparent transparent #fff}
+.yt-facade__btn:hover .yt-facade__play{transform:scale(1.08)}
+.yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.signature__text{display:flex;flex-direction:column;gap:18px}
+.signature__series{font-family:var(--ub);font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--label);margin:0}
+.signature__title{font-family:var(--jp);font-weight:900;font-size:24px;line-height:1.5;margin:0;font-feature-settings:"palt"}
+@media (max-width:900px){
+  .signature{padding:72px 0}
+  .signature__grid{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:28px}
+  .signature__title{font-size:19px}
+  .yt-facade__play{width:64px;height:64px;margin:-32px 0 0 -32px}
+  .yt-facade__play::after{left:26px;top:21px;border-width:11px 0 11px 18px}
+}
+
+/* ===== 1.7.49 スマホのトップページ調整 ===== */
+@media (max-width:900px){
+  /* メインキャッチを画面いっぱいに */
+  .hero{min-height:100vh;min-height:100svh}
+  /* Works：1件目を大きく、残りは2列 */
+  .works-grid--home{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .works-grid--home>.work{aspect-ratio:1/1}
+  .works-grid--home>.work:first-child{grid-column:1/-1;aspect-ratio:16/10}
+  .works-grid--home>.work:not(:first-child) .work__cap{padding:12px;gap:4px}
+  .works-grid--home>.work:not(:first-child) .work__title{font-size:13px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .works-grid--home>.work:not(:first-child) .work__title.is-en{font-size:18px;line-height:1}
+  .works-grid--home>.work:not(:first-child) .work__meta{display:none}
+  .works-grid--home>.work:not(:first-child) :not(body).tag{font-size:9px;padding:3px 7px}
+  .works-grid--home>.work:first-child .work__cap{padding:18px}
+  /* note：2列 */
+  .note-feed__list{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}
+  .note-feed__list a{gap:8px}
+  .note-feed__title{font-size:13px;line-height:1.55}
+  .note-feed__meta{font-size:10px;gap:8px}
+  .note-feed__src{height:18px;padding:0 6px;font-size:9px}
+  .note-feed__go{font-size:10px;letter-spacing:.1em}
+  /* News：2列 */
+  .news__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}
+  .news__list li a,.news__list li:last-child a{display:flex;flex-direction:column;gap:8px;padding:0;border:0}
+  .news__list .news__meta{gap:8px;flex-wrap:wrap}
+  .news__list .news__meta time{font-size:10px}
+  .news__list .news__title{font-size:13px;line-height:1.55;-webkit-line-clamp:3}
+  .news__list :not(body).tag{font-size:9px;padding:3px 7px}
+}
+@media (max-width:900px){
+  /* Instagram：最新2件を横並び */
+  #sb_instagram #sbi_images{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  #sb_instagram #sbi_images .sbi_item{width:auto!important;display:block!important}
+  #sb_instagram #sbi_images .sbi_item:nth-child(n+3){display:none!important}
+  #sb_instagram #sbi_load .sbi_load_btn{display:none!important}
+}

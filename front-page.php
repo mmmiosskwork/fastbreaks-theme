@@ -135,11 +135,40 @@ if ( $featured->have_posts() ) : ?>
 </section>
 <?php endif; ?>
 
+<!-- SIGNATURE CONTENT -->
+<?php $sig_id = fb_youtube_id( fb_opt( 'sig_video' ) ); if ( $sig_id ) : $sig_url = 'https://www.youtube.com/watch?v=' . $sig_id; ?>
+<section class="signature" id="signature">
+	<div class="wrap">
+		<div class="section-head">
+			<div>
+				<p class="label"><span class="label__idx">04</span>Signature content</p>
+				<p class="display section-head__en"><?php echo esc_html( fb_opt( 'sig_heading' ) ); ?></p>
+			</div>
+			<?php if ( fb_opt( 'sns_youtube' ) ) : ?><a class="arrow-link" href="<?php echo esc_url( fb_opt( 'sns_youtube' ) ); ?>" target="_blank" rel="noopener">YouTube channel <span aria-hidden="true">↗</span></a><?php endif; ?>
+		</div>
+		<div class="signature__grid">
+			<div class="yt-facade" data-yt="<?php echo esc_attr( $sig_id ); ?>">
+				<button type="button" class="yt-facade__btn" aria-label="動画を再生：<?php echo esc_attr( fb_opt( 'sig_title' ) ); ?>">
+					<img src="https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/hqdefault.jpg'" alt="" loading="lazy">
+					<span class="yt-facade__play" aria-hidden="true"></span>
+				</button>
+			</div>
+			<div class="signature__text">
+				<?php if ( fb_opt( 'sig_series' ) ) : ?><p class="signature__series"><?php echo esc_html( fb_opt( 'sig_series' ) ); ?></p><?php endif; ?>
+				<h2 class="signature__title"><?php echo esc_html( fb_opt( 'sig_title' ) ); ?></h2>
+				<?php if ( fb_opt( 'sig_lead' ) ) : ?><p class="body-text"><?php echo esc_html( fb_opt( 'sig_lead' ) ); ?></p><?php endif; ?>
+				<a class="arrow-link" href="<?php echo esc_url( $sig_url ); ?>" target="_blank" rel="noopener">YouTube で見る <span aria-hidden="true">↗</span></a>
+			</div>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
+
 <!-- FACTS -->
 <section class="facts" aria-label="数字で見るFASTBREAKS">
 	<div class="wrap facts__grid">
 		<div class="facts__head">
-			<p class="label"><span class="label__idx">04</span>Facts</p>
+			<p class="label"><span class="label__idx">05</span>Facts</p>
 			<p class="display facts__en">By the<br>numbers</p>
 			<p class="facts__note">2020–2025 / 2025年実績</p>
 		</div>
@@ -160,7 +189,7 @@ if ( $featured->have_posts() ) : ?>
 	<div class="strength__slash" aria-hidden="true"></div>
 	<div class="wrap strength__inner">
 		<div class="strength__head">
-			<p class="label"><span class="label__idx">05</span>Why FASTBREAKS</p>
+			<p class="label"><span class="label__idx">06</span>Why FASTBREAKS</p>
 			<p class="display section-head__en">Try. Fail. Fast.<br>Break. Repeat.</p>
 		</div>
 		<div class="strength__grid">
@@ -213,7 +242,7 @@ if ( $featured->have_posts() ) : ?>
 <!-- MEDIA + NEWS -->
 <section class="media-news wrap" id="news">
 	<div class="media">
-		<p class="label"><span class="label__idx">06</span>Our media</p>
+		<p class="label"><span class="label__idx">07</span>Our media</p>
 		<p class="display section-head__en"><?php echo esc_html( fb_opt( 'sns_handle' ) ); ?></p>
 		<p class="media__note"><?php echo esc_html( fb_opt( 'sns_followers' ) ); ?></p>
 		<?php if ( $ig = fb_opt( 'instagram_shortcode' ) ) : ?>
@@ -229,7 +258,7 @@ if ( $featured->have_posts() ) : ?>
 	</div>
 	<div class="news">
 		<div class="section-head section-head--tight">
-			<div><p class="label"><span class="label__idx">07</span>News</p><p class="display section-head__en">Latest</p></div>
+			<div><p class="label"><span class="label__idx">08</span>News</p><p class="display section-head__en">Latest</p></div>
 			<a class="arrow-link" href="<?php echo esc_url( fb_news_url() ); ?>">Index →</a>
 		</div>
 		<ul class="news__list">
