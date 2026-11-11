@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('FB_THEME_VER','1.7.46');
+define('FB_THEME_VER','1.7.47');
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -712,7 +712,7 @@ add_action( 'login_head', 'fb_favicon_links' );
  * AIOSEO と ExUnit の両方が og: を出していて内容が食い違っていたため、
  * wp_head の出力から og:・twitter:・description をいったん取り除き、テーマで一本化して出し直す。
  * ------------------------------------------------------------------------- */
-function fb_front_title() { return 'FASTBREAKS｜スポーツ映像・ライブ配信・SNSのコンテンツプロダクション'; }
+function fb_front_title() { return 'FASTBREAKS｜スポーツのライブ配信・映像制作・SNS運用のコンテンツプロダクション'; }
 add_filter( 'aioseo_title', function ( $t ) {
 	if ( is_front_page() ) { return fb_front_title(); }
 	$o = fb_seo_override();
