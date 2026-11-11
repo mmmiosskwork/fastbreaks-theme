@@ -46,7 +46,7 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 			<div class="plan"><p class="label c-blue">Light</p><?php if ( $show_prices ) : ?><p class="plan__price display">¥80,000<small>〜 / 日</small></p><?php endif; ?><p class="plan__setup">1カメラ・スタッフ1名</p><ul class="checks"><li>固定カメラ配信</li><li>スコアテロップ</li><li>YouTube / 自社PFへの配信設定</li><li>アーカイブURL納品</li></ul><p class="plan__for">学校・部活動・セミナー・小規模大会</p></div>
 			<div class="plan plan--hot"><p class="label c-indigo">Standard <span>— 人気</span></p><?php if ( $show_prices ) : ?><p class="plan__price display">¥200,000<small>〜 / 日</small></p><?php endif; ?><p class="plan__setup">2〜3カメラ・スタッフ2〜3名</p><ul class="checks"><li>スイッチング・リプレイ</li><li>スコア・スタッツテロップ</li><li>オープニングVTR</li><li>ハイライト1本付き</li></ul><p class="plan__for">連盟公式戦・地域リーグ・企業イベント</p></div>
 			<div class="plan"><p class="label c-purple">Premium</p><?php if ( $show_prices ) : ?><p class="plan__price display">¥500,000<small>〜 / 日</small></p><?php endif; ?><p class="plan__setup">4〜8カメラ・スタッフ4名〜</p><ul class="checks"><li>実況・解説の手配</li><li>マルチアングル・会場LED連動</li><li>即日ダイジェスト・縦型ショート</li><li>スポンサー露出設計</li></ul><p class="plan__for">全国大会・国際大会・ファイナル</p></div>
-			<div class="plan"><p class="label label--muted">Season</p><?php if ( $show_prices ) : ?><p class="plan__price display">¥60,000<small>〜 / 試合</small></p><?php endif; ?><p class="plan__setup">年間50試合以上のシーズン契約</p><ul class="checks"><li>試合数に応じた単価設定</li><li>複数会場の同時配信</li><li>シーズン通しのハイライト・SNS運用</li><li>スポンサー誘致の支援</li></ul><p class="plan__for">連盟・リーグ運営団体</p></div>
+			<div class="plan"><p class="label label--muted">Season</p><?php if ( $show_prices ) : ?><p class="plan__price display">¥60,000<small>〜 / 試合</small></p><?php endif; ?><p class="plan__setup">年間50試合以上のシーズン契約</p><ul class="checks"><li>試合数に応じた単価設定</li><li>複数会場の同時配信</li><li>シーズン通しのハイライト・SNS運用</li><li>スポンサー露出設計</li></ul><p class="plan__for">連盟・リーグ運営団体</p></div>
 		</div>
 	</div>
 </section>
@@ -56,7 +56,7 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 	<div class="setup__text">
 		<p class="label">Setup</p>
 		<p class="display display--jp section-head__en">体制と機材</p>
-		<p class="body-text">ソフトウェアベースの基幹システムで、<br>放送局水準の画作りを少人数・低コストで。<br>2020年から6年間、年間100試合超を止めずに配信してきた運用が、<br>そのまま御社の現場に入ります。</p>
+		<p class="body-text">ソフトウェアベースの基幹システムで、<br>放送局水準の画作りを少人数・低コストで。<br>2020年から年間100試合超を止めずに配信してきた運用が、<br>そのまま御社の現場に入ります。</p>
 		<ul class="checks checks--2col"><li>最大8カメラ（ミラーレス・PTZ）</li><li>オンタイムのリプレイ</li><li>スコア・スタッツ・選手名テロップ</li><li>実況席・ヘッドセット一式</li><li>最大5会場の同時配信</li><li>有線・IP回線のバックアップ</li><li>YouTube / 自社PF / 有料配信</li><li>大阪・東京拠点から全国出張</li></ul>
 	</div>
 </section>

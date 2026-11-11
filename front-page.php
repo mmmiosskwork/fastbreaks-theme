@@ -74,7 +74,7 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 			<div class="service__rows">
 				<a class="srow" href="<?php echo esc_url( home_url( '/service/live-streaming/' ) ); ?>">
 					<span class="srow__num display">01</span>
-					<span class="srow__body"><span class="srow__en display">Live Streaming &amp; Video</span><span class="srow__jp">ライブ配信・映像制作。マルチカメラ・実況・テロップまで少人数で完結。ハイライトからドキュメンタリーまで。</span></span>
+					<span class="srow__body"><span class="srow__en display">Live Streaming &amp; Video</span><span class="srow__jp">ライブ配信・映像制作。マルチカメラ・リプレイ・リアルタイムスタッツ表示・実況解説まで少人数で完結。ハイライトからドキュメンタリーまで。</span></span>
 					<?php if ( $show_prices && fb_price( 'price_live' ) ) : ?><span class="srow__price"><span class="display"><?php echo esc_html( fb_price( 'price_live' ) ); ?>〜</span><small>配信 / 1日</small></span><?php endif; ?>
 					<span class="srow__arrow display" aria-hidden="true">→</span>
 				</a>

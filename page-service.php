@@ -6,7 +6,7 @@
 get_header();
 $show_prices = '1' === (string) fb_opt( 'show_prices' );
 $services = array(
-	array( 'num' => '01', 'en' => 'Live Streaming & Video', 'jp' => 'ライブ配信・映像制作', 'desc' => 'マルチカメラ・実況・テロップまで少人数で完結する配信チームと、ハイライト・縦型ショート・ドキュメンタリーの制作。', 'url' => home_url( '/service/live-streaming/' ), 'img' => 'operator_court.jpg', 'price' => fb_price( 'price_live' ), 'unit' => '配信 / 1日', 'c' => 'c-blue' ),
+	array( 'num' => '01', 'en' => 'Live Streaming & Video', 'jp' => 'ライブ配信・映像制作', 'desc' => 'マルチカメラ・リプレイ・リアルタイムスタッツ表示・実況解説まで少人数で完結する配信チームと、ハイライト・縦型ショート・ドキュメンタリーの制作。', 'url' => home_url( '/service/live-streaming/' ), 'img' => 'operator_court.jpg', 'price' => fb_price( 'price_live' ), 'unit' => '配信 / 1日', 'c' => 'c-blue' ),
 	array( 'num' => '02', 'en' => 'SNS & Marketing', 'jp' => 'SNS運用・コンテンツマーケティング', 'desc' => '「ファンを熱狂させるメディア運営」のノウハウをBPO形式で。企画・撮影・編集・投稿・分析まで一括。', 'url' => home_url( '/service/sns/' ), 'img' => 'switcher_laptop.jpg', 'price' => fb_price( 'price_sns' ), 'unit' => '運用 / 月', 'c' => 'c-indigo' ),
 	array( 'num' => '03', 'en' => 'Media & Sponsored', 'jp' => '自社メディア・スポンサードコンテンツ', 'desc' => '関西最大級の学生バスケメディア『FASTBREAKS』で、試合の熱量や選手の物語に溶け込むタイアップ企画を設計。', 'url' => home_url( '/service/media/' ), 'img' => 'team_huddle.jpg', 'price' => fb_price( 'price_media' ), 'unit' => '企画 / 1本', 'c' => 'c-purple' ),
 );

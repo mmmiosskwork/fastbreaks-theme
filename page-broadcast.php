@@ -10,7 +10,7 @@ $fb_plans = array(
 	array( 'id' => 'light',    'label' => 'Light',    'cls' => 'c-blue',     'price' => 150000, 'unit' => '日',   'setup' => '1カメラ・スタッフ1名', 'items' => array( '固定カメラ配信', 'スコアテロップ', 'YouTube / 自社PFへの配信設定', 'アーカイブURL納品' ), 'for' => '学校・部活動・セミナー・小規模大会', 'hot' => false ),
 	array( 'id' => 'standard', 'label' => 'Standard', 'cls' => 'c-indigo',   'price' => 320000, 'unit' => '日',   'setup' => '2〜3カメラ・スタッフ2〜3名', 'items' => array( 'スイッチング・リプレイ', 'スコア・スタッツテロップ', 'オープニングVTR', 'ハイライト1本付き' ), 'for' => '連盟公式戦・地域リーグ・企業イベント', 'hot' => true ),
 	array( 'id' => 'premium',  'label' => 'Premium',  'cls' => 'c-purple',   'price' => 500000, 'unit' => '日',   'setup' => '4〜8カメラ・スタッフ4名〜', 'items' => array( '実況・解説の手配', 'マルチアングル・会場LED連動', '即日ダイジェスト・縦型ショート', 'スポンサー露出設計' ), 'for' => '全国大会・国際大会・ファイナル', 'hot' => false ),
-	array( 'id' => 'season',   'label' => 'Season',   'cls' => 'label--muted', 'price' => 150000, 'unit' => '試合', 'setup' => 'シーズンを通した複数試合の契約', 'items' => array( '試合数に応じた単価設定', '複数会場の同時配信', 'シーズン通しのハイライト・SNS運用', 'スポンサー誘致の支援' ), 'for' => '連盟・リーグ運営団体', 'hot' => false ),
+	array( 'id' => 'season',   'label' => 'Season',   'cls' => 'label--muted', 'price' => 150000, 'unit' => '試合', 'setup' => 'シーズンを通した複数試合の契約', 'items' => array( '試合数に応じた単価設定', '複数会場の同時配信', 'シーズン通しのハイライト・SNS運用', 'スポンサー露出設計' ), 'for' => '連盟・リーグ運営団体', 'hot' => false ),
 );
 $fb_faq = array(
 	array( '会場にインターネット回線がなくても配信できますか？', 'はい。モバイル回線を束ねるIP配信機材を持ち込みます。体育館・屋外ともに実績があります。' ),
@@ -104,7 +104,7 @@ $fb_faq = array(
 	<div class="setup__text">
 		<p class="label">Setup</p>
 		<h2 class="display display--jp section-head__en">体制と機材</h2>
-		<p class="body-text">ソフトウェアベースの基幹システムで、<br>放送局水準の画作りを少人数・低コストで。<br>2020年から6年間、年間100試合超を止めずに配信してきた運用が、<br>そのまま御社の現場に入ります。</p>
+		<p class="body-text">ソフトウェアベースの基幹システムで、<br>放送局水準の画作りを少人数・低コストで。<br>2020年から年間100試合超を止めずに配信してきた運用が、<br>そのまま御社の現場に入ります。</p>
 		<ul class="checks checks--2col"><li>最大8カメラ（ミラーレス・PTZ）</li><li>オンタイムのリプレイ</li><li>スコア・スタッツ・選手名テロップ</li><li>実況席・ヘッドセット一式</li><li>最大5会場の同時配信</li><li>有線・IP回線のバックアップ</li><li>YouTube / 自社PF / 有料配信</li><li>大阪・東京拠点から全国出張</li></ul>
 	</div>
 </section>

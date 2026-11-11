@@ -15,7 +15,7 @@ $total  = $wp_query->found_posts;
 		<nav class="crumbs" aria-label="パンくず"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>／</span><span>Works</span></nav>
 		<div class="section-head">
 			<div><p class="label">Works</p><h1 class="display ptitle__title">Selected<br>works</h1></div>
-			<p class="section-head__lead">FIBA 3x3から関西学生リーグまで。各実績に担当範囲・体制・成果を明記しています。<br><small>全 <?php echo (int) $total; ?> 件<?php if ( is_tax() ) : ?> — <?php single_term_title(); ?><?php endif; ?></small></p>
+			<p class="section-head__lead">FIBA 3x3の国際大会から、関西学生リーグまで。</p>
 		</div>
 		<div class="filters">
 			<?php if ( $types && ! is_wp_error( $types ) ) : ?>
