@@ -28,7 +28,7 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 	<div class="hero__slash" aria-hidden="true"></div>
 	<div class="wrap hero__inner">
 		<p class="label hero__in">Sports × Digital Contents Production</p>
-		<h1 class="display hero__title"><span class="line"><span>One instance</span></span><span class="line"><span>shows <span class="gradtext">all the rest.</span></span></span></h1>
+		<h1 class="display hero__title"><span class="line"><span>Try. Fail. Fast.</span></span><span class="line"><span><span class="gradtext">Break. Repeat.</span></span></span></h1>
 		<p class="hero__jp hero__in">確かな熱源が、そこにはある。</p>
 		<p class="hero__lead hero__in">大学スポーツの最前線から、心を動かす瞬間を届ける。<br>熱と物語を形にする、コンテンツプロダクション。</p>
 	</div>
@@ -161,7 +161,7 @@ if ( $featured->have_posts() ) : ?>
 	<div class="wrap strength__inner">
 		<div class="strength__head">
 			<p class="label"><span class="label__idx">05</span>Why FASTBREAKS</p>
-			<p class="display section-head__en">Try. Fail. Fast.<br>Break. Repeat.</p>
+			<p class="display section-head__en">One instance<br>shows <span class="gradtext">all the rest.</span></p>
 		</div>
 		<div class="strength__grid">
 			<div class="str">
