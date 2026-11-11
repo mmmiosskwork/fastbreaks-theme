@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('FB_THEME_VER','1.7.50');
+define('FB_THEME_VER','1.7.51');
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -206,7 +206,7 @@ function fb_settings_fields() {
 		),
 		'トップページ：シグネチャーコンテンツ' => array(
 			'sig_video'   => array( 'https://www.youtube.com/watch?v=mEiY09HDUsQ', 'YouTube の動画 URL（空欄ならセクションごと非表示）' ),
-			'sig_heading' => array( 'Dog fight.', '大きな英字の見出し' ),
+			'sig_heading' => array( 'Documentary', '大きな英字の見出し' ),
 			'sig_series'  => array( 'DOG FIGHT. 倒すべきは強者。', 'シリーズ名' ),
 			'sig_title'   => array( '【密着】EP.1 竹野明倫監督と唯一の4回生が果たす下剋上。', '動画のタイトル' ),
 			'sig_lead'    => array( '阪南大学バスケットボール部に密着したドキュメンタリー。', '説明文' ),

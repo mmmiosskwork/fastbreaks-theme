@@ -135,40 +135,11 @@ if ( $featured->have_posts() ) : ?>
 </section>
 <?php endif; ?>
 
-<!-- SIGNATURE CONTENT -->
-<?php $sig_id = fb_youtube_id( fb_opt( 'sig_video' ) ); if ( $sig_id ) : $sig_url = 'https://www.youtube.com/watch?v=' . $sig_id; ?>
-<section class="signature" id="signature">
-	<div class="wrap">
-		<div class="section-head">
-			<div>
-				<p class="label"><span class="label__idx">04</span>Signature content</p>
-				<p class="display section-head__en"><?php echo esc_html( fb_opt( 'sig_heading' ) ); ?></p>
-			</div>
-			<?php if ( fb_opt( 'sns_youtube' ) ) : ?><a class="arrow-link" href="<?php echo esc_url( fb_opt( 'sns_youtube' ) ); ?>" target="_blank" rel="noopener">YouTube channel <span aria-hidden="true">↗</span></a><?php endif; ?>
-		</div>
-		<div class="signature__grid">
-			<div class="yt-facade" data-yt="<?php echo esc_attr( $sig_id ); ?>">
-				<button type="button" class="yt-facade__btn" aria-label="動画を再生：<?php echo esc_attr( fb_opt( 'sig_title' ) ); ?>">
-					<img src="https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/hqdefault.jpg'" alt="" loading="lazy">
-					<span class="yt-facade__play" aria-hidden="true"></span>
-				</button>
-			</div>
-			<div class="signature__text">
-				<?php if ( fb_opt( 'sig_series' ) ) : ?><p class="signature__series"><?php echo esc_html( fb_opt( 'sig_series' ) ); ?></p><?php endif; ?>
-				<h2 class="signature__title"><?php echo esc_html( fb_opt( 'sig_title' ) ); ?></h2>
-				<?php if ( fb_opt( 'sig_lead' ) ) : ?><p class="body-text"><?php echo esc_html( fb_opt( 'sig_lead' ) ); ?></p><?php endif; ?>
-				<a class="arrow-link" href="<?php echo esc_url( $sig_url ); ?>" target="_blank" rel="noopener">YouTube で見る <span aria-hidden="true">↗</span></a>
-			</div>
-		</div>
-	</div>
-</section>
-<?php endif; ?>
-
 <!-- FACTS -->
 <section class="facts" aria-label="数字で見るFASTBREAKS">
 	<div class="wrap facts__grid">
 		<div class="facts__head">
-			<p class="label"><span class="label__idx">05</span>Facts</p>
+			<p class="label"><span class="label__idx">04</span>Facts</p>
 			<p class="display facts__en">By the<br>numbers</p>
 			<p class="facts__note">2020–2025 / 2025年実績</p>
 		</div>
@@ -189,7 +160,7 @@ if ( $featured->have_posts() ) : ?>
 	<div class="strength__slash" aria-hidden="true"></div>
 	<div class="wrap strength__inner">
 		<div class="strength__head">
-			<p class="label"><span class="label__idx">06</span>Why FASTBREAKS</p>
+			<p class="label"><span class="label__idx">05</span>Why FASTBREAKS</p>
 			<p class="display section-head__en">Try. Fail. Fast.<br>Break. Repeat.</p>
 		</div>
 		<div class="strength__grid">
@@ -215,50 +186,73 @@ if ( $featured->have_posts() ) : ?>
 	</div>
 </section>
 
-<!-- NOTE -->
-<?php $notes = fb_note_items( 4 ); if ( $notes ) : ?>
-<section class="note-feed wrap" id="note">
-	<div class="section-head">
-		<div>
-			<p class="label">Stories on note</p>
-			<p class="display section-head__en">FASTBREAKS <span class="gradtext">note</span></p>
-		</div>
-		<p class="section-head__lead">関西学生バスケットボールの公式note。コートの外にある選手とチームのストーリーを届けています。</p>
-	</div>
-	<ul class="note-feed__list">
-		<?php foreach ( $notes as $n ) : ?>
-		<li><a href="<?php echo esc_url( $n['link'] ); ?>" target="_blank" rel="noopener">
-			<span class="note-feed__thumb"><?php if ( $n['thumb'] ) : ?><img src="<?php echo esc_url( $n['thumb'] ); ?>" alt="" loading="lazy"><?php endif; ?></span>
-			<span class="note-feed__meta"><span class="note-feed__src">note</span><time datetime="<?php echo esc_attr( gmdate( 'c', $n['date'] ) ); ?>"><?php echo esc_html( wp_date( 'Y.m.d', $n['date'] ) ); ?></time></span>
-			<span class="note-feed__title"><?php echo esc_html( $n['title'] ); ?></span>
-			<span class="note-feed__go">note で読む <span aria-hidden="true">↗</span></span>
-		</a></li>
-		<?php endforeach; ?>
-	</ul>
-	<div class="note-feed__more"><a class="pill pill--line" href="<?php echo esc_url( fb_opt( 'sns_note' ) ); ?>" target="_blank" rel="noopener">note をもっと見る ↗</a></div>
-</section>
-<?php endif; ?>
-
-<!-- MEDIA + NEWS -->
-<section class="media-news wrap" id="news">
-	<div class="media">
-		<p class="label"><span class="label__idx">07</span>Our media</p>
-		<p class="display section-head__en"><?php echo esc_html( fb_opt( 'sns_handle' ) ); ?></p>
-		<p class="media__note"><?php echo esc_html( fb_opt( 'sns_followers' ) ); ?></p>
-		<?php if ( $ig = fb_opt( 'instagram_shortcode' ) ) : ?>
-			<div class="media__feed"><?php echo do_shortcode( $ig ); ?></div>
-		<?php else : ?>
-			<div class="media__grid" aria-hidden="true">
-				<?php foreach ( array( 'hero_celebrate', 'arena_wide', 'arena_purple', 'operator_court', 'switcher_laptop', 'switcher_closeup' ) as $f ) : ?>
-					<img src="<?php echo fb_img( $f . '.jpg' ); ?>" alt="" loading="lazy">
-				<?php endforeach; ?>
+<!-- OUR MEDIA：ドキュメンタリー / Instagram / note -->
+<?php $sig_id = fb_youtube_id( fb_opt( 'sig_video' ) ); $notes = fb_note_items( 3 ); $ig = fb_opt( 'instagram_shortcode' ); ?>
+<section class="media-row" id="media">
+	<div class="wrap">
+		<div class="section-head section-head--tight">
+			<div>
+				<p class="label"><span class="label__idx">06</span>Our media</p>
+				<p class="display section-head__en">Stories from <span class="gradtext">the court.</span></p>
 			</div>
-		<?php endif; ?>
-		<?php echo fb_sns_list( 'sns-icons--lg' ); // phpcs:ignore ?>
+			<?php echo fb_sns_list( 'sns-icons--lg' ); // phpcs:ignore ?>
+		</div>
+		<div class="media-row__grid">
+			<?php if ( $sig_id ) : ?>
+			<div class="mcol mcol--doc" id="documentary">
+				<p class="mcol__label">Original content</p>
+				<p class="display mcol__head"><?php echo esc_html( fb_opt( 'sig_heading' ) ); ?></p>
+				<div class="yt-facade" data-yt="<?php echo esc_attr( $sig_id ); ?>">
+					<button type="button" class="yt-facade__btn" aria-label="動画を再生：<?php echo esc_attr( fb_opt( 'sig_title' ) ); ?>">
+						<img src="https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/<?php echo esc_attr( $sig_id ); ?>/hqdefault.jpg'" alt="" loading="lazy">
+						<span class="yt-facade__play" aria-hidden="true"></span>
+					</button>
+				</div>
+				<?php if ( fb_opt( 'sig_series' ) ) : ?><p class="signature__series"><?php echo esc_html( fb_opt( 'sig_series' ) ); ?></p><?php endif; ?>
+				<h2 class="signature__title"><?php echo esc_html( fb_opt( 'sig_title' ) ); ?></h2>
+				<?php if ( fb_opt( 'sig_lead' ) ) : ?><p class="mcol__text"><?php echo esc_html( fb_opt( 'sig_lead' ) ); ?></p><?php endif; ?>
+				<a class="arrow-link" href="<?php echo esc_url( 'https://www.youtube.com/watch?v=' . $sig_id ); ?>" target="_blank" rel="noopener">YouTube で見る <span aria-hidden="true">↗</span></a>
+			</div>
+			<?php endif; ?>
+			<div class="mcol mcol--ig">
+				<p class="mcol__label">Instagram</p>
+				<p class="display mcol__head"><?php echo esc_html( fb_opt( 'sns_handle' ) ); ?></p>
+				<?php if ( fb_opt( 'sns_followers' ) ) : ?><p class="mcol__text"><?php echo esc_html( fb_opt( 'sns_followers' ) ); ?></p><?php endif; ?>
+				<?php if ( $ig ) : ?>
+					<div class="media__feed"><?php echo do_shortcode( $ig ); ?></div>
+				<?php else : ?>
+					<div class="media__grid" aria-hidden="true">
+						<?php foreach ( array( 'hero_celebrate', 'arena_wide', 'arena_purple', 'operator_court' ) as $f ) : ?>
+							<img src="<?php echo fb_img( $f . '.jpg' ); ?>" alt="" loading="lazy">
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+			<?php if ( $notes ) : ?>
+			<div class="mcol mcol--note" id="note">
+				<p class="mcol__label">Stories on note</p>
+				<p class="display mcol__head">FASTBREAKS <span class="gradtext">note</span></p>
+				<p class="mcol__text">関西学生バスケットボールの公式note。コートの外にある選手とチームのストーリーを届けています。</p>
+				<ul class="note-mini">
+					<?php foreach ( $notes as $n ) : ?>
+					<li><a href="<?php echo esc_url( $n['link'] ); ?>" target="_blank" rel="noopener">
+						<span class="note-mini__thumb"><?php if ( $n['thumb'] ) : ?><img src="<?php echo esc_url( $n['thumb'] ); ?>" alt="" loading="lazy"><?php endif; ?></span>
+						<span class="note-mini__body"><time datetime="<?php echo esc_attr( gmdate( 'c', $n['date'] ) ); ?>"><?php echo esc_html( wp_date( 'Y.m.d', $n['date'] ) ); ?></time><span class="note-mini__title"><?php echo esc_html( $n['title'] ); ?></span></span>
+					</a></li>
+					<?php endforeach; ?>
+				</ul>
+				<a class="arrow-link" href="<?php echo esc_url( fb_opt( 'sns_note' ) ); ?>" target="_blank" rel="noopener">note をもっと見る <span aria-hidden="true">↗</span></a>
+			</div>
+			<?php endif; ?>
+		</div>
 	</div>
+</section>
+
+<!-- NEWS -->
+<section class="news-solo wrap" id="news">
 	<div class="news">
 		<div class="section-head section-head--tight">
-			<div><p class="label"><span class="label__idx">08</span>News</p><p class="display section-head__en">Latest</p></div>
+			<div><p class="label"><span class="label__idx">07</span>News</p><p class="display section-head__en">Latest</p></div>
 			<a class="arrow-link" href="<?php echo esc_url( fb_news_url() ); ?>">Index →</a>
 		</div>
 		<ul class="news__list">

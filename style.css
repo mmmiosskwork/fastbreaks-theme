@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.50
+Version: 1.7.51
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -972,4 +972,50 @@ body{overflow-x:clip}
   .news__list .news__title{overflow-wrap:anywhere}
   .works-grid--home>.work:first-child .work__title{font-size:17px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .works-grid--home>.work:first-child .work__title.is-en{font-size:26px;line-height:1}
+}
+
+/* ===== 1.7.51 Our media（ドキュメンタリー / Instagram / note を横並び）・News 単独 ===== */
+.media-row{padding:120px 0;border-top:1px solid var(--line)}
+.media-row .section-head{align-items:flex-end}
+.media-row__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px;align-items:start}
+.mcol{display:flex;flex-direction:column;gap:16px;min-width:0}
+.mcol__label{font-family:var(--ub);font-size:12px;font-weight:700;letter-spacing:.28em;color:var(--label);text-transform:uppercase;margin:0}
+.mcol__head{font-size:44px;margin:0 0 4px;overflow-wrap:anywhere}
+.mcol__text{font-size:13px;color:var(--muted);line-height:1.85;margin:0}
+.mcol .signature__series{margin-top:4px}
+.mcol .signature__title{font-size:17px;line-height:1.55}
+.mcol .arrow-link{margin-top:4px}
+.mcol--ig .sb_instagram_header,.mcol--ig #sb_instagram .sb_instagram_header{display:none!important}
+.mcol--ig #sb_instagram{padding:0!important}
+.mcol--ig #sb_instagram #sbi_images{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;padding:0!important}
+.mcol--ig #sb_instagram #sbi_images .sbi_item:nth-child(n+5){display:none!important}
+.mcol--ig #sb_instagram #sbi_load .sbi_load_btn{display:none!important}
+.mcol--ig .media__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.note-mini{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.note-mini li a{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.note-mini li:last-child a{border-bottom:1px solid var(--line)}
+.note-mini__thumb{display:block;aspect-ratio:1280/670;overflow:hidden;background:var(--surface)}
+.note-mini__thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.note-mini li a:hover .note-mini__thumb img{transform:scale(1.04)}
+.note-mini__body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.note-mini__body time{font-family:var(--ub);font-size:11px;letter-spacing:.08em;color:var(--muted-2)}
+.note-mini__title{font-size:13px;font-weight:700;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.note-mini li a:hover .note-mini__title{color:var(--label)}
+.news-solo{padding:120px var(--gutter);border-top:1px solid var(--line)}
+.news-solo .news__list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}
+.news-solo .news__list li{min-width:0}
+.news-solo .news__list li a,.news-solo .news__list li:last-child a{display:flex;flex-direction:column;gap:12px;padding:0;border:0}
+.news-solo .news__title{-webkit-line-clamp:3}
+.news-solo .recruit-boxes{margin-top:56px}
+@media (max-width:1100px) and (min-width:901px){.media-row__grid{gap:32px}.mcol__head{font-size:36px}.note-mini li a{grid-template-columns:96px minmax(0,1fr)}}
+@media (max-width:900px){
+  .media-row{padding:72px 0}
+  .media-row__grid{grid-template-columns:minmax(0,1fr);gap:56px}
+  .mcol__head{font-size:40px}
+  .mcol--ig #sb_instagram #sbi_images .sbi_item:nth-child(n+3){display:none!important}
+  .note-mini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}
+  .note-mini li a,.note-mini li:last-child a{display:flex;flex-direction:column;gap:8px;padding:0;border:0;align-items:stretch}
+  .news-solo{padding:72px var(--gutter)}
+  .news-solo .news__list{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}
+  .news-solo .recruit-boxes{margin-top:32px}
 }
