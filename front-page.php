@@ -187,7 +187,7 @@ if ( $featured->have_posts() ) : ?>
 </section>
 
 <!-- OUR MEDIA：ドキュメンタリー / Instagram / note -->
-<?php $sig_id = fb_youtube_id( fb_opt( 'sig_video' ) ); $notes = fb_note_items( 3 ); $ig = fb_opt( 'instagram_shortcode' ); ?>
+<?php $sig_id = fb_youtube_id( fb_opt( 'sig_video' ) ); $notes = fb_note_items( 4 ); $ig = fb_opt( 'instagram_shortcode' ); ?>
 <section class="media-row" id="media">
 	<div class="wrap">
 		<div class="section-head section-head--tight">
