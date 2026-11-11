@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('FB_THEME_VER','1.7.58');
+define('FB_THEME_VER','1.7.59');
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -199,7 +199,7 @@ function fb_settings_fields() {
 			'instagram_shortcode' => array( '', 'Instagram表示プラグインのショートコード（例：[instagram-feed]）' ),
 		),
 		'トップページ：数字（FACTS）' => array(
-			'fact1_value' => array( '8,230', '数字1' ), 'fact1_unit' => array( '万', '単位1' ), 'fact1_label' => array( '累計再生回数', 'ラベル1' ),
+			'fact1_value' => array( '8,230', '数字1' ), 'fact1_unit' => array( '万回', '単位1' ), 'fact1_label' => array( '累計再生回数', 'ラベル1' ),
 			'fact2_value' => array( '124', '数字2' ),   'fact2_unit' => array( '日程', '単位2' ), 'fact2_label' => array( '年間ライブ配信（2025）', 'ラベル2' ),
 			'fact3_value' => array( '325', '数字3' ),   'fact3_unit' => array( '本', '単位3' ),  'fact3_label' => array( '年間動画コンテンツ制作（2025）', 'ラベル3' ),
 			'fact4_value' => array( '5', '数字4' ),     'fact4_unit' => array( '現場', '単位4' ), 'fact4_label' => array( '最大同時運用現場数（同日・別会場）', 'ラベル4' ),

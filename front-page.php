@@ -45,7 +45,7 @@ $show_prices = '1' === (string) fb_opt( 'show_prices' );
 			<p class="label"><span class="label__idx">01</span>About us</p>
 			<p class="display about__en">Digital ×<br>Sports Contents</p>
 			<h2 class="about__title">挑んで、倒れて、また挑む。<br>それを繰り返す姿こそが、人を動かすと信じている。</h2>
-			<p class="body-text">コロナ禍で観客が入れなくなった関西学生バスケットボールの全試合を、ゼロからライブ配信したのがFASTBREAKSの原点です。選手とチームのストーリーに焦点を当てたコンテンツは、6年間で累計7,000万回再生に。現場の熱を掘り起こし、デジタルの力で増幅させ、速攻で届ける。「記録」で終わらせない。「熱狂」に変える。</p>
+			<p class="body-text">コロナ禍で観客が入れなくなった関西学生バスケットボールの全試合を、ゼロからライブ配信したのがFASTBREAKSの原点です。選手とチームのストーリーに焦点を当てたコンテンツは、6年間で累計8,230万回再生に。現場の熱を掘り起こし、デジタルの力で増幅させ、速攻で届ける。「記録」で終わらせない。「熱狂」に変える。</p>
 			<div class="btn-row"><a class="arrow-link" href="<?php echo esc_url( home_url( '/vision/' ) ); ?>">Our vision <span aria-hidden="true">→</span></a><a class="arrow-link" href="<?php echo esc_url( home_url( '/company/' ) ); ?>">Company <span aria-hidden="true">→</span></a></div>
 		</div>
 		<figure class="about__fig">
