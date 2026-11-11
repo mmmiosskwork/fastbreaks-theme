@@ -146,7 +146,7 @@ if ( $featured->have_posts() ) : ?>
 		<ul class="facts__list">
 			<?php for ( $i = 1; $i <= 4; $i++ ) : ?>
 			<li class="fact">
-				<p class="fact__num display"><span class="<?php echo 1 === $i ? 'gradtext' : ''; ?>" data-count><?php echo esc_html( fb_opt( "fact{$i}_value" ) ); ?></span><span class="fact__unit"><?php echo esc_html( fb_opt( "fact{$i}_unit" ) ); ?></span></p>
+				<p class="fact__num display"><span class="gradtext" data-count><?php echo esc_html( fb_opt( "fact{$i}_value" ) ); ?></span><span class="fact__unit"><?php echo esc_html( fb_opt( "fact{$i}_unit" ) ); ?></span></p>
 				<?php $fb_lbl = (string) fb_opt( "fact{$i}_label" ); /* 設定で「|」を入れた位置だけで改行する */ ?>
 				<p class="fact__label<?php echo false !== strpos( $fb_lbl, '|' ) ? ' fact__label--wbr' : ''; ?>"><?php echo implode( '<wbr>', array_map( 'esc_html', explode( '|', $fb_lbl ) ) ); ?></p>
 			</li>
