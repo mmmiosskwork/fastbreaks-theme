@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.61
+Version: 1.7.62
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -1054,4 +1054,18 @@ body{overflow-x:clip}
   .post-single__main{max-width:none}
   .work-single .phero__inner,.work-single .work-single__fig,.work-single .work-single__grid{max-width:calc(1180px + var(--gutter)*2)}
   .work-single__grid{grid-template-columns:300px minmax(0,1fr);gap:56px}
+}
+/* 1.7.62 詳細ページを1列・中央揃えに（左の細い欄があると本文が右寄りに見えるため） */
+@media (min-width:901px){
+  .post-single .phero__inner,.post-single .post-single__grid{max-width:calc(880px + var(--gutter)*2)}
+  .post-single__grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .post-single__aside{position:static;order:2;flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 40px;padding-top:28px;border-top:1px solid var(--line)}
+  .post-single__aside .spec{display:flex;gap:40px;margin:0}
+  .post-single__aside .spec>div{border-top:0;padding:0}
+  .work-single .phero__inner,.work-single .work-single__fig,.work-single .work-single__grid{max-width:calc(960px + var(--gutter)*2)}
+  .work-single__grid{grid-template-columns:minmax(0,1fr);gap:48px}
+  .work-single__meta{position:static}
+  .work-single__meta .spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 32px;margin:0}
+  .work-single__meta .spec>div{padding:16px 0}
+  .work-single__meta .results{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
 }
