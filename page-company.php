@@ -24,7 +24,7 @@ $history = array(
 		<p class="label">About — Company &amp; Vision</p>
 		<h1 class="display phero__title">Heat<br><span class="gradtext">Source.</span></h1>
 		<p class="phero__jp">「記録」で終わらせない。「熱狂」に変える。</p>
-		<p class="phero__lead">現場にある圧倒的なドラマと、世間の認知にあるギャップ。私たちはその壁を、デジタルの力とクリエイティブで破壊する。「競技」を「事業」へ。「大学スポーツ」を「カルチャー」へ。</p>
+		<p class="phero__lead">現場にある圧倒的なドラマと、世間の認知にあるギャップ。<br>私たちはその壁を、デジタルの力とクリエイティブで破壊する。<br>「競技」を「事業」へ。「大学スポーツ」を「カルチャー」へ。</p>
 	</div>
 </section>
 
