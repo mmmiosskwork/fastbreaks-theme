@@ -57,7 +57,7 @@ $mvv = array(
 		<div class="statement__body">
 			<p>高校時代に注目を集めた選手が、大学進学とともに、伝えられる機会を失っていくことがある。<br>まだ広く知られていない選手にも、積み重ねてきた日々と、その人だけの物語がある。</p>
 			<p>大学スポーツの現場には、心を動かす姿があふれている。<br>けれど、その熱量に見合うほど、世の中には届いていない。</p>
-			<p class="statement__quote">こんなにも面白いのに、<br>なぜ届かないのか。</p>
+			<p class="statement__quote">こんなにも熱く、面白いのに、<br>なぜ届かないのか。</p>
 			<p>現場で感じる熱と、世の中の認知との隔たり。<br>そのもどかしさが、FASTBREAKSの原点になった。</p>
 			<p>ひとつのプレーに、努力の積み重ねがにじむ。<br>試合後のひと言に、その人が歩んできた時間が見える。</p>
 			<p>私たちは、その瞬間と、そこに至る物語を見つめる。<br>競技を知り、現場に通い、選手の言葉に耳を傾ける。<br>そこで受け取ったものを、心に届くコンテンツへと変えていく。</p>
@@ -123,7 +123,7 @@ $mvv = array(
 				<p>私たちは、現場に立ち、その姿を見つめる。<br>熱を捉え、物語を形にし、<br>まだ出会っていない誰かへ届ける。</p>
 				<p>その出会いが、応援になる。<br>その応援が、次の挑戦につながっていく。</p>
 			</div>
-			<p class="manifesto__sign"><span class="gradtext">確かな熱源が、そこにはある。</span><span class="display manifesto__name">FASTBREAKS</span></p>
+			<p class="manifesto__sign"><span class="gradtext">確かな熱源が、そこにはある。</span><img class="manifesto__logo" src="<?php echo fb_logo( 'white' ); ?>" alt="FASTBREAKS" width="200" height="58" loading="lazy"></p>
 			<div class="btn-row" style="margin-top:48px"><a class="pill pill--accent" href="<?php echo esc_url( home_url( '/company/' ) ); ?>">会社概要</a><a class="pill pill--line" href="<?php echo esc_url( home_url( '/recruit/' ) ); ?>">採用情報</a></div>
 		</div>
 		<figure class="manifesto__fig" style="position:relative"><img src="<?php echo fb_img( 'crew_headsets.jpg' ); ?>" alt="" loading="lazy"><span class="about__bar" aria-hidden="true"></span></figure>

@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.69
+Version: 1.7.70
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -1121,3 +1121,22 @@ body{overflow-x:clip}
 }
 .mvv__title,.mvv__item .body-text,.word__jp,.word__text,.statement__body,.statement .vision-statement__jp,.words__lead,.words__intro .body-text,.manifesto__title,.manifesto__verse{word-break:auto-phrase}
 .mvv__title,.word__jp{text-wrap:balance}
+/* 1.7.70 Our statement を1列の読み物レイアウトに（見出し→本文を中央の細い列で）、マニフェストの署名をロゴに */
+.statement{display:block;max-width:calc(760px + var(--gutter)*2)}
+.statement__head{position:static;margin-bottom:56px}
+.statement .vision-statement__jp{font-size:clamp(32px,3.4vw,48px);line-height:1.45;max-width:none}
+.statement__body{gap:32px;font-size:17px;line-height:2.1}
+.statement__quote{font-size:clamp(26px,2.8vw,38px);line-height:1.5;padding:12px 0 12px 28px;margin:16px 0!important}
+.statement__close{padding-top:32px;border-top:1px solid var(--line);font-size:18px;line-height:2}
+.vision-statement{padding:180px 0 140px}
+.vision-statement .ghost{top:56px}
+.manifesto__logo{display:block;width:200px;height:auto;margin-top:6px}
+@media (max-width:900px){
+  .vision-statement{padding:110px 0 72px}
+  .statement__head{margin-bottom:36px}
+  .statement .vision-statement__jp{font-size:26px}
+  .statement__body{font-size:15px;gap:24px}
+  .statement__quote{font-size:22px;padding-left:18px}
+  .statement__close{font-size:16px;padding-top:24px}
+  .manifesto__logo{width:160px}
+}
