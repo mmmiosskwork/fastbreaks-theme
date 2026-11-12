@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.67
+Version: 1.7.68
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -1079,3 +1079,43 @@ body{overflow-x:clip}
 @media (max-width:900px){.ghost{-webkit-text-stroke-width:1.5px}}
 /* 1.7.67 Vision ページの背景文字「VISION」を中央寄せに */
 .vision-statement .ghost{left:0;right:0;text-align:center}
+
+/* ===== 1.7.68 Vision（Philosophy）ページの新構成 ===== */
+.statement{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:80px;align-items:start}
+.statement__head{position:sticky;top:calc(var(--header-h) + 40px)}
+.statement .vision-statement__jp{margin-top:28px;font-size:clamp(30px,3.2vw,44px)}
+.statement__body{display:flex;flex-direction:column;gap:28px;font-size:16px;line-height:2.1;color:rgba(255,255,255,.82)}
+.statement__body p{margin:0}
+.statement__quote{font-size:clamp(24px,2.4vw,32px);font-weight:900;line-height:1.55;color:#fff;padding:8px 0 8px 24px;border-left:3px solid transparent;border-image:var(--grad-text) 1;margin:8px 0!important}
+.statement__close{color:#fff;font-weight:700}
+.mvv__jp-label{display:block;margin-top:8px;font-family:var(--jp);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:none;font-weight:700}
+.mvv__en{font-size:clamp(40px,3.6vw,56px)}
+.mvv__item{gap:18px}
+.words__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:end;margin-bottom:64px}
+.words__en{font-size:clamp(64px,7vw,112px);line-height:.92;margin-top:24px}
+.words__intro{display:flex;flex-direction:column;gap:14px}
+.words__lead{font-size:20px;font-weight:900;line-height:1.6;margin:0}
+.word:nth-child(4) .word__en{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.word__jp{font-size:17px}
+.word__text{font-size:13px;line-height:2}
+.manifesto__title{font-size:clamp(28px,2.8vw,40px);font-weight:900;line-height:1.5;margin:28px 0 0;text-wrap:balance}
+.manifesto__verse{display:flex;flex-direction:column;gap:22px;margin-top:32px;font-size:16px;line-height:2;color:rgba(255,255,255,.82)}
+.manifesto__verse p{margin:0}
+.manifesto__sign{display:flex;flex-direction:column;gap:10px;margin:40px 0 0;font-size:clamp(20px,1.8vw,26px);font-weight:900}
+.manifesto__name{font-size:28px;letter-spacing:.04em;color:#fff}
+.manifesto__fig img{height:100%;min-height:560px}
+.manifesto__inner{align-items:stretch}
+@media (max-width:900px){
+  .statement{grid-template-columns:minmax(0,1fr);gap:32px}
+  .statement__head{position:static}
+  .statement .vision-statement__jp{font-size:26px}
+  .statement__body{font-size:15px;gap:22px}
+  .statement__quote{font-size:22px;padding-left:18px}
+  .words__head{grid-template-columns:minmax(0,1fr);gap:28px;margin-bottom:40px}
+  .words__en{font-size:56px}
+  .words__lead{font-size:17px}
+  .mvv__en{font-size:40px}
+  .manifesto__title{font-size:24px}
+  .manifesto__verse{font-size:15px}
+  .manifesto__fig img{min-height:0;height:360px}
+}
