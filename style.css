@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.73
+Version: 1.7.74
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -1147,3 +1147,12 @@ body.nav-open #page_top{opacity:0!important;visibility:hidden!important}
 /* 1.7.73 Vision の英語見出しを PC・スマホとも2行で（画面幅に合わせて文字サイズを調整し、折り返さない） */
 .phero__title--fit{white-space:nowrap;font-size:min(150px,calc((100vw - var(--gutter)*2 - 16px) / 7))}
 @media (max-width:900px){.phero__title--fit{font-size:min(80px,calc((100vw - var(--gutter)*2 - 8px) / 7))}}
+/* 1.7.74 スマホ：5つの動詞をコンパクトに（左に番号と英字、右に見出しと本文） */
+@media (max-width:900px){
+  .words__list{border-top:1px solid var(--line)}
+  .word{display:grid;grid-template-columns:96px minmax(0,1fr);grid-template-areas:"num jp" "en text";column-gap:16px;row-gap:8px;padding:22px 0;min-height:0}
+  .word__num{grid-area:num;align-self:end;font-size:10px}
+  .word__en{grid-area:en;font-size:30px;line-height:1;margin:0}
+  .word__jp{grid-area:jp;font-size:15px;line-height:1.5;margin:0;align-self:end}
+  .word__text{grid-area:text;font-size:12.5px;line-height:1.9}
+}
