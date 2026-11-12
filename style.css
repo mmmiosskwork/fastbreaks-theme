@@ -3,7 +3,7 @@ Theme Name: FASTBREAKS
 Theme URI: https://www.fastbreaks.jp/
 Author: FASTBREAKS
 Description: FASTBREAKS コーポレートサイト用オリジナルテーマ。全面ダーク、Bebas Neue × Helvetica Bold × Noto Sans JP、ブルー→パープルのディープグラデーション。
-Version: 1.7.68
+Version: 1.7.69
 Requires at least: 6.4
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
@@ -1119,3 +1119,5 @@ body{overflow-x:clip}
   .manifesto__verse{font-size:15px}
   .manifesto__fig img{min-height:0;height:360px}
 }
+.mvv__title,.mvv__item .body-text,.word__jp,.word__text,.statement__body,.statement .vision-statement__jp,.words__lead,.words__intro .body-text,.manifesto__title,.manifesto__verse{word-break:auto-phrase}
+.mvv__title,.word__jp{text-wrap:balance}
