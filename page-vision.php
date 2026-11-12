@@ -40,7 +40,7 @@ $mvv = array(
 	<div class="wrap phero__inner">
 		<nav class="crumbs" aria-label="パンくず"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>／</span><span>Vision</span></nav>
 		<p class="label">Philosophy — What drives FASTBREAKS</p>
-		<h1 class="display phero__title">One moment<br>tells <span class="gradtext">it all.</span></h1>
+		<h1 class="display phero__title">One instance<br>shows <span class="gradtext">all the rest.</span></h1>
 		<p class="phero__jp">確かな熱源が、そこにはある。</p>
 		<p class="phero__lead">ひとつの瞬間が、すべてを物語る。<br>大学スポーツの最前線から、熱と物語を形にして届ける。</p>
 	</div>
@@ -52,7 +52,7 @@ $mvv = array(
 	<div class="wrap statement" style="position:relative">
 		<div class="statement__head">
 			<p class="label">Our statement — 私たちの原点</p>
-			<h2 class="vision-statement__jp">この熱には、<br>まだ届いていない場所がある。</h2>
+			<h2 class="vision-statement__jp">この熱が、<br>まだ届いていない場所がある。</h2>
 		</div>
 		<div class="statement__body">
 			<p>高校時代に注目を集めた選手が、大学進学とともに、伝えられる機会を失っていくことがある。<br>まだ広く知られていない選手にも、積み重ねてきた日々と、その人だけの物語がある。</p>
