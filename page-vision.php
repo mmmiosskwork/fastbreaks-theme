@@ -40,7 +40,7 @@ $mvv = array(
 	<div class="wrap phero__inner">
 		<nav class="crumbs" aria-label="パンくず"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>／</span><span>Vision</span></nav>
 		<p class="label">Philosophy — What drives FASTBREAKS</p>
-		<h1 class="display phero__title">One instance<br>shows <span class="gradtext">all the rest.</span></h1>
+		<h1 class="display phero__title phero__title--fit">One instance<br>shows <span class="gradtext">all the rest.</span></h1>
 		<p class="phero__jp">確かな熱源が、そこにはある。</p>
 		<p class="phero__lead">ひとつの瞬間が、すべてを物語る。<br>大学スポーツの最前線から、熱と物語を形にして届ける。</p>
 	</div>
