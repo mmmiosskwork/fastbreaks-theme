@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.75' );
+define( 'FB_THEME_VER', '1.7.76' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -787,6 +787,15 @@ add_action( 'wp_head', function () {
 	echo fb_meta_tags( $desc ); // phpcs:ignore
 }, 9999 );
 
+/* ExUnit の WebSite 構造化データは wp_head の最後（上のバッファの後）に出るため、</head> までをもう一度拾って除去 */
+add_action( 'wp_head', function () { if ( ! is_admin() ) { ob_start(); } }, PHP_INT_MAX );
+add_action( 'wp_body_open', function () {
+	if ( is_admin() || ob_get_level() < 1 ) { return; }
+	$html = ob_get_clean();
+	if ( false === $html ) { return; }
+	echo preg_replace( '#<!-- \[ VK All in One Expansion Unit [A-Za-z]+ Structure Data \] -->.*?<!-- \[ / VK All in One Expansion Unit [A-Za-z]+ Structure Data \] -->#s', '', $html ); // phpcs:ignore
+}, 0 );
+
 function fb_meta_tags( $desc = '' ) {
 	$site  = 'FASTBREAKS';
 	$fix   = array( '関西大学バスケ' => '関西学生バスケ' );
@@ -988,7 +997,7 @@ add_action( 'send_headers', function () {
 	if ( headers_sent() ) { return; }
 	header_remove( 'X-Pingback' );
 	header_remove( 'X-Powered-By' );
-	header( 'X-Content-Type-Options: nosniff' );
+	if ( ! preg_grep( '/^X-Content-Type-Options:/i', headers_list() ) ) { header( 'X-Content-Type-Options: nosniff' ); }
 	header( 'X-Frame-Options: SAMEORIGIN' );
 	header( 'Referrer-Policy: strict-origin-when-cross-origin' );
 	header( 'Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()' );
