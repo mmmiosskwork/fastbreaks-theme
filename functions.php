@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'FB_THEME_VER', '1.7.76' );
+define( 'FB_THEME_VER', '1.7.77' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -788,7 +788,7 @@ add_action( 'wp_head', function () {
 }, 9999 );
 
 /* ExUnit の WebSite 構造化データは wp_head の最後（上のバッファの後）に出るため、</head> までをもう一度拾って除去 */
-add_action( 'wp_head', function () { if ( ! is_admin() ) { ob_start(); } }, PHP_INT_MAX );
+add_action( 'wp_head', function () { if ( ! is_admin() ) { ob_start(); } }, 9999 );
 add_action( 'wp_body_open', function () {
 	if ( is_admin() || ob_get_level() < 1 ) { return; }
 	$html = ob_get_clean();
