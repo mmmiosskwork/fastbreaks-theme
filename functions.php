@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('FB_THEME_VER','1.7.74');
+define( 'FB_THEME_VER', '1.7.75' );
 define( 'FB_THEME_URI', get_template_directory_uri() );
 define( 'FB_THEME_DIR', get_template_directory() );
 
@@ -417,21 +417,7 @@ function fb_nav_fallback() {
 	echo '</ul>';
 }
 
-/* JSON-LD（Organization） */
-add_action( 'wp_head', function () {
-	if ( ! is_front_page() ) { return; }
-	$data = array(
-		'@context' => 'https://schema.org',
-		'@type'    => 'Organization',
-		'name'     => fb_opt( 'company_name' ),
-		'url'      => home_url( '/' ),
-		'logo'     => fb_logo( 'white' ),
-		'address'  => array( '@type' => 'PostalAddress', 'streetAddress' => fb_opt( 'address_osaka' ), 'addressCountry' => 'JP' ),
-		'sameAs'   => array_values( array_filter( array( fb_opt( 'sns_youtube' ), fb_opt( 'sns_instagram' ), fb_opt( 'sns_tiktok' ), fb_opt( 'sns_x' ), fb_opt( 'sns_note' ) ) ) ),
-	);
-	if ( fb_opt( 'email' ) ) { $data['email'] = fb_opt( 'email' ); }
-	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
-} );
+/* JSON-LD の Organization は AIOSEO の構造化データに統合（末尾「構造化データ」参照） */
 
 /* -------------------------------------------------------------------------
  * 6. 移行ツール（ツール → FASTBREAKS 移行）
@@ -788,6 +774,15 @@ add_action( 'wp_head', function () {
 	$html = preg_replace( '#<!-- \[ VK All in One Expansion Unit (OGP|twitter card) \] -->.*?<!-- \[ / VK All in One Expansion Unit (OGP|twitter card) \] -->#s', '', $html );
 	$html = preg_replace( '#<meta\s+(property|name)="(og:|twitter:|article:|fb:)[^"]*"[^>]*>\s*#i', '', $html );
 	$html = preg_replace( '#<meta\s+name="description"[^>]*>\s*#i', '', $html );
+	/* ジェネレーター表記（WordPress・プラグインのバージョン）を出さない */
+	$html = preg_replace( '#<meta\s+name="generator"[^>]*>\s*#i', '', $html );
+	/* ExUnit の構造化データ（WebSite / Article）は AIOSEO と重複し日時も不正確なので除去 */
+	$html = preg_replace( '#<!-- \[ VK All in One Expansion Unit (WebSite|Article) Structure Data \] -->.*?<!-- \[ / VK All in One Expansion Unit (WebSite|Article) Structure Data \] -->#s', '', $html );
+	/* 中身の薄い一覧ページは検索結果に出さない（リンクはたどらせる） */
+	if ( fb_should_noindex() ) {
+		$html = preg_replace( '#<meta\s+name="robots"[^>]*>\s*#i', '', $html );
+		$html .= '<meta name="robots" content="noindex, follow">' . "\n";
+	}
 	echo $html; // phpcs:ignore
 	echo fb_meta_tags( $desc ); // phpcs:ignore
 }, 9999 );
@@ -935,3 +930,180 @@ add_filter( 'wpcf7_form_elements', function ( $html ) {
 	return $html . '<p class="recaptcha-note">このフォームは reCAPTCHA で保護されており、Google の<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener">利用規約</a>が適用されます。</p>';
 } );
 
+
+/* -------------------------------------------------------------------------
+ * セキュリティ強化（テーマ側でできる範囲）
+ * SiteGuard（ログインページ変更・画像認証・ログインロック等）と併用する。
+ * ---------------------------------------------------------------------- */
+/* 管理画面からのテーマ・プラグインのファイル編集を無効化（更新は GitHub 経由で行うため不要） */
+if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) { define( 'DISALLOW_FILE_EDIT', true ); }
+
+/* XML-RPC を完全に停止（総当たり攻撃・ピンバック悪用の入口になるため。サイトでは未使用） */
+add_filter( 'xmlrpc_enabled', '__return_false' );
+add_filter( 'xmlrpc_methods', function () { return array(); } );
+add_filter( 'pings_open', '__return_false' );
+add_action( 'init', function () {
+	if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
+		status_header( 403 );
+		header( 'Content-Type: text/plain; charset=utf-8' );
+		exit( 'XML-RPC is disabled.' );
+	}
+}, 0 );
+
+/* ユーザー名の漏えい防止：未ログイン時は REST API のユーザー一覧を出さない */
+add_filter( 'rest_endpoints', function ( $endpoints ) {
+	if ( is_user_logged_in() ) { return $endpoints; }
+	foreach ( array_keys( $endpoints ) as $route ) {
+		if ( 0 === strpos( $route, '/wp/v2/users' ) ) { unset( $endpoints[ $route ] ); }
+	}
+	return $endpoints;
+} );
+/* 埋め込み（oEmbed）情報の投稿者名もサイト名に置き換える */
+add_filter( 'oembed_response_data', function ( $data ) {
+	$data['author_name'] = 'FASTBREAKS';
+	$data['author_url']  = home_url( '/' );
+	return $data;
+} );
+
+/* 投稿者アーカイブ（/author/〇〇/ はログイン名の手がかりになる）と添付ファイルページは使わないので転送 */
+add_action( 'template_redirect', function () {
+	if ( is_author() && ! is_user_logged_in() ) {
+		wp_safe_redirect( home_url( '/' ), 301 );
+		exit;
+	}
+	if ( is_attachment() ) {
+		$parent = (int) wp_get_post_parent_id( get_queried_object_id() );
+		$to     = ( $parent && 'publish' === get_post_status( $parent ) ) ? get_permalink( $parent ) : wp_get_attachment_url( get_queried_object_id() );
+		wp_safe_redirect( $to ? $to : home_url( '/' ), 301 );
+		exit;
+	}
+} );
+
+/* セキュリティ関連の HTTP ヘッダー */
+add_filter( 'wp_headers', function ( $headers ) {
+	unset( $headers['X-Pingback'] );
+	return $headers;
+} );
+add_action( 'send_headers', function () {
+	if ( headers_sent() ) { return; }
+	header_remove( 'X-Pingback' );
+	header_remove( 'X-Powered-By' );
+	header( 'X-Content-Type-Options: nosniff' );
+	header( 'X-Frame-Options: SAMEORIGIN' );
+	header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+	header( 'Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()' );
+	if ( is_ssl() ) { header( 'Strict-Transport-Security: max-age=15552000' ); }
+} );
+
+/* -------------------------------------------------------------------------
+ * SEO：インデックス対象の整理
+ * ---------------------------------------------------------------------- */
+/* 中身の薄い自動生成ページ（タグ・日付・検索結果・投稿者）は noindex, follow */
+function fb_should_noindex() {
+	return is_tag() || is_date() || is_search() || is_author() || is_attachment();
+}
+add_filter( 'wp_robots', function ( $robots ) {
+	if ( fb_should_noindex() ) {
+		unset( $robots['index'] );
+		$robots['noindex'] = true;
+		$robots['follow']  = true;
+	}
+	return $robots;
+} );
+/* noindex にしたタグ一覧は XML サイトマップからも外す */
+add_filter( 'aioseo_sitemap_indexes', function ( $indexes ) {
+	if ( ! is_array( $indexes ) ) { return $indexes; }
+	return array_values( array_filter( $indexes, function ( $i ) {
+		$loc = is_array( $i ) && isset( $i['loc'] ) ? (string) $i['loc'] : '';
+		return false === strpos( $loc, 'post_tag-sitemap' );
+	} ) );
+} );
+
+/* -------------------------------------------------------------------------
+ * SEO：構造化データ（AIOSEO の出力を一本化して補正）
+ * ---------------------------------------------------------------------- */
+/* 住所文字列を PostalAddress に分解 */
+function fb_postal_address( $str ) {
+	$str = trim( (string) $str );
+	if ( '' === $str ) { return null; }
+	$addr = array( '@type' => 'PostalAddress', 'addressCountry' => 'JP' );
+	if ( preg_match( '/〒?\s*(\d{3}-\d{4})\s*/u', $str, $m ) ) {
+		$addr['postalCode'] = $m[1];
+		$str = trim( str_replace( $m[0], '', $str ) );
+	}
+	if ( preg_match( '/^(東京都|北海道|京都府|大阪府|.{2,3}県)?(.+?市(?:.+?区)?|.+?区|.+?郡.+?[町村])(.*)$/u', $str, $m ) ) {
+		$region = $m[1];
+		if ( ! $region && 0 === strpos( $m[2], '大阪市' ) ) { $region = '大阪府'; }
+		if ( $region ) { $addr['addressRegion'] = $region; }
+		$addr['addressLocality'] = $m[2];
+		$addr['streetAddress']   = trim( $m[3] );
+	} else {
+		$addr['streetAddress'] = $str;
+	}
+	return $addr;
+}
+function fb_org_same_as() {
+	return array_values( array_filter( array( fb_opt( 'sns_youtube' ), fb_opt( 'sns_instagram' ), fb_opt( 'sns_tiktok' ), fb_opt( 'sns_x' ), fb_opt( 'sns_note' ) ) ) );
+}
+add_filter( 'aioseo_schema_output', function ( $graphs ) {
+	if ( ! is_array( $graphs ) ) { return $graphs; }
+	$org_id = home_url( '/#organization' );
+	$out    = array();
+	$has_article = false;
+	$webpage_id  = '';
+	foreach ( $graphs as $g ) {
+		if ( ! is_array( $g ) || empty( $g['@type'] ) ) { $out[] = $g; continue; }
+		$type = is_array( $g['@type'] ) ? implode( ',', $g['@type'] ) : $g['@type'];
+		/* 投稿者は個人ではなく会社として扱う（/author/ ページは使っていない） */
+		if ( 'Person' === $type ) { continue; }
+		if ( 'Organization' === $type ) {
+			$g['name']          = fb_opt( 'company_name' );
+			$g['alternateName'] = 'FASTBREAKS';
+			$g['description']   = '大学スポーツの最前線から、熱と物語を形にするコンテンツプロダクション。スポーツのライブ配信・映像制作・SNS運用を手がける。';
+			$g['url']           = home_url( '/' );
+			$g['logo']          = array( '@type' => 'ImageObject', '@id' => home_url( '/#organizationLogo' ), 'url' => FB_THEME_URI . '/assets/img/logo_dark.png', 'width' => 801, 'height' => 231, 'caption' => 'FASTBREAKS' );
+			$g['image']         = array( '@id' => home_url( '/#organizationLogo' ) );
+			$g['foundingDate']  = '2020-03-10';
+			$g['address']       = array_values( array_filter( array( fb_postal_address( fb_opt( 'address_osaka' ) ), fb_postal_address( fb_opt( 'address_tokyo' ) ) ) ) );
+			$g['sameAs']        = fb_org_same_as();
+			$g['knowsAbout']    = array( 'スポーツのライブ配信', '映像制作', 'SNS運用', '大学スポーツ', '学生バスケットボール' );
+		}
+		if ( 'BreadcrumbList' === $type && ! empty( $g['itemListElement'] ) && is_array( $g['itemListElement'] ) ) {
+			foreach ( $g['itemListElement'] as $k => $item ) {
+				if ( isset( $item['position'] ) && 1 === (int) $item['position'] ) { $g['itemListElement'][ $k ]['name'] = 'ホーム'; }
+			}
+		}
+		if ( in_array( $type, array( 'Article', 'BlogPosting', 'NewsArticle' ), true ) ) {
+			$has_article = true;
+			$g['author']    = array( '@id' => $org_id );
+			$g['publisher'] = array( '@id' => $org_id );
+		}
+		if ( false !== strpos( $type, 'WebPage' ) && isset( $g['@id'] ) ) {
+			$webpage_id = $g['@id'];
+			if ( isset( $g['author'] ) ) { $g['author'] = array( '@id' => $org_id ); }
+			if ( isset( $g['creator'] ) ) { $g['creator'] = array( '@id' => $org_id ); }
+		}
+		$out[] = $g;
+	}
+	/* 実績ページは AIOSEO が Article を出さないので補う */
+	if ( ! $has_article && is_singular( 'works' ) ) {
+		$id  = get_queried_object_id();
+		$art = array(
+			'@type'            => 'Article',
+			'@id'              => get_permalink( $id ) . '#article',
+			'headline'         => wp_strip_all_tags( get_the_title( $id ) ),
+			'datePublished'    => get_the_date( 'c', $id ),
+			'dateModified'     => get_the_modified_date( 'c', $id ),
+			'author'           => array( '@id' => $org_id ),
+			'publisher'        => array( '@id' => $org_id ),
+			'inLanguage'       => 'ja',
+		);
+		if ( $webpage_id ) { $art['mainEntityOfPage'] = array( '@id' => $webpage_id ); $art['isPartOf'] = array( '@id' => $webpage_id ); }
+		if ( has_post_thumbnail( $id ) ) {
+			$src = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'full' );
+			if ( $src ) { $art['image'] = array( '@type' => 'ImageObject', 'url' => $src[0], 'width' => (int) $src[1], 'height' => (int) $src[2] ); }
+		}
+		$out[] = $art;
+	}
+	return $out;
+}, 20 );
